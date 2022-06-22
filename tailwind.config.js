@@ -4,13 +4,14 @@ module.exports = {
     ],
     theme: {
         colors: {
-            'green': '#32BD081',
-            'lightgreen': '#CCEFAB',
-            'red': '#F66867',
-            'yellow': '#F7DD7D',
-            'lightblue': '#5BCEA',
-            'blue': '#3D93DD',
-            'gray': '#505050',
+            "green": '#32d081',
+            "lightgreen": '#ccefab',
+            "red": '#f66867',
+            "yellow": '#f7dd7d',
+            "lightblue": '#5bc5ea',
+            "blue": '#3d93dd',
+            "gray": "#505050",
+            "white": "#ffffff",
         },
         extend: {
             fontFamily: {
