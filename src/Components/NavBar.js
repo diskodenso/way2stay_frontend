@@ -4,7 +4,7 @@ import Button from './Button'
 
 const NavBar = () => {
     return (
-        <div className='p-4 shadow-md'>
+        <div className='p-4 shadow-md bg-white'>
             <div className='flex justify-between text-red'>
                 <div>
                     Logo
