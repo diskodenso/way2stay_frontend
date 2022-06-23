@@ -1,11 +1,34 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { FlatsList } from './FlatsList'
+import Loader from './Loader';
 
 const UserDashboard = () => {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const apiUrl = process.env.REACT_APP_API_URL;
+        axios
+            .get(`${apiUrl}/flats`)
+            .then(res => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
+        
     return (
         <>
             <div className='flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center'>
-                <div className='w-1/3 border rounded-lg p-5 my-5 shadow-lg border-[#868686] bg-white'>
+                <div className='w-1/3 border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
                     <div className='items-center gap-5 mb-5'>
                         <picture className='rounded-full w-[50px] h-[50px] bg-green'>
 
@@ -30,7 +53,7 @@ const UserDashboard = () => {
                         </div>
                         <div className='flex justify-between gap-4 my-5'>
                             <input className='border-b-2 border-[#6b6b6b] focus:outline-none w-5/6' placeholder='Straße' />
-                            <input className='border-b-2 border-[#6b6b6b] focus:outline-none w-1/6' placeholder='Haus-Nr.' />
+                            <input className='border-b-2 border-[#6b6b6b] focus:outline-none w-1/6' placeholder='Nr.' />
                         </div>
                         <input className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-3' placeholder='Mobil- / Telefonnummer' />
                         <div className='flex justify-between my-5 gap-4'>
@@ -40,7 +63,7 @@ const UserDashboard = () => {
                     </form>
                 </div>
                 <div className='flex flex-col w-2/3'>
-                    <div className='border rounded-lg p-5 my-5 shadow-lg border-[#868686] bg-white'>
+                    <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
                         <div>
                             <h2>Meine Wohnungen</h2>
                             <div className='flex gap-5 my-5'>
@@ -50,7 +73,7 @@ const UserDashboard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='border rounded-lg p-5 my-5 shadow-lg border-[#868686] bg-white'>
+                    <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
                         <div>
                             <h2>Meine Favoriten</h2>
                             <div className='flex gap-5 my-5'>
