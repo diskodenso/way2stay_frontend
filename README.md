@@ -1,70 +1,215 @@
-# Getting Started with Create React App
+<div id="top"></div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<center> <img src="https://i.ibb.co/JmkTqwz/Logo-W.png" alt="Logo" width="75"/> </center>
 
-## Available Scripts
+# <center>&mdash;&mdash;&mdash;&mdash;&mdash; way2stay Frontend &mdash;&mdash;&mdash;&mdash;&mdash;</center>
 
-In the project directory, you can run:
+#### <center>[go to the backend &rarr;](https://github.com/diskodenso/way2stay_backend)</center>
+#### <center>[go to the website &rarr;](https://www.google.com)</center>
 
-### `npm start`
+<p align="right">&darr; <a href="#end">go to the bottom</a> &darr;</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<details>
+<summary style="font-weight:500; font-size:18pt;">Table of Contents</summary>
+  <ol>
+    <li><a href="#build-status">Build Status</a></li>
+    <li><a href="#what">What is way2stay?</a></li>
+    <li><a href="#how">How do you use way2stay?</a></li>
+    <li><a href="#pictures">Pictures</a></li>
+    <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <!-- <li><a href="#copyright">Copyright</a></li> -->
+    <li><a href="#collaborators">Collaborators</a></li>
+  </ol>
+</details>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
+<br>
 
-### `npm test`
+<div href="#build-status"></div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Build Status
 
-### `npm run build`
+| Netlify |
+| --- |
+| [![Build Status](https://ci.joomla.org/api/badges/joomla/joomla-cms/status.svg?branch=4.0-dev)](https://ci.joomla.org/joomla/joomla-cms) |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<div id="what"></div>
 
-### `npm run eject`
+## What is way2stay?
+[way2stay]() - or short w2s - is a web application which you can use to exchange your home for an agreed period of time with another person or family. The goal behind our website is to make it possible for people to work remote or take a vacation without the need to live in a hotel or similar accomodations but to have your own temporary home. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<div id="how"></div>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How do you use way2stay?
+<ol>
+  <li>Create a free account</li>
+  <li>Set up your profile and your home</li>
+  <li>Look for your temporary dream home</li>
+  <li>Make a call or text the owner of the home to get to know each other</li>
+  <li>Let them show you the home in a video call</li>
+  <li>You can start the booking process if both parties are happy with the period and home of the exchange</li>
+  <li>Make sure that your home is tidy and you have another pair of keys ready</li>
+  <li>Now the most important part - Enjoy your vacation</li>
+  <li>Leave an honest review of the home that you have stayed in</li>
+</ol>
 
-## Learn More
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<div id="pictures"></div>
 
-### Code Splitting
+## Pictures (Wireframe for now)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br>
 
-### Analyzing the Bundle Size
+### Landingpage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br>
 
-### Making a Progressive Web App
+<img src="https://i.ibb.co/vYNdndJ/Wireframe.jpg" alt="Wireframe" title="Example picture" width="48%"/>
+<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#
+<br>
 
-### Advanced Configuration
+### About Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<br>
 
-### Deployment
+<img src="https://i.ibb.co/fpV3d6X/Wireframe3.jpg" alt="Wireframe" title="Example picture" width="48%"/>
+<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#
 
-### `npm run build` fails to minify
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+<br>
+
+<div href="#getting-started"></div>
+
+## Getting Started
+
+<br>
+
+### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+#
+<br>
+
+### Clone the repository to your local storage.
+
+```
+git clone https://github.com/diskodenso/way2stay_frontend.git
+```
+
+#
+<br>
+
+### Install dependencies (all dependencies are listed in package.json).
+
+```
+npm i
+```
+
+#
+<br>
+
+### Run the app in the development mode.
+
+```
+npm start
+``` 
+
+#
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+---
+<br>
+
+<div href="#built-with"></div>
+
+## Built With
+
+- #### [React](https://reactjs.org/)
+
+- #### [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+
+- #### [Axios](https://axios-http.com/docs/intro)
+
+- #### [Leaflet](https://leafletjs.com/)
+
+- #### [React Leaflet](https://react-leaflet.js.org/)
+
+- #### [Tailwind](https://tailwindcss.com/docs/installation)
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+---
+<br>
+
+<div href="#contributing"></div>
+
+## Contributing
+<!-- - [Report a bug]() -->
+- Documentation for the [Backend](https://github.com/diskodenso/way2stay_backend)
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+---
+<br>
+
+<div href="#contact"></div>
+
+## Contact
+- Denis
+- Phone: 01234567890
+- E-Mail: qwertzui@gmail.com
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+<!-- ---
+<br>
+
+<div href="#copyright"></div>
+
+## Copyright
+- No copyright yet
+- Copyright (C) 2022 - 2029 All rights reserved.
+- Maybe distributed under some License
+- See [License details]()
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p> -->
+
+---
+<br>
+
+<div href="#collaborators"></div>
+
+## Collaborators
+
+- [Matthias Wieser](https://github.com/AlpineWeezl)
+
+- [Marcel-BK](https://github.com/Marcel-BK)
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+---
+
+<div id="end"></div>
