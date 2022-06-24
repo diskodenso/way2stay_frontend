@@ -1,11 +1,11 @@
 <div id="top"></div>
 
-<center> <img src="https://i.ibb.co/JmkTqwz/Logo-W.png" alt="Logo" width="75"/> </center>
+<div align="center"> <img src="https://i.ibb.co/JmkTqwz/Logo-W.png" alt="Logo" width="75"/> </div>
 
-# <center>&mdash;&mdash;&mdash;&mdash;&mdash; way2stay Frontend &mdash;&mdash;&mdash;&mdash;&mdash;</center>
+# <div align="center">&mdash;&mdash;&mdash;&mdash;&mdash; way2stay Frontend &mdash;&mdash;&mdash;&mdash;&mdash;</div>
 
-#### <center>[go to the backend &rarr;](https://github.com/diskodenso/way2stay_backend)</center>
-#### <center>[go to the website &rarr;](https://www.google.com)</center>
+#### <div align="center">[go to the backend &rarr;](https://github.com/diskodenso/way2stay_backend)</div>
+#### <div align="center">[go to the website &rarr;](https://www.google.com)</div>
 
 <p align="right">&darr; <a href="#end">go to the bottom</a> &darr;</p>
 
@@ -82,7 +82,7 @@
 <br>
 
 <img src="https://i.ibb.co/vYNdndJ/Wireframe.jpg" alt="Wireframe" title="Example picture" width="48%"/>
-<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
+<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="48%" align="right"/>
 
 #
 <br>
@@ -92,7 +92,7 @@
 <br>
 
 <img src="https://i.ibb.co/fpV3d6X/Wireframe3.jpg" alt="Wireframe" title="Example picture" width="48%"/>
-<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
+<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="48%" align="right"/>
 
 #
 
