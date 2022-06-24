@@ -81,8 +81,8 @@
 
 <br>
 
-<img src="https://i.ibb.co/vYNdndJ/Wireframe.jpg" alt="Wireframe" title="Example picture" width="48%"/>
-<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
+<img src="https://i.ibb.co/vYNdndJ/Wireframe.jpg" alt="Wireframe" title="Example picture" width="45%"/>
+<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="45%" style="float: right;"/>
 
 #
 <br>
@@ -91,8 +91,8 @@
 
 <br>
 
-<img src="https://i.ibb.co/fpV3d6X/Wireframe3.jpg" alt="Wireframe" title="Example picture" width="48%"/>
-<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="48%" style="float: right;"/>
+<img src="https://i.ibb.co/fpV3d6X/Wireframe3.jpg" alt="Wireframe" title="Example picture" width="45%"/>
+<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="45%" style="float: right;"/>
 
 #
 

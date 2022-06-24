@@ -2,7 +2,7 @@ import React from 'react'
 
 const StartSwapping = () => {
     return (
-        <div className='rounded-lg bg-green'>
+        <div className='rounded-lg bg-yellow opacity-80 shadow-lg'>
             <form className='flex p-4'>
                 <div className='flex flex-col'>
                     <label>I want to start from</label>

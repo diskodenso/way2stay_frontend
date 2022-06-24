@@ -4,11 +4,10 @@ import StartSwapping from './StartSwapping'
 
 const Landing = () => {
     return (
-        <div className='flex justify-between p-4'>
-            <div>
-                <h1 className='font-heading'>
-                    Make YOUR home the world’s home,<br />
-                    make the world become YOUR home
+        <div className='flex justify-between w-5/6 mx-auto py-5'>
+            <div className=''>
+                <h1 className='font-script text-3xl'>
+                    Make the world become YOUR home.
                 </h1>
                 <StartSwapping />
             </div>
