@@ -13,6 +13,7 @@ const UserDashboard = () => {
 
     useEffect(() => {
         const apiUrl = process.env.REACT_APP_API_URL;
+        axios.defaults.withCredentials = true;
         axios
             .get(`${apiUrl}/users/62b2e03b26764e46038fa5f9`)
             .then(res => {
