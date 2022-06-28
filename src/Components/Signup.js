@@ -21,7 +21,7 @@ export const Signup = () => {
             .then(res => {
                 setUsers(res.data.users);
                 setTimeout(() => {
-                    setLoading(false);    
+                    setLoading(false);
                 }, 1000);
                 setError(null);
             })
@@ -40,7 +40,7 @@ export const Signup = () => {
         (!isPasswordMinimumLength) && toast.error('Das Passwort muss mindestens 4 Zeichen lang sein!');
         console.log(users);
         (users.find(user => { return user.email === email.value })) ? isEmailExists = true : isEmailExists = false;
-        (isEmailExists) && toast.error('Die E-Mail-Adresse existiert bereits!'); 
+        (isEmailExists) && toast.error('Die E-Mail-Adresse existiert bereits!');
         (users.find(user => { return user.username === username.value })) ? isUsernameExists = true : isUsernameExists = false;
         (isUsernameExists) && toast.error('Der Benutzername existiert bereits!');
 
@@ -53,6 +53,8 @@ export const Signup = () => {
                 })
                 .then(res => {
                     console.log(res);
+                    toast.success('Benutzer erfolgreich angelegt');
+                    localStorage.setItem('token', res.headers.authorization)
                 })
                 .catch(err => console.log(err));
         } else {
