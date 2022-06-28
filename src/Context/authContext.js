@@ -6,6 +6,7 @@ export const authContext = createContext();
 const AuthState = ({ children }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const [processing, setProcessing] = useState(true);
+    const [userId, setUserId] = useState(null);
     const token = localStorage.getItem('token');
     // const [token, setToken] = useState(localStorage.getItem('token'));
     const [verified, setVerified] = useState(null);
@@ -20,6 +21,8 @@ const AuthState = ({ children }) => {
                 }
             )
             .then(res => {
+                console.log(res.data);
+                setUserId(res.data.userId);
                 setVerified(true);
                 setProcessing(false);
             })
@@ -32,7 +35,7 @@ const AuthState = ({ children }) => {
 
     if (!processing) {
         return (
-            <authContext.Provider value={{ setVerified, verified }}>
+            <authContext.Provider value={{ setVerified, verified, userId }}>
                 {children}
             </authContext.Provider>
         );
