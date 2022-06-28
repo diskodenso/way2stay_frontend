@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from './Loader'
-import "react-toastify/dist/ReactToastify.css";
 
 export const Signup = () => {
     const [users, setUsers] = useState(null);
@@ -20,9 +19,9 @@ export const Signup = () => {
             .get(`${apiUrl}/users`)
             .then(res => {
                 setUsers(res.data.users);
-                setTimeout(() => {
-                    setLoading(false);
-                }, 1000);
+                // setTimeout(() => {
+                setLoading(false);
+                // }, 1000);
                 setError(null);
             })
             .catch(err => {
@@ -39,7 +38,7 @@ export const Signup = () => {
         (password.value.length > 3) ? isPasswordMinimumLength = true : isPasswordMinimumLength = false;
         (!isPasswordMinimumLength) && toast.error('Das Passwort muss mindestens 4 Zeichen lang sein!');
         console.log(users);
-        (users.find(user => { return user.email === email.value })) ? isEmailExists = true : isEmailExists = false;
+        (users.find(user => { return user.contact.email === email.value })) ? isEmailExists = true : isEmailExists = false;
         (isEmailExists) && toast.error('Die E-Mail-Adresse existiert bereits!');
         (users.find(user => { return user.username === username.value })) ? isUsernameExists = true : isUsernameExists = false;
         (isUsernameExists) && toast.error('Der Benutzername existiert bereits!');
@@ -60,6 +59,7 @@ export const Signup = () => {
         } else {
             console.log();
         }
+        
     }
 
     if (error) { return <h2>Oh no, an error occured!</h2> }

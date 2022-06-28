@@ -21,6 +21,7 @@ const AuthState = ({ children }) => {
                 }
             )
             .then(res => {
+                console.log(res.data);
                 setUserId(res.data.userId);
                 setVerified(true);
                 setProcessing(false);
