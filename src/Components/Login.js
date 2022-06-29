@@ -13,24 +13,28 @@ const Login = () => {
         if (verified) {
             navigate('/dashboard');
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [verified])
+    }, [navigate, verified])
 
     const submitHandler = (e) => {
         const { email, password } = e.target;
-
         e.preventDefault();
-        if (email) { }
         axios
             .post(`${apiUrl}/users/login`, {
                 "email": `${email.value}`,
                 "password": `${password.value}`
             })
             .then(res => {
-                console.log(res);
-                toast.success('Du wurdest erfolgreich eingeloggt');
-                localStorage.setItem('token', res.headers.authorization);
-                setVerified(true);
+                // const verifyHandler = async () => {
+                //     try {
+                        localStorage.setItem('token', res.headers.authorization);
+                        toast.success('Du wurdest erfolgreich eingeloggt');
+                        setVerified(true);
+                        navigate('/dashboard');
+                    // } catch (error) {
+                    //     console.log(error);
+                    // }
+                // }
+                // verifyHandler();
             })
             .catch(err => {
                 console.log(err);

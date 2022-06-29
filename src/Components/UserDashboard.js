@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { authContext } from '../Context/authContext';
 import { FlatsListItem } from './FlatsListItem'
 import Loader from './Loader';
 
 const UserDashboard = () => {
+    const navigate = useNavigate(authContext);
     const { userId, verified } = useContext(authContext);
-    const [userLoading, setUserLoading] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [flats, setFlats] = useState(null);
@@ -18,30 +18,29 @@ const UserDashboard = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        console.log(userId);
-        if (verified && userId) {
-            axios
-                .get(`${apiUrl}/users/${userId}`)
-                .then(res => {
-                    setUser(res.data);
-                    setUserLoading(false)
-                    console.log(res.data);
-                })
-                .then(res => {
+        (!verified) && navigate('/login');
+        const getData = async () => {
+            if (verified && userId) {
+                try {
+                    await axios
+                        .get(`${apiUrl}/users/${userId}`)
+                        .then(res => {
+                            setUser(res.data);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
                     axios
                         .get(`${apiUrl}/flats/users/${userId}`)
                         .then(flatsRes => {
                             setFlats(flatsRes.data.flats);
-                            console.log(flatsRes.data);
+                            setLoading(false);
                         })
                         .catch(err => {
                             setError(true);
                             setLoading(false);
                             console.log(err);
-                        })
-
-                })
-                .then(res => {
+                        });
                     const tempFav = [];
                     console.log(user);
                     user.favorites.forEach(favorite => {
@@ -49,16 +48,21 @@ const UserDashboard = () => {
                             .get(`${apiUrl}/flats/${favorite}`)
                             .then(favRes => {
                                 tempFav.push(favRes.data);
-                                console.log(favRes.data);
+                                setLoading(false);
                             })
                             .catch(err => console.log(err));
                     });
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                } catch (error) {
+                    console.log(error);
+                }
+
+                console.log(userId);
+
+            } else {
+                setLoading(false);
+            }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        getData();
     }, [apiUrl, userId, verified]);
 
     const submitHandler = async (e) => {
@@ -107,7 +111,7 @@ const UserDashboard = () => {
         );
     }
 
-    if (!loading && !error && verified) {
+    if (!loading && !error && verified && userId) {
         return (
             <>
                 <ToastContainer />
