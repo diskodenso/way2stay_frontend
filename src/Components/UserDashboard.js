@@ -19,6 +19,7 @@ const UserDashboard = () => {
 
     useEffect(() => {
         (!verified) && navigate('/login');
+        console.log();
         const getData = async () => {
             if (verified && userId) {
                 try {
@@ -26,6 +27,17 @@ const UserDashboard = () => {
                         .get(`${apiUrl}/users/${userId}`)
                         .then(res => {
                             setUser(res.data);
+                            const tempFav = [];
+                            res.data.favorites.forEach(favorite => {
+                                axios
+                                    .get(`${apiUrl}/flats/${favorite}`)
+                                    .then(favRes => {
+                                        tempFav.push(favRes.data);
+                                        setLoading(false);
+                                    })
+                                    .catch(err => console.log(err));
+                            });
+                            setFavorites(tempFav);
                         })
                         .catch(err => {
                             console.log(err);
@@ -41,29 +53,15 @@ const UserDashboard = () => {
                             setLoading(false);
                             console.log(err);
                         });
-                    const tempFav = [];
-                    console.log(user);
-                    user.favorites.forEach(favorite => {
-                        axios
-                            .get(`${apiUrl}/flats/${favorite}`)
-                            .then(favRes => {
-                                tempFav.push(favRes.data);
-                                setLoading(false);
-                            })
-                            .catch(err => console.log(err));
-                    });
                 } catch (error) {
                     console.log(error);
                 }
-
-                console.log(userId);
-
             } else {
                 setLoading(false);
             }
         }
         getData();
-    }, [apiUrl, userId, verified]);
+    }, [apiUrl]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -165,9 +163,12 @@ const UserDashboard = () => {
 
                                 <div className='flex gap-5 my-5 flex-wrap'>
                                     {
-                                        (flats !== []) ?
+                                        (flats !== [] && !flats) ?
                                             (
                                                 <>
+                                                    {
+                                                        console.log(flats)
+                                                    }
                                                     {
                                                         flats.map((flat) => {
                                                             return <FlatsListItem key={flat._id} flat={flat} />
@@ -188,7 +189,7 @@ const UserDashboard = () => {
                                 <h2>Meine Favoriten</h2>
                                 <div className='flex gap-5 my-5'>
                                     {
-                                        (favorites !== []) ?
+                                        (favorites !== [] && !favorites) ?
                                             (
                                                 <>
                                                     {

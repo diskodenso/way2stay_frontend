@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from './Loader'
 import { useNavigate } from 'react-router-dom';
+import { authContext } from '../Context/authContext';
+
 
 export const Signup = () => {
+    const { verified, setVerified } = useContext(authContext);
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,20 +20,24 @@ export const Signup = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios
-            .get(`${apiUrl}/users`)
-            .then(res => {
-                setUsers(res.data.users);
-                // setTimeout(() => {
-                setLoading(false);
-                // }, 1000);
-                setError(null);
-            })
-            .catch(err => {
-                setLoading(false);
-                setError(err);
-            })
-    }, [apiUrl]);
+        if (!verified) {
+            axios
+                .get(`${apiUrl}/users`)
+                .then(res => {
+                    setUsers(res.data.users);
+                    // setTimeout(() => {
+                    setLoading(false);
+                    // }, 1000);
+                    setError(null);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    setError(err);
+                })
+        } else {
+            navigate('/dashboard');
+        }
+    }, [apiUrl, navigate, verified]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -55,8 +62,9 @@ export const Signup = () => {
                 .then(res => {
                     console.log(res);
                     localStorage.setItem('token', res.headers.authorization);
+                    setVerified(true);
                     toast.success('Benutzer erfolgreich angelegt');
-                    navigate('/dashboard');
+                    // navigate('/dashboard');
                 })
                 .catch(err => console.log(err));
         } else {
