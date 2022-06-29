@@ -26,13 +26,13 @@ const Login = () => {
             .then(res => {
                 // const verifyHandler = async () => {
                 //     try {
-                        localStorage.setItem('token', res.headers.authorization);
-                        toast.success('Du wurdest erfolgreich eingeloggt');
-                        setVerified(true);
-                        navigate('/dashboard');
-                    // } catch (error) {
-                    //     console.log(error);
-                    // }
+                localStorage.setItem('token', res.headers.authorization);
+                toast.success('Du wurdest erfolgreich eingeloggt');
+                setVerified(true);
+                navigate('/dashboard');
+                // } catch (error) {
+                //     console.log(error);
+                // }
                 // }
                 // verifyHandler();
             })
