@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from './Loader'
+import { useNavigate } from 'react-router-dom';
 
 export const Signup = () => {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     let isSamePassword = true;
     let isPasswordMinimumLength = true;
@@ -53,13 +55,13 @@ export const Signup = () => {
                 .then(res => {
                     console.log(res);
                     toast.success('Benutzer erfolgreich angelegt');
-                    localStorage.setItem('token', res.headers.authorization)
+                    navigate('/dashboard');
+                    localStorage.setItem('token', res.headers.authorization);
                 })
                 .catch(err => console.log(err));
         } else {
             console.log();
         }
-        
     }
 
     if (error) { return <h2>Oh no, an error occured!</h2> }

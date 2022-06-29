@@ -8,12 +8,13 @@ import Loader from './Loader';
 
 const UserDashboard = () => {
     const { userId, verified } = useContext(authContext);
+    const [userLoading, setUserLoading] = useState(true);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [flats, setFlats] = useState(null);
     const [user, setUser] = useState(null);
     // eslint-disable-next-line
-    const [favorites, setFavorites] = useState(null);
+    const [favorites, setFavorites] = useState([]);
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -23,27 +24,41 @@ const UserDashboard = () => {
                 .get(`${apiUrl}/users/${userId}`)
                 .then(res => {
                     setUser(res.data);
+                    setUserLoading(false)
                     console.log(res.data);
                 })
-                .catch(err => {
-                    console.log(err);
-                })
-            axios
-                .get(`${apiUrl}/flats/users/${userId}`)
                 .then(res => {
-                    setFlats(res.data.flats);
-                    console.log(res.data);
-                    // console.log(res.data.flats);
-                    // setFavorites(res.data.filter(flat => {return flat. }))
-                    // setTimeout(() => {
-                    setLoading(false);
-                    // }, 2000);
+                    axios
+                        .get(`${apiUrl}/flats/users/${userId}`)
+                        .then(flatsRes => {
+                            setFlats(flatsRes.data.flats);
+                            console.log(flatsRes.data);
+                        })
+                        .catch(err => {
+                            setError(true);
+                            setLoading(false);
+                            console.log(err);
+                        })
+
+                })
+                .then(res => {
+                    const tempFav = [];
+                    console.log(user);
+                    user.favorites.forEach(favorite => {
+                        axios
+                            .get(`${apiUrl}/flats/${favorite}`)
+                            .then(favRes => {
+                                tempFav.push(favRes.data);
+                                console.log(favRes.data);
+                            })
+                            .catch(err => console.log(err));
+                    });
                 })
                 .catch(err => {
-                    setError(true);
                     console.log(err);
                 })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [apiUrl, userId, verified]);
 
     const submitHandler = async (e) => {
@@ -74,7 +89,7 @@ const UserDashboard = () => {
             city: city.value,
             street: street.value,
             housenumber: housenumber.value,
-            isActive: isActive.value
+            isActive: isActive.checked
         }
         axios
             .put(`${apiUrl}/users/${userId}`, updatedUser)
@@ -110,8 +125,8 @@ const UserDashboard = () => {
                         </div>
                         <form onSubmit={submitHandler} className='my-5 items-stretch'>
                             <input name='email' type={'email'} className='border-b-2 border-[#6b6b6b] w-full focus:outline-none my-5' placeholder='E-Mail Adresse' defaultValue={user.contact && user.contact.email} required />
-                            {/* <input name='password' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Passwort' />
-                            <input name='password2' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full' placeholder='Passwort wiederholen' /> */}
+                            <input name='password' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Passwort' />
+                            <input name='password2' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full' placeholder='Passwort wiederholen' />
                             <div name='namedetails' className='flex justify-between gap-4 items-stretch my-5'>
                                 <input name='firstname' type={'text'} className='border-b-2 border-[#6b6b6b] w-1/2 focus:outline-none' placeholder='Vorname' defaultValue={user.firstname} />
                                 <input name='lastname' type={'text'} className='border-b-2 border-[#6b6b6b] w-1/2 focus:outline-none' placeholder='Nachname' defaultValue={user.lastname} />
@@ -140,13 +155,13 @@ const UserDashboard = () => {
                             <div>
                                 <div className='flex justify-between'>
 
-                                <h2>Meine Wohnungen</h2>
-                                <Link to={'/newflat'} name='newFlat' className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'>neue Wohnung anlegen</Link>
+                                    <h2>Meine Wohnungen</h2>
+                                    <Link to={'/newflat'} name='newFlat' className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'>neue Wohnung anlegen</Link>
                                 </div>
 
                                 <div className='flex gap-5 my-5 flex-wrap'>
                                     {
-                                        flats ?
+                                        (flats !== []) ?
                                             (
                                                 <>
                                                     {
@@ -155,7 +170,6 @@ const UserDashboard = () => {
                                                         })
                                                     }
                                                 </>
-
                                             )
                                             :
                                             (
@@ -170,12 +184,14 @@ const UserDashboard = () => {
                                 <h2>Meine Favoriten</h2>
                                 <div className='flex gap-5 my-5'>
                                     {
-                                        !flats ?
+                                        (favorites !== []) ?
                                             (
                                                 <>
-                                                    flats.map(
-                                                    return <FlatsListItem />
-                                                    )
+                                                    {
+                                                        favorites.map((favorite) => {
+                                                            return <FlatsListItem key={favorite} />
+                                                        })
+                                                    }
                                                 </>
 
                                             )
