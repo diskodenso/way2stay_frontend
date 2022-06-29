@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 
 const CarouselContainer = () => {
   return (
-    <Carousel>
+    <Carousel showThumbs={false}>
       <div className="flex gap-12 pr-10 pb-20">
         <div className="w-1/2 my-auto">
             <div className="flex w-3/5 mx-auto justify-between">
