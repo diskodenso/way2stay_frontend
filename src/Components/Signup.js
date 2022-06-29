@@ -54,9 +54,9 @@ export const Signup = () => {
                 })
                 .then(res => {
                     console.log(res);
+                    localStorage.setItem('token', res.headers.authorization);
                     toast.success('Benutzer erfolgreich angelegt');
                     navigate('/dashboard');
-                    localStorage.setItem('token', res.headers.authorization);
                 })
                 .catch(err => console.log(err));
         } else {
