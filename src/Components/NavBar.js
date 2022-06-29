@@ -12,7 +12,7 @@ const NavBar = () => {
                 <div>
                     <NavLink to={'/'} className={'active:font-bold mx-5'}>Home</NavLink>
                     <NavLink to={'/faq'} className={'active:font-bold'} >FAQ's</NavLink>
-                    <Button link={'/singnup'} value={'Sign Up'} bg={'lightgreen'} textcolor={'blue'} classes={'mx-5'} />
+                    <Button link={'/signup'} value={'Sign Up'} bg={'lightgreen'} textcolor={'blue'} classes={'mx-5'} />
                     <Button link={'/login'} value={'Log In'} textcolor={'green'} />
                 </div>
             </div>
