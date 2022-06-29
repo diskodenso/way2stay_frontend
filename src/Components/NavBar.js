@@ -41,7 +41,7 @@ const NavBar = () => {
                 link={"/logout"}
                 value={"Log Out"}
                 classes={
-                  "bg-opacity-0 border-2 border-lightblue rounded-md px-3 py-1 text-lightblue font-bold hover:bg-lightblue hover:text-[#f1f5ee]"
+                  "mx-5 bg-opacity-0 border-2 border-lightblue rounded-md px-3 py-1 text-lightblue font-bold hover:bg-lightblue hover:text-[#f1f5ee]"
                 }
               />
           )}
