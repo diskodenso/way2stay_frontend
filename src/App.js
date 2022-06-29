@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import FlatsEditor from './Components/FlatsEditor';
 import Footer from './Components/Footer';
 import Landing from './Components/Landing';
 import Login from './Components/Login';
@@ -11,7 +10,7 @@ import UserDashboard from './Components/UserDashboard';
 const App = () => {
     return (
         <div className="App font-text bg-[#f1f5ee]">
-            <header className="App-header sticky top-0">
+            <header className="App-header sticky top-0 z-50">
                 <NavBar />
             </header>
             <main>
@@ -19,7 +18,6 @@ const App = () => {
                 <Route path='/' element={<Landing />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/login' element={<Login />} />
-                    <Route path='/flateditor' element={<FlatsEditor />} />
                     <Route path='/dashboard/' element={<UserDashboard />} />
                     <Route path='/flats/' element={<h2>Flats</h2>} />
                 </Routes>
