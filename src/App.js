@@ -10,7 +10,7 @@ import UserDashboard from './Components/UserDashboard';
 const App = () => {
     return (
         <div className="App font-text bg-[#f1f5ee]">
-            <header className="App-header">
+            <header className="App-header sticky top-0">
                 <NavBar />
             </header>
             <main>
