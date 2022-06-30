@@ -9,7 +9,6 @@ const Landing = () => {
     return (
         <>
             <ToTopButton />
-            <div className='top-0' href="#top"></div>
             <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full h-full bg-no-repeat'>
                 <div className='flex justify-between w-5/6 mx-auto mt-28 mb-20'>
                     <div>
