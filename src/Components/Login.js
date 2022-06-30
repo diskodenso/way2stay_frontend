@@ -51,7 +51,9 @@ const Login = () => {
                 <form onSubmit={submitHandler}>
                     <input name='email' type={'email'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='E-Mail-Adresse' />
                     <input name='password' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Passwort' />
-                    <button type={'submit'} className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white' >Absenden</button>
+                    <div className='flex justify-end'>  
+                        <button type={'submit'} className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white' >Absenden</button>
+                    </div>
                 </form>
             </div>
         </>

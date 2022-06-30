@@ -77,6 +77,7 @@ export const Signup = () => {
 
     return (
         <>
+            <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[65vh] mt-20'>
             <ToastContainer />
             <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white w-96 m-auto'>
                 <h2 className='text-center mb-5'>Registriere Dich hier</h2>
@@ -85,8 +86,11 @@ export const Signup = () => {
                     <input name='email' type={'email'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='E-Mail-Adresse' />
                     <input name='password' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Passwort' />
                     <input name='password2' type={'password'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Passwort wiederholen' />
-                    <button type={'submit'} className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white' >Absenden</button>
+                    <div className='flex justify-end'>
+                        <button type={'submit'} className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white' >Absenden</button>
+                    </div>
                 </form>
+            </div>
             </div>
         </>
     )

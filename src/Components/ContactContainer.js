@@ -17,10 +17,10 @@ const ContactContainer = () => {
                 <p className='w-96 text-xl font-heading'>
                     Please get in touch if you...
                 </p>
-                <ul className='mb-10'>
-                    <li>- Have any questions before you join</li>
-                    <li>- Want help getting ready for your first swap</li>
-                    <li>- Need absolutely anything else!</li>
+                <ul className='ml-5 mb-10 marker:text-blue list-disc'>
+                    <li>have any questions before you join.</li>
+                    <li>want help getting ready for your first swap.</li>
+                    <li>need absolutely anything else!</li>
                 </ul>
                 <button className="my-3 bg-opacity-0 border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#BDE8F7]">Contact us</button>
             </div>

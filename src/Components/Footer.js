@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="sticky p-4 bg-[#f1f5ee] shadow-2xl md:flex md:items-center md:justify-between md:p-6">
+    <div className="sticky p-4 bg-white shadow-2xl md:flex md:items-center md:justify-between md:p-6">
       <span className="ml-5 text-sm text-gray-500 sm:text-center">
         <div className="flex mb-5">
           <img
