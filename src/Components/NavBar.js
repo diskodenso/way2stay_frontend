@@ -9,15 +9,18 @@ const NavBar = () => {
   return (
     <div className="p-4 shadow-md bg-[#f1f5ee]">
       <div className="flex justify-between items-center">
-        <div>
+        <NavLink to={"/"}>
           <img src="https://i.ibb.co/F7Gs6b1/Logo-S.png" className="ml-5 h-10 w-10" alt="Logo"></img>
-        </div>
+        </NavLink>
         <div>
           <NavLink to={"/"} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
             Home
           </NavLink>
-          <NavLink to={"/faq"} className={"active:font-bold text-blue font-bold hover:text-lightblue"}>
-            FAQ's
+          <NavLink to={"/faq"} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
+            FAQ
+          </NavLink>
+          <NavLink to={"/ "} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
+            Contact
           </NavLink>
           {!verified ? (
             <>
@@ -32,7 +35,7 @@ const NavBar = () => {
                 link={"/login"}
                 value={"Login"}
                 classes={
-                  "bg-opacity-0 border-2 border-lightblue rounded-md px-3 py-1 text-lightblue font-bold hover:bg-lightblue hover:text-[#f1f5ee]"
+                  "mr-5 bg-opacity-0 border-2 border-lightblue rounded-md px-3 py-1 text-lightblue font-bold hover:bg-lightblue hover:text-[#f1f5ee]"
                 }
               />
             </>
