@@ -18,12 +18,13 @@ const App = () => {
             </header>
             <main className='mb-auto'>
                 <Routes>
-                <Route path='/' element={<Landing />} />
+                    <Route path='/' element={<Landing />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
                     <Route path='/dashboard/' element={<UserDashboard />} />
-                    <Route path='/flats/editor' element={<FlatsEditor newFlat={true}/>} />
+                    <Route path='/flats/editor' element={<FlatsEditor />} />
+                    <Route path='/flats/editor/:flatId' element={<FlatsEditor />} />
                     <Route path='/flats/' element={<FlatsList />} />
                 </Routes>
             </main>
