@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const StartSwapping = () => {
     return (
@@ -12,7 +13,7 @@ const StartSwapping = () => {
                     <label className='pb-3 font-heading font-bold text-xl'>My destination should be:</label>
                     <input className='p-2 focus:outline-green' />
                 <div className='mt-4 text-right'>
-                    <button className="w-1/3 bg-opacity-0 border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-yellow/80">Submit</button>
+                    <Link to={'/flats'} className="w-1/3 bg-opacity-0 border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-yellow/80">Submit</Link>
                 </div>
                 </div>
             </form>

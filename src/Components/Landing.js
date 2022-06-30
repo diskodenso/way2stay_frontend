@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import CarouselContainer from './CarouselContainer'
 import ContactContainer from './ContactContainer'
 import HowToUse from './HowToUse'
@@ -59,7 +60,7 @@ const Landing = () => {
                             <img src="https://i.ibb.co/CJQ9LVQ/Choose-Location.png"></img>
                         </div>
                         <div className='flex justify-center items-start'>
-                            <button className="bg-red border-2 border-lightgreen rounded-md px-3 py-1 text-lightgreen font-bold hover:bg-lightgreen hover:text-red">Search by country</button>
+                            <Link to={'/flats'} className="bg-red border-2 border-lightgreen rounded-md px-3 py-1 text-lightgreen font-bold hover:bg-lightgreen hover:text-red">Find your home</Link>
                         </div>
                     </div>
 
