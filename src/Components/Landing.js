@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import CarouselContainer from "./CarouselContainer";
 import ContactContainer from "./ContactContainer";
-import HowToUse from "./HowToUse";
+import HowToUseContainer from "./HowToUseContainer";
 import StartSwapping from "./StartSwapping";
 import ToTopButton from "./ToTopButton";
 
@@ -19,7 +19,7 @@ const Landing = () => {
             <StartSwapping />
           </div>
           <div>
-            <HowToUse />
+            <HowToUseContainer />
           </div>
         </div>
 
