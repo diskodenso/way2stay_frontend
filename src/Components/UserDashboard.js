@@ -19,7 +19,6 @@ const UserDashboard = () => {
 
     useEffect(() => {
         (!verified) && navigate('/login');
-        console.log();
         const getData = async () => {
             if (verified && userId) {
                 try {
@@ -61,7 +60,7 @@ const UserDashboard = () => {
             }
         }
         getData();
-    }, [apiUrl]);
+    }, [apiUrl, navigate, userId, verified]);
 
     const submitHandler = async (e) => {
         e.preventDefault();

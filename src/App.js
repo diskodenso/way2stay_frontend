@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import FlatsEditor from './Components/FlatsEditor';
 import Footer from './Components/Footer';
 import Landing from './Components/Landing';
 import Login from './Components/Login';
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
                     <Route path='/dashboard/' element={<UserDashboard />} />
+                    <Route path='/flats/editor' element={<FlatsEditor newFlat={true}/>} />
                     <Route path='/flats/' element={<h2>Flats</h2>} />
                 </Routes>
             </main>
