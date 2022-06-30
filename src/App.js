@@ -3,6 +3,7 @@ import './App.css';
 import FlatsEditor from './Components/FlatsEditor';
 import FlatsList from './Components/FlatsList';
 import Footer from './Components/Footer';
+import HowToUse from './Components/HowToUse';
 import Landing from './Components/Landing';
 import Login from './Components/Login';
 import Logout from './Components/Logout';
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path='/flats/editor' element={<FlatsEditor />} />
                     <Route path='/flats/editor/:flatId' element={<FlatsEditor />} />
                     <Route path='/flats/' element={<FlatsList />} />
+                    <Route path='/how2use' element={<HowToUse />} />
                 </Routes>
             </main>
             <footer>
