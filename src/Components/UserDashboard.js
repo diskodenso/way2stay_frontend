@@ -13,7 +13,6 @@ const UserDashboard = () => {
     const [error, setError] = useState(false);
     const [flats, setFlats] = useState(null);
     const [user, setUser] = useState(null);
-    // eslint-disable-next-line
     const [favorites, setFavorites] = useState([]);
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -31,14 +30,16 @@ const UserDashboard = () => {
                                 axios
                                     .get(`${apiUrl}/flats/${favorite}`)
                                     .then(favRes => {
-                                        tempFav.push(favRes.data);
+                                        tempFav.push(favRes.data.flat);
                                         setLoading(false);
                                     })
                                     .catch(err => console.log(err));
                             });
+                            console.log(tempFav);
                             setFavorites(tempFav);
                         })
                         .catch(err => {
+                            setError(err);
                             console.log(err);
                         });
                     axios
@@ -48,11 +49,13 @@ const UserDashboard = () => {
                             setLoading(false);
                         })
                         .catch(err => {
-                            setError(true);
+                            setError(err);
                             setLoading(false);
                             console.log(err);
                         });
                 } catch (error) {
+                    setError(error);
+
                     console.log(error);
                 }
             } else {
@@ -66,7 +69,7 @@ const UserDashboard = () => {
         e.preventDefault();
         const { firstname, lastname, email, phone, postalcode, city, street, housenumber, isActive } = e.target;
         (isActive.value === "on") ? (isActive.value = true) : (isActive.value = false)
-        console.log(isActive.value);
+        console.log(isActive);
         let isEmailExists;
         await axios
             .get(`${apiUrl}/users`)
@@ -74,13 +77,11 @@ const UserDashboard = () => {
                 const existingEmailUser = res.data.find(user => { return user.email === email.value });
                 (existingEmailUser && existingEmailUser.userId !== userId) ? isEmailExists = true : isEmailExists = false;
                 (isEmailExists) && toast.error('Die E-Mail-Adresse existiert bereits!');
-                console.log(res.data);
             })
             .catch(err => {
                 console.log(err)
                 setLoading(false);
             });
-        console.log(email.value);
         const updatedUser = {
             firstname: firstname.value,
             lastname: lastname.value,
@@ -155,19 +156,15 @@ const UserDashboard = () => {
                         <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
                             <div>
                                 <div className='flex justify-between'>
-
                                     <h2>Meine Wohnungen</h2>
                                     <Link to={'/newflat'} name='newFlat' className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'>neue Wohnung anlegen</Link>
                                 </div>
 
                                 <div className='flex gap-5 my-5 flex-wrap'>
                                     {
-                                        (flats !== [] && !flats) ?
+                                        (flats !== [] && flats !== null) ?
                                             (
                                                 <>
-                                                    {
-                                                        console.log(flats)
-                                                    }
                                                     {
                                                         flats.map((flat) => {
                                                             return <FlatsListItem key={flat._id} flat={flat} />
@@ -188,16 +185,15 @@ const UserDashboard = () => {
                                 <h2>Meine Favoriten</h2>
                                 <div className='flex gap-5 my-5'>
                                     {
-                                        (favorites !== [] && !favorites) ?
+                                        (favorites !== [] && favorites) ?
                                             (
                                                 <>
                                                     {
                                                         favorites.map((favorite) => {
-                                                            return <FlatsListItem key={favorite} />
+                                                            return <FlatsListItem key={favorite} flat={favorite} />
                                                         })
                                                     }
                                                 </>
-
                                             )
                                             :
                                             (
