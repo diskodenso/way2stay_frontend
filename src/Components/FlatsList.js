@@ -1,15 +1,44 @@
-import React from "react";
+import axios from 'axios';
+import React, { useEffect } from "react";
 import ToTopButton from "./ToTopButton";
 import { useState } from "react";
 import { FlatsListItem } from "./FlatsListItem";
+import Loader from "./Loader";
 
 const FlatsList = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const toggling = () => setIsOpen(!isOpen);
-
   const [flats, setFlats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [flatCount, setFlatCount] = useState(null);
 
-  
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/flats`)
+      .then((res) => {
+        setFlats(res.data.flats);
+        setFlatCount(res.data.flats.length);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+        setLoading(false);
+      });
+      axios
+      .get(`${apiUrl}/categories`);
+    }, []);
+
+    const toggling = () => setIsOpen(!isOpen);
+
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) {
+    return <h3>Oh no, an error occured</h3>;
+  }
 
   return (
     <>
@@ -17,7 +46,7 @@ const FlatsList = () => {
       <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full min-h-screen pb-20 bg-no-repeat'>
         <div className="w-5/6 flex justify-between mx-auto mt-20">
           <h2 className=" font-script text-4xl">
-            We've found XXX results to your search.
+            We've found {flatCount} results to your search.
           </h2>
 
           <div>
@@ -58,15 +87,12 @@ const FlatsList = () => {
         <div className="flex flex-wrap gap-16 mt-20 w-5/6 mx-auto">
           {/* <FlatsListItem /> */}
 
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
-          <div className="w-1/6 h-80 bg-red"></div>
+          {flats && (
+            flats.map((flat) => {
+              return <FlatsListItem flat={flat} />
+            }) 
+          )}
+
         </div>
       </div>
     </>
