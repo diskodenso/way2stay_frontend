@@ -6,7 +6,7 @@ import { authContext } from '../Context/authContext';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { verified, setVerified } = useContext(authContext);
+    const { verified, setVerified, setUserId } = useContext(authContext);
     const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
@@ -29,6 +29,8 @@ const Login = () => {
                 localStorage.setItem('token', res.headers.authorization);
                 toast.success('Du wurdest erfolgreich eingeloggt');
                 setVerified(true);
+                console.log(res.data);
+                setUserId(res.data.userId)
                 navigate('/dashboard');
                 // } catch (error) {
                 //     console.log(error);
