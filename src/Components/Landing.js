@@ -35,7 +35,7 @@ const Landing = () => {
                             you want.
                         </h1>
                         <p className='w-96'>
-                        You go to their place. They come to yours. Just find a home you’d like to stay in, and see if the owner would like to stay in yours. Classic Swaps can happen at the same time or at different times. 
+                            You go to their place. They come to yours. Just find a home you&apos;d like to stay in, and see if the owner would like to stay in yours. Classic Swaps can happen at the same time or at different times. 
                         </p>
                     </div>
                 </div>
