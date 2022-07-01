@@ -89,7 +89,7 @@ const FlatsList = () => {
 
           {flats && (
             flats.map((flat) => {
-              return <FlatsListItem flat={flat} />
+              return <FlatsListItem key={`flat_${flat._id}`} flat={flat} />
             }) 
           )}
 
