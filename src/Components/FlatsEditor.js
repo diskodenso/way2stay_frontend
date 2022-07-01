@@ -125,7 +125,7 @@ const FlatsEditor = () => {
                                     type={'number'}
                                     className='border-b-2 border-[#6b6b6b] focus:outline-none w-[4em]'
                                     placeholder='PLZ'
-                                    defaultValue={flat && flat.location.postalcode}
+                                    defaultValue={flat && (flat.location && flat.location.postalcode)}
                                     required
                                 />
                                 <input
@@ -133,7 +133,7 @@ const FlatsEditor = () => {
                                     type={'text'}
                                     className='border-b-2 border-[#6b6b6b] focus:outline-none w-full'
                                     placeholder='Ort'
-                                    defaultValue={flat && flat.location.city}
+                                    defaultValue={flat && (flat.location && flat.location.city)}
                                     required
                                 />
                             </div>
@@ -143,7 +143,7 @@ const FlatsEditor = () => {
                                     type={'text'}
                                     className='border-b-2 border-[#6b6b6b] focus:outline-none w-5/6'
                                     placeholder='Straße'
-                                    defaultValue={flat && flat.location.street}
+                                    defaultValue={flat && (flat.location && flat.location.street)}
                                     required
                                 />
                                 <input
@@ -151,7 +151,7 @@ const FlatsEditor = () => {
                                     type={'text'}
                                     className='border-b-2 border-[#6b6b6b] focus:outline-none w-1/6'
                                     placeholder='Nr.'
-                                    defaultValue={flat && flat.location.housenumber}
+                                    defaultValue={flat && (flat.location && flat.location.housenumber)}
                                     required
                                 />
                             </div>
