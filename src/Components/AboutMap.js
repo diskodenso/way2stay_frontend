@@ -3,18 +3,18 @@ import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const AboutMap = () => {
-  const position = [52.10696, 13.2726];
-
-  render(
-    <MapContainer center={position} zoom={16} scrollWheelZoom={false}>
+  const mapPosition = [52.10696, 13.2726];
+  const officePosition = [52.457119, 13.54023];
+  return (
+    <MapContainer center={mapPosition} zoom={16} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={position}>
+      <Marker position={officePosition}>
         <Popup>
-          This is our beautiful office. <br /> Come by Monday to Friday 10am to
-          6pm.
+          This is our beautiful office. <br /> You are welcome to come by <br />
+          Monday to Friday 10am to 6pm.
         </Popup>
       </Marker>
     </MapContainer>
