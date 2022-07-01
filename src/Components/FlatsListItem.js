@@ -16,6 +16,12 @@ export const FlatsListItem = ({ flat }) => {
     const owner = (userId === flat.userId);
     const [shortDescription, setShortDescription] = useState(null);
 
+    // #####################################################
+    // TODO's
+    // - Calculate and set ratings according the reviews
+    // - link a cover picture
+    // #####################################################
+    
     useEffect(() => {
         console.log(user);
         if (user) {
@@ -26,7 +32,7 @@ export const FlatsListItem = ({ flat }) => {
             setLoading(false);
             setError(null);
         }
-
+        setRating(0);
         flat.description.length >= 200 ? setShortDescription(`${flat.description.substring(0, 199)} ...`) : (setShortDescription(flat.description));
     }, [apiUrl, flat._id, userId, favoriteList, user, flat.description]);
 
@@ -67,8 +73,8 @@ export const FlatsListItem = ({ flat }) => {
     return (
         <>
             <ToastContainer />
-            <div className='overflow-hidden shadow-lg rounded-lg w-1/3 h-[30rem] bg-white flex flex-col justify-between'>
-                <div>
+            <div className='overflow-hidden shadow-lg rounded-lg w-1/3 bg-white flex flex-col justify-between'>
+                <div className='min-h-[25rem]'>
 
                     {(owner && userId) && (
                         <div className='absolute flex justify-end p-1'>
@@ -120,5 +126,3 @@ export const FlatsListItem = ({ flat }) => {
         </>
     )
 }
-
-
