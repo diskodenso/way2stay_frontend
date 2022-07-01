@@ -1,9 +1,9 @@
-import { Popup } from "leaflet";
+// import { Icon } from "leaflet";
 import React, { useState } from 'react'
 // import Map, Marker, Popup and title from leaflet
-import { Map, Marker, Popup, Tilelayer } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-const FlatMap = () => {
+const FlatsMap = ({flats}) => {
     const [activeFlat, setActiveFlat] = useState(null);
     
   // --- custom icon as marker --- //
@@ -20,19 +20,19 @@ const FlatMap = () => {
               />
               {flats.map(flat =>(
                 <Marker
-                  key={data.flats.flatId}
-                  position={{ data.flats.coordinates.lang }, { data.flats.coordinates.lat }}
+                  key={flat.flatId}
+                  position={{ flats.coordinates.lat }, {  flats.coordinates.lat  }}
                   onClick={() => { setActiveFlat(flat) }} />
               ))}
         {activeFlat && (
           <Popup
-            position={{ data.activeFlat.coordinates.lang }, { data.activeFlat.coordinates.lat }}
+            position={{ activeFlat.coordinates.lat }, { activeFlat.coordinates.lang }}
             onClose={() => { setActiveFlat(null) }}
             //icon={houseMarker}
           >
             <div>
-              <h2>{data.activeFlat.title}</h2>
-              <p>{data.activeFlat.description}</p>
+              <h2>{activeFlat.title}</h2>
+              <p>{activeFlat.description}</p>
             </div>
           </Popup>
         )}
@@ -41,4 +41,4 @@ const FlatMap = () => {
   );
 };
 
-export default FlatMap;
+export default FlatsMap;
