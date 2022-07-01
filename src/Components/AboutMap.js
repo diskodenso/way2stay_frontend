@@ -3,7 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useState } from "react";
 
 const AboutMap = () => {
-  const [activePopup, setActivePopup] = useState(false);
+  const [activePopup, setActivePopup] = useState(null);
   return (
     <>
       <h1>You can find us here:</h1>
@@ -22,7 +22,7 @@ const AboutMap = () => {
           <Popup
             position={[52.457119, 13.54023]}
             onClose={() => {
-              setActivePopup(false);
+              setActivePopup(null);
             }}
           >
             <div>
