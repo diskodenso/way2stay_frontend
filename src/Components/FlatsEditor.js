@@ -97,7 +97,6 @@ const FlatsEditor = () => {
     }
 
     if (!loading && !error && verified) {
-        console.log(flat);
         return (
             <>
                 <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
