@@ -18,7 +18,7 @@ const App = () => {
             <header className="App-header sticky top-0 z-50">
                 <NavBar />
             </header>
-            <main className='mb-auto'>
+            <main className='mb-auto z-30'>
                 <Routes>
                     <Route path='/' element={<Landing />} />
                     <Route path='/signup' element={<Signup />} />
