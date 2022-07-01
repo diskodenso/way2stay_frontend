@@ -8,6 +8,7 @@ import Landing from './Components/Landing';
 import Login from './Components/Login';
 import Logout from './Components/Logout';
 import NavBar from './Components/NavBar';
+import Contact from './Components/Contact';
 import { Signup } from './Components/Signup';
 import UserDashboard from './Components/UserDashboard';
 
@@ -28,6 +29,7 @@ const App = () => {
                     <Route path='/flats/editor/:flatId' element={<FlatsEditor />} />
                     <Route path='/flats/' element={<FlatsList />} />
                     <Route path='/how2use' element={<HowToUse />} />
+                    <Route path='/contact' element={<Contact />} />
                 </Routes>
             </main>
             <footer>
