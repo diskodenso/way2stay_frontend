@@ -13,7 +13,7 @@ const AllFlatsMap = ({ flats }) => {
   // });
   return (
     <>
-      <Map center={[54.525963, 15.255119]} zoom={12}>
+      <Map center={[54.526, 15.2551]} zoom={12}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
