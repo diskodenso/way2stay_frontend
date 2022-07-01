@@ -7,7 +7,7 @@ import { authContext } from "../Context/authContext";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 
-const FlatsList = () => {
+const FlatsList = ({}) => {
   const { userId, verified } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
   const [flats, setFlats] = useState(null);

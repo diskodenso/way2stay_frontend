@@ -9,6 +9,7 @@ const AuthState = ({ children }) => {
     const [processing, setProcessing] = useState(true);
     const [user, setUser] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [searchString, setSearchString] = useState(null);
     const token = localStorage.getItem('token');
     const [verified, setVerified] = useState(null);
     useEffect(() => {
@@ -52,7 +53,7 @@ const AuthState = ({ children }) => {
 
     if (!processing) {
         return (
-            <authContext.Provider value={{ setVerified, verified, setUserId, userId, user, imgPlaceholder }}>
+            <authContext.Provider value={{ setVerified, verified, setUserId, userId, user, imgPlaceholder, searchString, setSearchString }}>
                 {children}
             </authContext.Provider>
         );
