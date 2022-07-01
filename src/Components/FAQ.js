@@ -10,7 +10,7 @@ const FAQ = () => {
           Frequently Asked Questions
         </h1>
 
-        <div className="flex justify-between w-5/6 mx-auto mb-10">
+        <div className="flex justify-between w-5/6 mx-auto pb-10">
           <div className="bg-white border border-[#d9d9d9] w-full shadow-lg rounded-lg mx-auto">
             <h2 className="font-script text-3xl mt-6 ml-6 pb-5">
               What is Lorem Ipsum?
@@ -23,7 +23,7 @@ const FAQ = () => {
           </div>
         </div>
 
-        <div className="flex justify-between w-5/6 mx-auto mb-10">
+        <div className="flex justify-between w-5/6 mx-auto pb-10">
           <div className="bg-white border border-[#d9d9d9] w-full shadow-lg rounded-lg mx-auto">
             <h2 className="font-script text-3xl mt-6 ml-6 pb-5">
               Does this website use Lorem Ipsum?
@@ -36,7 +36,7 @@ const FAQ = () => {
           </div>
         </div>
 
-        <div className="flex justify-between w-5/6 mx-auto mb-10">
+        <div className="flex justify-between w-5/6 mx-auto pb-10">
           <div className="bg-white border border-[#d9d9d9] w-full shadow-lg rounded-lg mx-auto">
             <h2 className="font-script text-3xl mt-6 ml-6 pb-5">
               Is Lorem Ipsum free to use?
