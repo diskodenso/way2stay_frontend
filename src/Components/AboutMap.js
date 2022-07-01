@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 // import Map, Marker, Popup and title from leaflet
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const AboutMap = () => {
   return (
     <>
       <h1>You can find us here:</h1>
-      <Map center={[54.525963, 15.255119]} zoom={12}>
+      <MapContainer center={[54.525963, 15.255119]} zoom={16}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -18,7 +18,7 @@ const AboutMap = () => {
             <p>Visit Us: Mo-Fr 10am - 6pm</p>
           </div>
         </Popup>
-      </Map>
+      </MapContainer>
     </>
   );
 };
