@@ -60,7 +60,7 @@ const FlatDetail = ({ flat }) => {
                 <h3>{flat.title}</h3>
                 <img src={imgPlaceholder} alt={"placeholder"} />
                 <p>{flat.description}</p>
-                <p>{flat.address.city}</p>
+                <p>{flat.location.city}</p>
                 <SingleFlatMap />
                 <button
                   onClick={handleClick}
