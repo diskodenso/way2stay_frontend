@@ -4,6 +4,7 @@ import { useState, createContext, useEffect } from "react";
 export const authContext = createContext();
 
 const AuthState = ({ children }) => {
+    const imgPlaceholder = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.schuler-rohstoff.de%2Fwp-content%2Fuploads%2F2015%2F09%2Fplatzhalter.jpg&f=1&nofb=1'
     const apiUrl = process.env.REACT_APP_API_URL;
     const [processing, setProcessing] = useState(true);
     const [user, setUser] = useState(null);
@@ -51,7 +52,7 @@ const AuthState = ({ children }) => {
 
     if (!processing) {
         return (
-            <authContext.Provider value={{ setVerified, verified, setUserId, userId, user }}>
+            <authContext.Provider value={{ setVerified, verified, setUserId, userId, user, imgPlaceholder }}>
                 {children}
             </authContext.Provider>
         );
