@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { authContext } from '../Context/authContext';
 import Loader from './Loader';
 
@@ -12,19 +13,24 @@ export const FlatsListItem = ({ flat }) => {
     const owner = (userId === flat.userId);
 
     useEffect(() => {
-        axios
-            .get(`${apiUrl}/users/${userId}`)
-            .then(res => {
-                console.log(res.data.favorites);
-                setIsFavorite(res.data.favorites.find(fav => { return fav === flat._id }));
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err);
-                setLoading(false);
-            });
+        if (userId) {
 
-    }, [apiUrl, userId]);
+            axios
+                .get(`${apiUrl}/users/${userId}`)
+                .then(res => {
+                    console.log(res.data.favorites);
+                    setIsFavorite(res.data.favorites.find(fav => { return fav === flat._id }));
+                    setLoading(false);
+                })
+                .catch(err => {
+                    setError(err);
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+            setError(null);
+        }
+    }, [apiUrl, flat._id, userId]);
 
     // console.log(flat);
     // console.log(owner);
@@ -39,12 +45,14 @@ export const FlatsListItem = ({ flat }) => {
         <div className='border rounded-lg w-1/3 bg-gray text-white'>
             {(owner && userId) && (
                 <div className='flex justify-end p-1'>
-                    <i className='fa fa-pen' />
+                    <Link to={`/flats/editor/${flat._id}`}>
+                        <i className='fa fa-pen' />
+                    </Link>
                 </div>
             )}
             {(!owner && userId) && (
                 <div className='flex justify-end p-1'>
-                    <i className={`fa fa-heart ${(isFavorite) ? 'text-red' : 'text-blue' }`} />
+                    <i className={`fa fa-heart ${(isFavorite) ? 'text-red' : 'text-green'}`} />
                 </div>
             )}
             <div className='p-5'>
