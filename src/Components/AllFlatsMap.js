@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 const AllFlatsMap = ({ flats }) => {
-  const [activeFlat, setActiveFlat] = useState(null);
+  const [activePopup, setActivePopup] = useState(null);
 
   // --- custom icon as marker --- //
   // const houseMarker = new Icon({
@@ -23,24 +23,24 @@ const AllFlatsMap = ({ flats }) => {
             key={flat.flatId}
             position={(flat.coordinates.lat, flat.coordinates.lang)}
             onClick={() => {
-              setActiveFlat(flat);
+              setActivePopup(flat);
             }}
           />
         ))}
-        {activeFlat && (
+        {activePopup && (
           <Popup
             position={(activeFlat.coordinates.lat, activeFlat.coordinates.lang)}
             onClose={() => {
-              setActiveFlat(null);
+              setActiveFlat(flat);
             }}
             //icon={houseMarker}
           >
             <div>
-              <h2>{activeFlat.title}</h2>
-              <p>{activeFlat.description}</p>
+              <h2>{activePopup.title}</h2>
+              <p>{activePopup.description}</p>
               <p>
-                {activeFlat.location.city}
-                {activeFlat.location.postalcode}
+                {activePopup.location.city}
+                {activePopup.location.postalcode}
               </p>
             </div>
           </Popup>

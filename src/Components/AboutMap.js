@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
 // import Map, Marker, Popup and title from leaflet
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 const AboutMap = () => {
+  const [activePopup, setActivePopup] = useState(null);
   return (
     <>
       <h1>You can find us here:</h1>
@@ -11,13 +11,20 @@ const AboutMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-        <Marker position={[52.457119, 13.54023]} />
-        <Popup position={[52.457119, 13.54023]}>
-          <div>
-            <h2>Our beautiful Office</h2>
-            <p>Visit Us: Mo-Fr 10am - 6pm</p>
-          </div>
-        </Popup>
+        <Marker
+          position={[52.457119, 13.54023]}
+          onClick={() => {
+            setActivePopup(flat);
+          }}
+        />
+        {activePopup && (
+          <Popup position={[52.457119, 13.54023]}>
+            <div>
+              <h2>Our beautiful Office</h2>
+              <p>Visit Us: Mo-Fr 10am - 6pm</p>
+            </div>
+          </Popup>
+        )}
       </Map>
     </>
   );
