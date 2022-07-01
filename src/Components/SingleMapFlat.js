@@ -3,9 +3,8 @@ import React, { useState } from "react";
 // import Map, Marker, Popup and title from leaflet
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-
-const SingleMapFlat = ({ flats }) => {
-    
+const SingleMapFlat = ({ flat }) => {
+  const [activePopup, setActivePopup] = useState(null);
   // --- custom icon as marker --- //
   // const houseMarker = new Icon({
   //   iconUrl: "/house.svg",
@@ -17,24 +16,25 @@ const SingleMapFlat = ({ flats }) => {
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              />
-              {flat && (
-                 <Marker
-                  key={flat.flatId}
-                  position={(flat.coordinates.lat,  flat.coordinates.lang  )}
-                      onClick={() => { setActiveFlat(flat) }}
-                  />
-              )}
-        {activeFlat && (
+        />
+        {flat && (
+          <Marker
+            key={flat.flatId}
+            position={(flat.coordinates.lat, flat.coordinates.lang)}
+            onClick={() => {
+              setActivePopup(flat);
+            }}
+          />
+        )}
+        {activePopup && (
           <Popup
-            position={{ activeFlat.coordinates.lat }, { activeFlat.coordinates.lang }}
-            onClose={() => { setActiveFlat(null) }}
+            position={(flat.coordinates.lat, flat.coordinates.lang)}
             //icon={houseMarker}
           >
             <div>
-              <h2>{activeFlat.title}</h2>
-              <p>{activeFlat.description}</p>
-              <p>{{activeFlat.location.city}, {activeFlat.location.postalcode} }</p>
+              <h2>{flat.title}</h2>
+              <p>{flat.description}</p>
+              <p>{(flat.location.city, flat.location.postalcode)}</p>
             </div>
           </Popup>
         )}
