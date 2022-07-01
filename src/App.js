@@ -11,6 +11,7 @@ import NavBar from './Components/NavBar';
 import Contact from './Components/Contact';
 import { Signup } from './Components/Signup';
 import UserDashboard from './Components/UserDashboard';
+import FAQ from './Components/FAQ';
 
 const App = () => {
     return (
@@ -30,6 +31,7 @@ const App = () => {
                     <Route path='/flats/' element={<FlatsList />} />
                     <Route path='/how2use' element={<HowToUse />} />
                     <Route path='/contact' element={<Contact />} />
+                    <Route path='/faq' element={<FAQ />} />
                 </Routes>
             </main>
             <footer>
