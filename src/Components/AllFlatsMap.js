@@ -29,9 +29,11 @@ const AllFlatsMap = ({ flats }) => {
         ))}
         {activePopup && (
           <Popup
-            position={(activeFlat.coordinates.lat, activeFlat.coordinates.lang)}
+            position={
+              (activePopup.coordinates.lat, activePopup.coordinates.lang)
+            }
             onClose={() => {
-              setActiveFlat(flat);
+              setActiveFlat(null);
             }}
             //icon={houseMarker}
           >
