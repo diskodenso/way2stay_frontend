@@ -19,7 +19,7 @@ const NavBar = () => {
           <NavLink to={"/faq"} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
             FAQ
           </NavLink>
-          <NavLink to={"/ "} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
+          <NavLink to={"/contact"} className={"active:font-bold mx-5 text-blue font-bold hover:text-lightblue"}>
             Contact
           </NavLink>
           {!verified ? (
