@@ -8,6 +8,7 @@ const Contact = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setSubmitted = useState(true);
     //  const { contactMail, subject, contactField } = e.target;
   };
 
