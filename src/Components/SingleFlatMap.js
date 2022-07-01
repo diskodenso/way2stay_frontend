@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import Map, Marker, Popup and title from leaflet
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-const SingleMapFlat = ({ flat }) => {
+const SingleFlatMap = ({ flat }) => {
   const [activePopup, setActivePopup] = useState(null);
   // --- custom icon as marker --- //
   // const houseMarker = new Icon({
@@ -12,7 +12,7 @@ const SingleMapFlat = ({ flat }) => {
   // });
   return (
     <>
-      <Map center={[54.525963, 15.255119]} zoom={12}>
+      <Map center={[54.526, 15.2551]} zoom={12}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -43,4 +43,4 @@ const SingleMapFlat = ({ flat }) => {
   );
 };
 
-export default SingleMapFlat;
+export default SingleFlatMap;
