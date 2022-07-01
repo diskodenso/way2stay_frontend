@@ -13,9 +13,9 @@ const StartSwapping = () => {
     navigate("/flats");
   };
   return (
-    <div className="rounded-lg bg-yellow shadow-lg p-2">
-      <form className="flex p-3 gap-6" onSubmit={submitHandler}>
-        <div className="flex flex-col">
+    <div className="rounded-lg w-1/2 bg-yellow shadow-lg p-2">
+      <form className="flex w-full p-3" onSubmit={submitHandler}>
+        <div className="flex flex-col w-full">
           <label className="pb-3 font-heading font-bold text-xl">
             My destination should be:
           </label>
