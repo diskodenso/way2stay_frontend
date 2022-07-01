@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ContactContainer = () => {
   return (
@@ -22,7 +23,7 @@ const ContactContainer = () => {
                     <li>want help getting ready for your first swap.</li>
                     <li>need absolutely anything else!</li>
                 </ul>
-                <button className="my-3 bg-opacity-0 border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#BDE8F7]">Contact us</button>
+                <Link to={'/contact'} className="my-3 bg-opacity-0 border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#BDE8F7]">Contact us</Link>
             </div>
         </div>
     </div>

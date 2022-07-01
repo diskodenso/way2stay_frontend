@@ -1,5 +1,6 @@
 import React from "react";
 import ToTopButton from "./ToTopButton";
+import { useState } from "react";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
