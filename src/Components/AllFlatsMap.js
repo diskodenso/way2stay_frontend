@@ -21,7 +21,7 @@ const AllFlatsMap = ({ flats }) => {
         {flats.map((flat) => (
           <Marker
             key={flat.flatId}
-            position={(flat.coordinates.lat, flat.coordinates.lang)}
+            position={[flat.coordinates.lat, flat.coordinates.lang]}
             onClick={() => {
               setActivePopup(flat);
             }}
