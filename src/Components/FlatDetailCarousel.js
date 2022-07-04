@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
-const FlatDetailCarousel = () => {
+const FlatDetailCarousel = ({images}) => {
   return (
     <Carousel showThumbs={false}>
       <div className="w-5/6 mb-10 mx-auto overflow-hidden rounded-lg shadow-lg">
