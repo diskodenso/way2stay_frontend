@@ -59,7 +59,8 @@ const FlatDetail = () => {
           <div className="w-2/3 border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white mx-auto">
             <div className="flex justify-between mt-5 mb-10 ml-10 mr-5">
               <h2 className="font-script text-4xl">{flat.title}</h2>
-              <Link to={`/bookings/${flatId}`}
+              <Link
+                to={`/bookings/${flatId}`}
                 className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
               >
                 Book this flat
@@ -105,26 +106,47 @@ const FlatDetail = () => {
               </div>
 
               <div className="flex flex-col w-1/2 mb-5">
-                <div className="border border-[#b3b3b3] rounded-lg shadow-lg h-36 mr-5 mb-10">
-                  <TimeSheet />
-                </div>
                 <div className="rounded-lg shadow-lg overflow-hidden mr-5">
                   <SingleFlatMap flat={flat} />
+                </div>
+                <div className="border border-[#b3b3b3] rounded-lg shadow-lg h-36 mr-5 mt-10">
+                  {/* <TimeSheet /> */}
                 </div>
               </div>
             </div>
 
-            <div>
-            <div className="ml-10 mt-10 mr-5">
-                  <h3 className="font-heading text-2xl mb-5">
-                    Reviews
-                  </h3>
-                  
-                  <div>
-                    Hi #####
+              <div className="ml-10 mt-20 mr-5">
+                <h3 className="font-heading text-2xl mb-5">Reviews</h3>
+
+                <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
+                  <div className="flex justify-between mb-2">
+                    <h4 className="font-heading text-lg">Name Nachname</h4>
+                    <p className="text-yellow"># # # # #</p>
                   </div>
+                  <p>
+                    You go to their place. They come to yours. Just find a home
+                    you&apos;d like to stay in, and see if the owner would like
+                    to stay in yours. Classic Swaps can happen at the same time
+                    or at different times.
+                  </p>
                 </div>
-            </div>
+
+                <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
+                  <div className="flex justify-between mb-2">
+                    <h4 className="font-heading text-lg">Name Nachname</h4>
+                    <p className="text-yellow"># # # # #</p>
+                  </div>
+                  <p>
+                    You go to their place. They come to yours. Just find a home
+                    you&apos;d like to stay in, and see if the owner would like
+                    to stay in yours. Classic Swaps can happen at the same time
+                    or at different times. You go to their place. They come to
+                    yours. Just find a home you&apos;d like to stay in, and see
+                    if the owner would like to stay in yours. Classic Swaps can
+                    happen at the same time or at different times.
+                  </p>
+                </div>
+              </div>
           </div>
         </div>
       </>
