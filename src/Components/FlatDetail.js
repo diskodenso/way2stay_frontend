@@ -1,11 +1,11 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Context/authContext.js";
 import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";
 
-const FlatDetail = ({ flat }) => {
+const FlatDetail = () => {
   const { flatId } = useParams();
   const navigate = useNavigate();
   const { imgPlaceholder } = useContext(authContext);
@@ -60,8 +60,8 @@ const FlatDetail = ({ flat }) => {
                 <h3>{flat.title}</h3>
                 <img src={imgPlaceholder} alt={"placeholder"} />
                 <p>{flat.description}</p>
-                <p>{flat.location.city}</p>
-                <SingleFlatMap />
+                <p>{flat.location && flat.location.city}</p>
+                <SingleFlatMap flat={flat} />
                 <button
                   onClick={handleClick}
                   name="onClick"

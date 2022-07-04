@@ -12,6 +12,7 @@ import Contact from './Components/Contact';
 import { Signup } from './Components/Signup';
 import UserDashboard from './Components/UserDashboard';
 import FAQ from './Components/FAQ';
+import FlatDetail from './Components/FlatDetail';
 import { ToastContainer } from 'react-toastify';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
                     <Route path='/dashboard/' element={<UserDashboard />} />
                     <Route path='/flats/editor' element={<FlatsEditor />} />
                     <Route path='/flats/editor/:flatId' element={<FlatsEditor />} />
+                    <Route path='/flats/:flatId' element={<FlatDetail />} />
                     <Route path='/flats/' element={<FlatsList />} />
                     <Route path='/how2use' element={<HowToUse />} />
                     <Route path='/contact' element={<Contact />} />
