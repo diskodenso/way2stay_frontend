@@ -1,7 +1,7 @@
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary } from "@cloudinary/url-gen";
 
-export const CloudinaryShow = ({ picUrl }) => {
+export const CloudinaryShow = ({ publicId }) => {
 
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
@@ -11,14 +11,12 @@ export const CloudinaryShow = ({ picUrl }) => {
   });
 
   // cld.image returns a CloudinaryImage with the configuration set.
-  const myImage = cld.image('sample');
+  const myImage = cld.image(publicId);
 
   // The URL of the image is: https://res.cloudinary.com/demo/image/upload/sample
 
   // Render the image in a React component.
   return (
-    <div>
       <AdvancedImage cldImg={myImage} />
-    </div>
   )
 };
