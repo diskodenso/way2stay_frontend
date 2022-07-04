@@ -15,6 +15,7 @@ const FlatsEditor = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [flat, setFlat] = useState(null);
+    const [categories, setCategories] = useState(null);
     const navigate = useNavigate();
 
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -34,6 +35,13 @@ const FlatsEditor = () => {
                     setError(err);
                     console.log(err);
                 })
+            axios
+                .get(`${apiUrl}/categories`)
+                .then(res => {
+                    setCategories(res.data.categories)
+                })
+                .catch(err => console.log(err))
+
         } else {
             setLoading(false);
         }
@@ -44,6 +52,7 @@ const FlatsEditor = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         const { title, description, street, housenumber, postalcode, city } = e.target;
+        console.log(title.value, description.value, street.value, housenumber.value, postalcode.value, city.value);
         if (!flatId) {
             axios
                 .post(`${apiUrl}/flats`, {
@@ -76,7 +85,7 @@ const FlatsEditor = () => {
                     city: city.value
                 })
                 .then(res => {
-                    console.log(res.data.flat);
+                    console.log(res.data);
                     toast.success('Die Wohnung wurde erfolgreich geändert!');
                 })
                 .catch(err => {
@@ -111,7 +120,7 @@ const FlatsEditor = () => {
     if (!loading && !error && verified) {
         return (
             <>
-                <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
+                <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] my-20'>
                     <div className='w-2/3 rounded-lg p-5 shadow-lg bg-white mx-auto'>
                         <div className='items-center gap-5 mb-5'>
                             <picture className='rounded-full w-[50px] h-[50px] bg-green'>
@@ -166,8 +175,10 @@ const FlatsEditor = () => {
                                     required
                                 />
                             </div>
-                            <h4 className="font-script bg-blue text-2xl">Hier kommt eine Map hin!</h4>
-                            <SingleFlatMap flat={flat} />
+                            <button type="submit" >Aktualisiere Karte</button>
+                            <div className="rounded-lg overflow-hidden">
+                                <SingleFlatMap flat={flat} />
+                            </div>
                             <textarea
                                 name="description"
                                 type={'text'}
@@ -179,14 +190,17 @@ const FlatsEditor = () => {
                             <div className="flex gap-3">
                                 <div className="flex flex-col gap-2">
                                     <h3>Kategorien</h3>
-                                    <div className="flex gap-2">
-                                        <input id="cbCat1" name="pets" type={'checkbox'} />
-                                        <label htmlFor="cbCat1">Kategorie 1 Dynamically</label>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <input id="cbCat2" name="pets" type={'checkbox'} />
-                                        <label htmlFor="cbCat2">Kategorie 2 Dynamically</label>
-                                    </div>
+
+                                    {
+                                        categories && categories.map(category => {
+                                            return (
+                                                <div key={`cat_${category._id}`} className="flex gap-2">
+                                                    <input id={`cb_${category._id}`} name="pets" type={'checkbox'} />
+                                                    <label htmlFor={`cb_${category._id}`} >{category.name}</label>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <h3>Details</h3>
@@ -209,7 +223,6 @@ const FlatsEditor = () => {
                             </button>
                         </form>
                         {/* <button onClick={myWidget.open()} >Bild upload</button> */}
-                        )
                     </div>
                 </div>
             </>
