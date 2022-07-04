@@ -3,6 +3,7 @@ import React, { useEffect, useNavigate, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import { authContext } from "../Context/authContext";
+import { toast } from "react-toastify";
 
 const TimeSheet = () => {
   const { timesheetId } = useParams();
@@ -55,50 +56,63 @@ const TimeSheet = () => {
 
   // standard axios fetch of all timesheets
   useEffect(() => {
+    !verified && navigate(`${apiUrl}/users/login`);
     axios
       .get(`${apiUrl}/timesheets`)
       .then((res) => {
-        setTimesheet(res.data.timesheets);
+        setTimesheet(res.data.timesheet);
         setLoading(false);
         setError(null);
-        console.log(timesheet);
+        console.log(res.data);
       })
       .catch((err) => {
         setLoading(false);
         setError(err);
+        console.log(err);
       });
-  }, [apiUrl, navigate, verified, timesheet]);
+  }, [apiUrl, navigate, verified]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { start, end } = e.target;
-      if (!timesheetId && verified) {
+      if (!timesheetId && flatId) {
         await axios
           .post(`${apiUrl}/timesheets`, {
             start: start.value,
             end: end.value,
           })
           .then((res) => {
-            setTimesheet(res.data);
+            setTimesheet(res.data.timesheet);
             setLoading(false);
-            console.log(timesheet)
+            toast.success("Buchungszeitraum wurde erfolgreich erstellt!");
           })
-          .catch((error) => {
+          .catch((err) => {
             setLoading(false);
-            setError(error);
-            console.log(error);
+            setError(err);
+            console.log(err);
+            toast.error("Zeitraum nicht erfolgreich erstellt!");
           });
-        const updatedTimesheet = {
+        const updatedTimeSheet = {
           start: start.value,
           end: end.value,
         };
-        await axios.put(
-          (`${apiUrl}/timesheets/${timesheetId}`, updatedTimesheet)
-        );
+        await axios
+          .put(`${apiUrl}/timesheets/${timesheetId}`, updatedTimeSheet)
+          .then((res) => {
+            setTimesheet(res.data.timesheet);
+            setLoading(false);
+            toast.success("Buchungszeitraum wurde erfolgreich geändert!");
+          })
+          .catch((err) => {
+            setLoading(false);
+            setError(err);
+            console.log(err);
+            toast.error("Buchungszeitraum wurde erfolgreich geändert!");
+          });
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
 
     if (loading) {
