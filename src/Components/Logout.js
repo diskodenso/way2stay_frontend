@@ -17,7 +17,6 @@ const Logout = () => {
 
     return (
         <>
-            <ToastContainer />
             <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white w-96 m-auto'>
                 <h2 className='text-center mb-5'>Du wurdest erfolgreich ausgeloggt</h2>
             </div>

@@ -49,7 +49,7 @@ const FlatsList = ({ }) => {
     return (
         <>
             <ToTopButton />
-            <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full min-h-screen pb-20 bg-no-repeat'>
+            <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full min-h-screen pb-20 bg-no-repeat flex flex-col items-center'>
                 <div className="w-5/6 flex justify-between mx-auto mt-20">
                     <div className="w-1/3">
                         <div>
@@ -94,7 +94,7 @@ const FlatsList = ({ }) => {
                         )}
                     </div>
                 </div>
-                <div className="flex flex-wrap gap-16 mt-10 w-5/6 mx-auto">
+                <div className="flex flex-wrap gap-16 mt-10 w-5/6 justify-between">
                     {/* <FlatsListItem /> */}
                     {
                         flats && flats.map((flat) => {

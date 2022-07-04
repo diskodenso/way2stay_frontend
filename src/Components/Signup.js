@@ -78,7 +78,6 @@ export const Signup = () => {
     return (
         <>
             <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[65vh] mt-20'>
-            <ToastContainer />
             <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white w-96 m-auto'>
                 <h2 className='text-center mb-5'>Registriere Dich hier</h2>
                 <form onSubmit={submitHandler}>

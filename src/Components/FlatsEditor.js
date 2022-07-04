@@ -1,9 +1,13 @@
+import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { authContext } from "../Context/authContext";
+import SingleFlatMap from '../Components/SingleFlatMap'
 import Loader from "./Loader";
+
+
 
 const FlatsEditor = () => {
     const { flatId } = useParams();
@@ -81,7 +85,15 @@ const FlatsEditor = () => {
                 });
 
         }
-    }
+    };
+
+    // const myWidget = Cloudinary.createUploadWidget({ cloudName: 'my_cloud_name', uploadPreset: 'my_preset' },
+    //     (error, result) => {
+    //         if (!error && result && result.event === "success") {
+    //             console.log('Done! Here is the image info: ', result.info);
+    //         }
+    //     }
+    // );
 
     if (loading) { return <Loader />; }
 
@@ -100,8 +112,7 @@ const FlatsEditor = () => {
         return (
             <>
                 <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
-                    <ToastContainer />
-                    <div className='w-2/3 border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white mx-auto'>
+                    <div className='w-2/3 rounded-lg p-5 shadow-lg bg-white mx-auto'>
                         <div className='items-center gap-5 mb-5'>
                             <picture className='rounded-full w-[50px] h-[50px] bg-green'>
 
@@ -156,6 +167,7 @@ const FlatsEditor = () => {
                                 />
                             </div>
                             <h4 className="font-script bg-blue text-2xl">Hier kommt eine Map hin!</h4>
+                            <SingleFlatMap flat={flat} />
                             <textarea
                                 name="description"
                                 type={'text'}
@@ -196,6 +208,8 @@ const FlatsEditor = () => {
                                 Speichern
                             </button>
                         </form>
+                        {/* <button onClick={myWidget.open()} >Bild upload</button> */}
+                        )
                     </div>
                 </div>
             </>
