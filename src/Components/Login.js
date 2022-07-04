@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { authContext } from '../Context/authContext';
 
 const Login = () => {
