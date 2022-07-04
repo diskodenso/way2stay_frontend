@@ -1,4 +1,3 @@
-import { Cloudinary, CloudinaryImage } from "@cloudinary/url-gen";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,6 +5,7 @@ import { toast } from "react-toastify";
 import { authContext } from "../Context/authContext";
 import SingleFlatMap from '../Components/SingleFlatMap'
 import Loader from "./Loader";
+import ImageList from "./ImageList";
 
 
 
@@ -22,7 +22,6 @@ const FlatsEditor = () => {
 
     useEffect(() => {
         (!verified) && navigate('/login');
-        console.log(flatId);
         if (flatId) {
             axios
                 .get(`${apiUrl}/flats/${flatId}`)
@@ -51,8 +50,7 @@ const FlatsEditor = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const { title, description, street, housenumber, postalcode, city } = e.target;
-        console.log(title.value, description.value, street.value, housenumber.value, postalcode.value, city.value);
+        const { title, description, street, housenumber, postalcode, city, files } = e.target;
         if (!flatId) {
             axios
                 .post(`${apiUrl}/flats`, {
@@ -65,7 +63,6 @@ const FlatsEditor = () => {
                     city: city.value
                 })
                 .then(res => {
-                    console.log(res.data.flat);
                     toast.success('Die Wohnung wurde erfolgreich angelegt!');
                     navigate(`/flats/editor/${res.data.flat._id}`);
                 })
@@ -73,6 +70,7 @@ const FlatsEditor = () => {
                     console.log(err);
                     setError(err);
                 });
+
         } else {
             axios
                 .put(`${apiUrl}/flats/${flatId}`, {
@@ -85,7 +83,6 @@ const FlatsEditor = () => {
                     city: city.value
                 })
                 .then(res => {
-                    console.log(res.data);
                     toast.success('Die Wohnung wurde erfolgreich geändert!');
                 })
                 .catch(err => {
@@ -93,16 +90,35 @@ const FlatsEditor = () => {
                     setError(err);
                 });
 
+
         }
     };
 
-    // const myWidget = Cloudinary.createUploadWidget({ cloudName: 'my_cloud_name', uploadPreset: 'my_preset' },
-    //     (error, result) => {
-    //         if (!error && result && result.event === "success") {
-    //             console.log('Done! Here is the image info: ', result.info);
-    //         }
-    //     }
-    // );
+    const uploadPicture = (e) => {
+        const formData = new FormData();
+
+        e.preventDefault();
+
+        formData.append('file', e.target.files.files[0])
+        formData.append('upload_preset', 'way2stay')
+
+        axios
+            .post(`${process.env.REACT_APP_CLOUDINARY_URL}/image/upload`, formData)
+            .then(res => {
+                let pictures = [];
+                (flat.images) && (pictures = flat.images)
+                pictures.push(res.data.public_id);
+                axios
+                    .put(`${apiUrl}/flats/${flatId}`, { images: pictures })
+                    .then(res => { toast.success('Das Bild wurde erfolgreich hochgeladen!'); })
+                    .catch(err => { toast.error('Das Bild konnte nich hochgeladen werden!'); })
+
+            })
+            .catch();
+
+
+    }
+
 
     if (loading) { return <Loader />; }
 
@@ -111,7 +127,6 @@ const FlatsEditor = () => {
     }
 
     if (!loading && flat && flatId && userId) {
-        console.log(flat.userId);
         if (flat.userId !== userId) {
             return (<h2 className='text-center my-10'>This is NOT your flat!</h2>)
         }
@@ -176,7 +191,7 @@ const FlatsEditor = () => {
                                 />
                             </div>
                             <button type="submit" >Aktualisiere Karte</button>
-                            <div className="rounded-lg overflow-hidden">
+                            <div className="rounded-lg overflow-hidden z-30">
                                 <SingleFlatMap flat={flat} />
                             </div>
                             <textarea
@@ -222,7 +237,21 @@ const FlatsEditor = () => {
                                 Speichern
                             </button>
                         </form>
-                        {/* <button onClick={myWidget.open()} >Bild upload</button> */}
+                        <form onSubmit={uploadPicture}>
+                            <input
+                                name="files"
+                                type={'file'}
+                                accept={'image/*'}
+                            />
+                            <button
+                                name='submit'
+                                type='submit'
+                                className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'
+                            >
+                                Upload
+                            </button>
+                        </form>
+                        <ImageList flat={flat} />
                     </div>
                 </div>
             </>

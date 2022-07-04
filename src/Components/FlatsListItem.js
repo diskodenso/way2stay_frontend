@@ -24,7 +24,6 @@ export const FlatsListItem = ({ flat }) => {
     // #####################################################
 
     useEffect(() => {
-        console.log(user);
         if (user) {
             setFavoriteList(user.favorites);
             setIsFavorite(user.favorites.find(fav => { return fav === flat._id }));
@@ -44,7 +43,6 @@ export const FlatsListItem = ({ flat }) => {
         setIsFavorite(!isFavorite);
         const tempFav = favoriteList;
         const favIndex = tempFav.findIndex(fav => (fav === flat._id));
-        console.log(favIndex);
         if (favIndex < 0) {
             tempFav.push(flat._id)
             toast.success(`Die Wohnung ${flat.title} wurde erfolgreich zu deinen Favoriten hinzugefügt`)
@@ -77,7 +75,6 @@ export const FlatsListItem = ({ flat }) => {
                 <div className='min-h-[25rem]'>
                     <div>
                         <CloudinaryShow />
-                        {/* <img src={myimg} alt={'placeholder'} /> */}
                     </div>
 
                     <div className='px-5 py-2'>
