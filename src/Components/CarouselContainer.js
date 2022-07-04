@@ -25,7 +25,7 @@ const CarouselContainer = () => {
         <div className="w-1/3 mx-auto overflow-hidden">
           <img
             src="https://i.ibb.co/CJQ9LVQ/Choose-Location.png"
-            alt="Pointing at world map - Image"
+            alt="Pointing at world map"
           />
         </div>
       </div>
@@ -49,7 +49,7 @@ const CarouselContainer = () => {
         <div className="w-1/3 mx-auto overflow-hidden">
           <img
             src="https://i.ibb.co/tZFqcS2/Trust-Hands.png"
-            alt="People holding hands - Image"
+            alt="People holding hands"
           />
         </div>
       </div>
@@ -73,7 +73,7 @@ const CarouselContainer = () => {
         <div className="w-1/3 mx-auto overflow-hidden">
           <img
             src="https://i.ibb.co/sjPZ2CD/Holding-Globe.png"
-            alt="Hand holding globe - Image"
+            alt="Hand holding globe"
           />
         </div>
       </div>

@@ -3,7 +3,7 @@ import React from "react";
 const TimeSheet = () => {
   return (
     <>
-      <div className="flex w-1/3 bg-white shadow-lg rounded-lg">
+      <div className="flex h-full bg-white shadow-lg rounded-lg">
         <div className="w-1/2 m-5">
             <h3 className="pb-3 font-heading font-bold text-xl">From</h3>
           <input
