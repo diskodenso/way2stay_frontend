@@ -18,7 +18,7 @@ const CarouselContainer = () => {
             aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
             duo dolores et ea rebum.
           </p>
-          <Link to={'/details'} className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
+          <Link to={'/flats/62bb072dd491a11505c2148f'} className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
             Visit this home
           </Link>
         </div>
@@ -42,9 +42,9 @@ const CarouselContainer = () => {
             aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
             duo dolores et ea rebum.
           </p>
-          <button className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
+          <Link to={'/flats/:flatId'} className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
             Visit this home
-          </button>
+          </Link>
         </div>
         <div className="w-1/3 mx-auto overflow-hidden">
           <img
@@ -66,9 +66,9 @@ const CarouselContainer = () => {
             aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
             duo dolores et ea rebum.
           </p>
-          <button className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
+          <Link to={'/flats/:flatId'} className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
             Visit this home
-          </button>
+          </Link>
         </div>
         <div className="w-1/3 mx-auto overflow-hidden">
           <img

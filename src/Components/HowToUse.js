@@ -12,7 +12,7 @@ const HowToUse = () => {
           <h1 className="font-script text-5xl ml-20 mb-3">
             A quick guide on how to use way2stay.
           </h1>
-          <h2 className="font-script text-2xl ml-20 mb-40">
+          <h2 className="font-script text-2xl ml-20 mb-20">
             Discover a new way of traveling and start swapping in just a few
             steps.
           </h2>
@@ -29,8 +29,8 @@ const HowToUse = () => {
           </p>
         </div>
 
-        <div className="flex w-5/6 mx-auto mt-20 gap-12">
-          <h1 className="font-script text-5xl ml-20 mb-20">
+        <div className="flex w-5/6 mx-auto mt-24 gap-12">
+          <h1 className="font-script text-5xl ml-20">
             Home swapping in 5 easy steps.
           </h1>
         </div>
@@ -39,10 +39,10 @@ const HowToUse = () => {
             <HowToUseCarousel />
           </div>
         </div>
-      </div>
 
       <div className="mx-auto mt-40">
         <ContactContainer />
+      </div>
       </div>
     </>
   );
