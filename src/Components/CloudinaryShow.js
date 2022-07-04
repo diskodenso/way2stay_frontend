@@ -11,7 +11,7 @@ export const CloudinaryShow = ({ publicId }) => {
   });
 
   // cld.image returns a CloudinaryImage with the configuration set.
-  const myImage = cld.image(publicId);
+  const myImage = publicId ? cld.image(publicId) : cld.image('platzhalter-934162855_n0stgv')
 
   // The URL of the image is: https://res.cloudinary.com/demo/image/upload/sample
 
