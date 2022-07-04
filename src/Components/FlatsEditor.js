@@ -50,17 +50,26 @@ const FlatsEditor = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const { title, description, street, housenumber, postalcode, city, files } = e.target;
+        const { title, description, street, housenumber, postalcode, city } = e.target;
+
+        let flatCategories = categories.filter(category => {
+            return (e.target[`${category._id}`].checked)
+        });
+
+        (flatCategories) && (flatCategories = flatCategories.map(category => { return category._id })); 
+
+        console.log(flatCategories);
+        
         if (!flatId) {
             axios
                 .post(`${apiUrl}/flats`, {
-                    userId: userId,
                     title: title.value,
                     description: description.value,
                     street: street.value,
                     housenumber: housenumber.value,
                     postalcode: postalcode.value,
-                    city: city.value
+                    city: city.value,
+                    categories: flatCategories
                 })
                 .then(res => {
                     toast.success('Die Wohnung wurde erfolgreich angelegt!');
@@ -74,13 +83,13 @@ const FlatsEditor = () => {
         } else {
             axios
                 .put(`${apiUrl}/flats/${flatId}`, {
-                    userId: userId,
                     title: title.value,
                     description: description.value,
                     street: street.value,
                     housenumber: housenumber.value,
                     postalcode: postalcode.value,
-                    city: city.value
+                    city: city.value,
+                    categories: flatCategories
                 })
                 .then(res => {
                     toast.success('Die Wohnung wurde erfolgreich geändert!');
@@ -89,8 +98,6 @@ const FlatsEditor = () => {
                     console.log(err);
                     setError(err);
                 });
-
-
         }
     };
 
@@ -115,8 +122,6 @@ const FlatsEditor = () => {
 
             })
             .catch();
-
-
     }
 
 
@@ -208,10 +213,16 @@ const FlatsEditor = () => {
 
                                     {
                                         categories && categories.map(category => {
+                                            console.log(category._id)
                                             return (
                                                 <div key={`cat_${category._id}`} className="flex gap-2">
-                                                    <input id={`cb_${category._id}`} name="pets" type={'checkbox'} />
-                                                    <label htmlFor={`cb_${category._id}`} >{category.name}</label>
+                                                    <input
+                                                        id={`cb_${category._id}`}
+                                                        name={`${category._id}`}
+                                                        type={'checkbox'}
+                                                        defaultChecked={flat.details.categories && (flat.details.categories.includes(category._id))}
+                                                    />
+                                                    <label htmlFor={`${category._id}`} >{category.name}</label>
                                                 </div>
                                             )
                                         })
