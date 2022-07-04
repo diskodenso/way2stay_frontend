@@ -18,6 +18,7 @@ const Booking = ({ flat }) => {
 
   useEffect(() => {
     !verified && navigate(`{apiUrl}`);
+    setLoading(false);
   }, [verified]);
 
   const submitHandler = (e) => {
