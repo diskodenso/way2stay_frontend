@@ -14,6 +14,7 @@ import UserDashboard from './Components/UserDashboard';
 import FAQ from './Components/FAQ';
 import FlatDetail from './Components/FlatDetail';
 import { ToastContainer } from 'react-toastify';
+import Booking from './Components/Booking';
 
 const App = () => {
     return (
@@ -36,6 +37,7 @@ const App = () => {
                     <Route path='/how2use' element={<HowToUse />} />
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/faq' element={<FAQ />} />
+                    <Route path='/bookings/:flatId' element={<Booking />} />
                 </Routes>
             </main>
             <footer>
