@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { authContext } from '../Context/authContext';
 import { FlatsListItem } from './FlatsListItem'
 import Loader from './Loader';
@@ -68,35 +68,44 @@ const UserDashboard = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         const { firstname, lastname, email, phone, postalcode, city, street, housenumber, isActive } = e.target;
-        (isActive.value === "on") ? (isActive.value = true) : (isActive.value = false)
-        console.log(isActive);
         let isEmailExists;
         await axios
             .get(`${apiUrl}/users`)
             .then(res => {
-                const existingEmailUser = res.data.find(user => { return user.email === email.value });
+                const existingEmailUser = res.data.users.find(user => {
+                    console.log(email.value);
+                    console.log(user.contact.email);
+                    return (user.contact.email === email.value && userId !== user._id)
+                });
                 (existingEmailUser && existingEmailUser.userId !== userId) ? isEmailExists = true : isEmailExists = false;
                 (isEmailExists) && toast.error('Die E-Mail-Adresse existiert bereits!');
             })
             .catch(err => {
                 console.log(err)
+                toast.error('Die Änderung des Profils ist fehlgeschlagen!');
                 setLoading(false);
             });
-        const updatedUser = {
-            firstname: firstname.value,
-            lastname: lastname.value,
-            email: email.value,
-            phonenumber: phone.value,
-            postalcode: postalcode.value,
-            city: city.value,
-            street: street.value,
-            housenumber: housenumber.value,
-            isActive: isActive.checked
+        if (!isEmailExists && email.value) {
+            const updatedUser = {
+                firstname: firstname.value,
+                lastname: lastname.value,
+                email: email.value,
+                phonenumber: phone.value,
+                postalcode: postalcode.value,
+                city: city.value,
+                street: street.value,
+                housenumber: housenumber.value,
+                isActive: isActive.checked
+            }
+
+            axios
+                .put(`${apiUrl}/users/${userId}`, updatedUser)
+                .then(res => toast.success('Der Benutzer wurde erfolgreich geändert'))
+                .catch(err => {
+                    toast.error('Die Änderung des Profils ist fehlgeschlagen!');
+                    console.log(err)
+                })
         }
-        axios
-            .put(`${apiUrl}/users/${userId}`, updatedUser)
-            .then(res => toast.success('Der Benutzer wurde erfolgreich geändert'))
-            .catch(err => console.log(err));
     }
 
     if (loading) {
