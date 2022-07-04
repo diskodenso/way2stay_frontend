@@ -12,7 +12,9 @@ const AuthState = ({ children }) => {
     const [searchString, setSearchString] = useState(null);
     const token = localStorage.getItem('token');
     const [verified, setVerified] = useState(null);
+    
     useEffect(() => {
+              
         if (token) {
             const verifyHandler = async () => {
                 try {

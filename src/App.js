@@ -1,5 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
 import FlatsEditor from './Components/FlatsEditor';
 import FlatsList from './Components/FlatsList';
 import Footer from './Components/Footer';
@@ -13,14 +13,16 @@ import { Signup } from './Components/Signup';
 import UserDashboard from './Components/UserDashboard';
 import FAQ from './Components/FAQ';
 import FlatDetail from './Components/FlatDetail';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
     return (
         <div className="App font-text bg-[#f1f5ee] min-h-screen flex flex-col justify-between">
+            <ToastContainer />
             <header className="App-header sticky top-0 z-50">
                 <NavBar />
             </header>
-            <main className='mb-auto z-30'>
+            <main className='mb-auto z-5'>
                 <Routes>
                     <Route path='/' element={<Landing />} />
                     <Route path='/signup' element={<Signup />} />

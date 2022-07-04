@@ -1,59 +1,77 @@
 // import { Icon } from "leaflet";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 // import Map, Marker, Popup and title from leaflet
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import Loader from "./Loader";
 
 const SingleFlatMap = ({ flat }) => {
-  const [activePopup, setActivePopup] = useState(null);
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [isActive, setIsActive] = useState(true);
-  if (flat.coordinates) {
-    setLat([flat.coordinates.lat]);
-    setLng([flat.coordinates.lang]);
-    setIsActive(true);
-  } else {
-    setLat(54.526);
-    setLng(15.2551);
-    setIsActive(false);
-  }
+    const [loading, setLoading] = useState(true);
+    const [activePopup, setActivePopup] = useState(null);
+    const [lat, setLat] = useState(54.526);
+    const [lng, setLng] = useState(15.255);
+    const [isStandard, setIsStandard] = useState(true);
 
-  // --- custom icon as marker --- //
-  // const houseMarker = new Icon({
-  //   iconUrl: "/house.svg",
-  //   iconSize: [25, 25]
-  // });
-  return (
-    <>
-      <MapContainer center={[lat, lng]} zoom={isActive ? 12 : 10}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {isActive && (
-          <Marker
-            key={flat.flatId}
-            position={[lat, lng]}
-            onClick={() => {
-              setActivePopup(flat);
-            }}
-          />
-        )}
-        {activePopup && (
-          <Popup
-            position={(flat.coordinates.lat, flat.coordinates.lang)}
-            //icon={houseMarker}
-          >
-            <div>
-              <h2>{flat.title}</h2>
-              <p>{flat.description}</p>
-              <p>{`${flat.location.postalcode}, ${flat.location.city}`}</p>
-            </div>
-          </Popup>
-        )}
-      </MapContainer>
-    </>
-  );
+    useEffect(() => {
+        if (flat.location) {
+            axios
+                .get(`${process.env.REACT_APP_GEOAPI}${flat.location.housenumber}%20${flat.location.street}%2C%20${flat.location.city}%20W1H%201LJ%2C%20${flat.location.country}&apiKey=${process.env.REACT_APP_GEOAPI_KEY}`)
+                .then(res => {
+                    setLng(res.data.features[0].geometry.coordinates[0]);
+                    setLat(res.data.features[0].geometry.coordinates[1]);
+                    setIsStandard(false);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.log('error', error)
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
+        // setLoading(false);
+    }, [flat.location]);
+
+    // --- custom icon as marker --- //
+    // const houseMarker = new Icon({
+    //   iconUrl: "/house.svg",
+    //   iconSize: [25, 25]
+    // });
+
+    if (loading) { return <Loader /> };
+
+    return (
+        <>
+            {console.log(`Lat: ${lat} | Lng: ${lng}`)}
+            <MapContainer center={[lat, lng]} zoom={!isStandard ? 14 : 8}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {!isStandard && (
+                    <>
+                        <Marker
+                            key={`marker_${flat.flatId}`}
+                            position={[lat, lng]}
+                            onClick={() => { setActivePopup(flat); }}
+                        />
+                        {activePopup && (
+                            <Popup
+                                position={[lat, lng]}
+                            //icon={houseMarker}
+                            >
+                                <div>
+                                    <h2>{flat.title}</h2>
+                                    <p>{flat.description}</p>
+                                    <p>{`${flat.location.postalcode}, ${flat.location.city}`}</p>
+                                </div>
+                            </Popup>
+                        )}
+                    </>
+                )}
+            </MapContainer>
+        </>
+    );
 };
 
 export default SingleFlatMap;

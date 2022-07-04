@@ -112,10 +112,9 @@ const UserDashboard = () => {
     if (!loading && !error && verified && userId) {
         return (
             <>
-                <ToastContainer />
-                <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
+                <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-5'>
                     <div className='flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center items-start'>
-                        <div className='w-1/3 border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
+                        <div className='sticky w-1/3 rounded-lg p-5 my-5 shadow-lg bg-white'>
                             <div className='items-center gap-5 mb-5'>
                                 <picture className='rounded-full w-[50px] h-[50px] bg-green'>
 
@@ -229,7 +228,7 @@ const UserDashboard = () => {
                             </form>
                         </div>
                         <div className='flex flex-col w-2/3'>
-                            <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
+                            <div className=' rounded-lg p-5 my-5 shadow-lg bg-white'>
                                 <div>
                                     <div className='flex justify-between'>
                                         <h2>Meine Wohnungen</h2>
@@ -263,7 +262,7 @@ const UserDashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white'>
+                            <div className=' rounded-lg p-5 my-5 shadow-lg bg-white'>
                                 <div>
                                     <h2>Meine Favoriten</h2>
                                     <div className='flex gap-5 my-5'>
