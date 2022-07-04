@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { authContext } from "../Context/authContext";
@@ -9,9 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 // verified - wenn verified checken ob flatID existiert und wenn ja dann booking
 // create a booking - check ob flatId existiert
 const Booking = ({ flat }) => {
-  const [flatId] = req.body;
   const [bookings, setBookings] = useState(null);
-  const { userId, verified } = useContext(authContext);
+  const { userId, user, verified } = useContext(authContext);
   const apiUrl = process.env.REACT_APP_API_URL;
   const [error, isError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -19,12 +17,11 @@ const Booking = ({ flat }) => {
   const navigate = useNavigate(authContext);
 
   useEffect(() => {
-    !verified && navigate(`{apiUrl}`)
-  }, [])
+    !verified && navigate(`{apiUrl}`);
+  }, [verified]);
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
     e.preventDefault();
-
   };
 
   if (loading) {
@@ -43,6 +40,12 @@ const Booking = ({ flat }) => {
               <p>{user.username}</p>
             </div>
             <div className="flex justify-between items-center mt-8">
+              <Link
+                to={"/flats/62bb072dd491a11505c2148f"}
+                className="border-2 border-green rounded-md px-3 py-2 text-green font-bold hover:bg-green hover:text-white"
+              >
+                Book now!
+              </Link>
               <h2>Buche dein neues Zuhause</h2>
             </div>
             <form onSubmit={submitHandler} className="my-5 items-stretch">
@@ -75,7 +78,7 @@ const Booking = ({ flat }) => {
                   type={"text"}
                   className="border-b-2 border-[#6b6b6b] w-1/2 focus:outline-none"
                   placeholder="Vorname"
-                  defaultValue={u}
+                  defaultValue={user.firstname}
                 />
                 <input
                   name="lastname"

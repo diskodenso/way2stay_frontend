@@ -15,6 +15,8 @@ import FAQ from "./Components/FAQ";
 import FlatDetail from "./Components/FlatDetail";
 import { ToastContainer } from "react-toastify";
 import TimeSheet from "./Components/TimeSheet";
+import Booking from "./Components/Booking";
+
 const App = () => {
   return (
     <div className="App font-text bg-[#f1f5ee] min-h-screen flex flex-col justify-between">
@@ -37,6 +39,8 @@ const App = () => {
           <Route path="/how2use" element={<HowToUse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path='/bookings/:flatId' element={<Booking />} />
+
         </Routes>
       </main>
       <footer>

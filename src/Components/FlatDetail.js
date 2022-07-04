@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Context/authContext.js";
 import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";
@@ -18,9 +18,6 @@ const FlatDetail = () => {
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
-  const handleClick = (e) => {
-    navigate(`/bookings/${flatId}`);
-  };
   useEffect(() => {
     if (flatId) {
       axios
@@ -62,14 +59,11 @@ const FlatDetail = () => {
           <div className="w-2/3 border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white mx-auto">
             <div className="flex justify-between mt-5 mb-10 ml-10 mr-5">
               <h2 className="font-script text-4xl">{flat.title}</h2>
-              <button
-                onClick={handleClick}
-                name="onClick"
-                type="onClick"
+              <Link to={`/bookings/${flatId}`}
                 className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
               >
                 Book this flat
-              </button>
+              </Link>
             </div>
 
             <div className="flex gap-8">
@@ -118,6 +112,18 @@ const FlatDetail = () => {
                   <SingleFlatMap flat={flat} />
                 </div>
               </div>
+            </div>
+
+            <div>
+            <div className="ml-10 mt-10 mr-5">
+                  <h3 className="font-heading text-2xl mb-5">
+                    Reviews
+                  </h3>
+                  
+                  <div>
+                    Hi #####
+                  </div>
+                </div>
             </div>
           </div>
         </div>
