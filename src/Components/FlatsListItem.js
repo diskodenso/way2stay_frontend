@@ -74,7 +74,7 @@ export const FlatsListItem = ({ flat }) => {
             <div className='overflow-hidden shadow-lg rounded-lg w-96 bg-white flex flex-col justify-between'>
                 <div className='min-h-[25rem]'>
                     <div>
-                        <CloudinaryShow />
+                        <CloudinaryShow publicId={flat.images[0]} />
                     </div>
 
                     <div className='px-5 py-2'>
