@@ -42,8 +42,7 @@ const SingleFlatMap = ({ flat }) => {
 
     return (
         <>
-            {console.log(`Lat: ${lat} | Lng: ${lng}`)}
-            <MapContainer center={[lat, lng]} zoom={!isStandard ? 14 : 8}>
+            <MapContainer center={[lat, lng]} zoom={!isStandard ? 14 : 8} className='z-30'>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -58,7 +57,6 @@ const SingleFlatMap = ({ flat }) => {
                         {activePopup && (
                             <Popup
                                 position={[lat, lng]}
-                            //icon={houseMarker}
                             >
                                 <div>
                                     <h2>{flat.title}</h2>
