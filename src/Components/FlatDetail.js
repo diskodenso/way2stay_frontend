@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Context/authContext.js";
 import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";
+import FlatDetailCarousel from "./FlatDetailCarousel.js";
+import TimeSheet from "./TimeSheet.js";
 
 const FlatDetail = () => {
   const { flatId } = useParams();
@@ -12,6 +14,7 @@ const FlatDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [flat, setFlat] = useState(null);
+  const [categories, setCategories] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -27,10 +30,16 @@ const FlatDetail = () => {
           setLoading(false);
         })
         .catch((err) => {
-          setLoading(false);
           setError(err);
           console.log(err);
+          setLoading(false);
         });
+      axios
+        .get(`${apiUrl}/categories`)
+        .then((res) => {
+          setCategories(res.data.categories);
+        })
+        .catch();
     } else {
       setLoading(false);
     }
@@ -49,27 +58,65 @@ const FlatDetail = () => {
   if (!loading && !error && flat) {
     return (
       <>
-        <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
+        <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20 pb-20'>
           <div className="w-2/3 border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white mx-auto">
-            <div className="items-center gap-5 mb-5">
-              <picture className="rounded-full w-[50px] h-[50px] bg-green"></picture>
+            <div className="flex justify-between mt-5 mb-10 ml-10 mr-5">
+              <h2 className="font-script text-4xl">{flat.title}</h2>
+              <button
+                onClick={handleClick}
+                name="onClick"
+                type="onClick"
+                className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+              >
+                Book this flat
+              </button>
             </div>
-            <div className="flex justify-between items-center mt-8">
-              <h2>Details zur Wohnung:</h2>
-              <div className="flatDetailsContainer">
-                <h3>{flat.title}</h3>
-                <img src={imgPlaceholder} alt={"placeholder"} />
-                <p>{flat.description}</p>
-                <p>{flat.location && flat.location.city}</p>
-                <SingleFlatMap flat={flat} />
-                <button
-                  onClick={handleClick}
-                  name="onClick"
-                  type="onClick"
-                  className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
-                >
-                  Buchen
-                </button>
+
+            <div className="flex gap-8">
+              <div className="w-1/2">
+                <FlatDetailCarousel />
+                <div className="ml-10 mt-10 mr-5">
+                  <h3 className="font-heading text-2xl mb-5">
+                    About this home
+                  </h3>
+                  <div>{flat.description}</div>
+                  <div className="mt-10">
+                    {flat.location && flat.location.city}
+                  </div>
+
+                  {categories && (
+                    <div className="mt-10 flex flex-col gap-5">
+                      <div className="flex gap-1">
+                        {categories.map((category) => {
+                          <>
+                            {console.log(category.name)}
+                            <div key={`cb_${category._id}`}>
+                              <input
+                                type={"checkbox"}
+                                name={`cb_${category._id}`}
+                                checked={true}
+                                disabled
+                              />
+                              <label htmlFor={`cb_${category._id}`}>
+                                {category.name}
+                              </label>
+                            </div>
+                            ;
+                          </>;
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex flex-col w-1/2 mb-5">
+                <div className="border border-[#b3b3b3] rounded-lg shadow-lg h-36 mr-5 mb-10">
+                  <TimeSheet />
+                </div>
+                <div className="rounded-lg shadow-lg overflow-hidden mr-5">
+                  <SingleFlatMap flat={flat} />
+                </div>
               </div>
             </div>
           </div>
