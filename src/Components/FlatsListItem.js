@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { authContext } from '../Context/authContext';
+import { CloudinaryShow } from './CloudinaryShow';
 import Loader from './Loader';
 
 export const FlatsListItem = ({ flat }) => {
-    const { userId, user, imgPlaceholder } = useContext(authContext);
+    const { userId, user } = useContext(authContext);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [favoriteList, setFavoriteList] = useState(null);
@@ -21,7 +22,7 @@ export const FlatsListItem = ({ flat }) => {
     // - Calculate and set ratings according the reviews
     // - link a cover picture
     // #####################################################
-    
+
     useEffect(() => {
         console.log(user);
         if (user) {
@@ -72,34 +73,26 @@ export const FlatsListItem = ({ flat }) => {
 
     return (
         <>
-            <ToastContainer />
-            <div className='overflow-hidden shadow-lg rounded-lg w-1/3 bg-white flex flex-col justify-between'>
+            <div className='overflow-hidden shadow-lg rounded-lg w-96 bg-white flex flex-col justify-between'>
                 <div className='min-h-[25rem]'>
-
-                    {(owner && userId) && (
-                        <div className='absolute flex justify-end p-1'>
-                            <Link to={`/flats/editor/${flat._id}`}>
-                                <i className='fa fa-pen' />
-                            </Link>
-                        </div>
-                    )}
-                    {(!owner && userId) && (
-                        <div className='absolute flex justify-end p-1'>
-                            <button type='button' onClick={handleToggleFavorite} className='p-3'>
-                                <i name={'favicon'} value={flat._id} className={`fa fa-heart text-4xl ${(isFavorite) ? 'text-red' : 'text-white'}`}>
-                                    <div name={'iconContainer'}>
-                                    </div>
-                                </i>
-                            </button>
-                        </div>
-                    )}
                     <div>
-                        <img src={imgPlaceholder} alt={'placeholder'} />
+                        <CloudinaryShow />
+                        {/* <img src={myimg} alt={'placeholder'} /> */}
                     </div>
 
                     <div className='px-5 py-2'>
-                        <div className='text-center text-xl font-bold'>
+                        <div className='flex items-center justify-between text-xl font-bold'>
                             <h3>{flat.title}</h3>
+                            {(owner && userId) && (
+                                <Link to={`/flats/editor/${flat._id}`}>
+                                    <i className='fa fa-pen' />
+                                </Link>
+                            )}
+                            {(!owner && userId) && (
+                                <button type='button' onClick={handleToggleFavorite} className='p-3'>
+                                    <i name={'favicon'} value={flat._id} className={`fa fa-heart ${(isFavorite) ? 'text-red' : 'text-lightblue'}`} />
+                                </button>
+                            )}
                         </div>
                         <div>
                             {shortDescription}
