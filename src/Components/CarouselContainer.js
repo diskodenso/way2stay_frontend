@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 
@@ -17,9 +18,9 @@ const CarouselContainer = () => {
             aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
             duo dolores et ea rebum.
           </p>
-          <button className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
+          <Link to={'/details'} className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-[#f1f5ee]">
             Visit this home
-          </button>
+          </Link>
         </div>
         <div className="w-1/3 mx-auto overflow-hidden">
           <img

@@ -12,6 +12,7 @@ import Contact from './Components/Contact';
 import { Signup } from './Components/Signup';
 import UserDashboard from './Components/UserDashboard';
 import FAQ from './Components/FAQ';
+import FlatDetail from './Components/FlatDetail';
 
 const App = () => {
     return (
@@ -32,6 +33,7 @@ const App = () => {
                     <Route path='/how2use' element={<HowToUse />} />
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/faq' element={<FAQ />} />
+                    <Route path='/details' element={<FlatDetail />} />
                 </Routes>
             </main>
             <footer>
