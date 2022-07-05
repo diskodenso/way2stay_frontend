@@ -2,30 +2,73 @@ import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { authContext } from "../Context/authContext";
 import Loader from "./Loader";
-import { Link, useNavigate } from "react-router-dom";
-import FlatDetailCarousel from "./FlatDetailCarousel";
-import SingleFlatMap from "./SingleFlatMap";
-import ToTopButton from "./ToTopButton";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import FlatDetailCarousel from "./FlatDetailCarousel.js";
 
 // erstelle booking
 // verified - wenn verified checken ob flatID existiert und wenn ja dann booking
 // create a booking - check ob flatId existiert
-const Booking = ({ flat }) => {
-  const [bookings, setBookings] = useState(null);
+const Booking = ({ flats }) => {
+  const { flatId } = useParams();
+  const [booking, setBooking] = useState(null);
   const { userId, user, verified } = useContext(authContext);
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [error, isError] = useState(false);
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isMatch, setIsMatch] = useState(false);
   const navigate = useNavigate(authContext);
 
   useEffect(() => {
-    !verified && navigate(`{apiUrl}`);
-    setLoading(false);
-  }, [verified]);
+    !verified && navigate(`/login`);
+    const bookingData = async () => {
+      if (verified) {
+        try {
+          await axios
+            .get(`${apiUrl}/bookings/flats/${flatId}`)
+            .then((res) => {
+              setLoading(false);
+              setError(false);
+              setBooking(res.data);
+              console.log(booking);
+            })
+            .catch((err) => {
+              setLoading(false);
+              setError(err);
+              console.log(err);
+            });
+        } catch (err) {
+          setLoading(false);
+          setError(err);
+          console.log(err);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+    bookingData();
+  }, [apiUrl, navigate, verified]);
 
-  const submitHandler = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+    console.log("damn");
+    const { arrival, departure } = e.target;
+    await axios
+      .post(`${apiUrl}/bookings`, {
+        departure: departure.value,
+        arrival: arrival.value,
+      })
+      .then((res) => {
+        setLoading(false);
+        setBooking(res.data);
+        console.log(booking);
+        toast.success("Booking successfully requested");
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err);
+        toast.error("Oh no, something went wrong with the booking");
+      });
   };
 
   if (loading) {
@@ -115,9 +158,7 @@ const Booking = ({ flat }) => {
                 />
               </div>
               <div className="w-1/2 m-5">
-                <h3 className="pb-3 font-heading text-xl">
-                  Departure
-                </h3>
+                <h3 className="pb-3 font-heading text-xl">Departure</h3>
                 <input
                   name="end"
                   type="date"
