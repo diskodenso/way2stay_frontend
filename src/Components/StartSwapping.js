@@ -17,7 +17,7 @@ const StartSwapping = () => {
           <input
             name="searchString"
             className="p-2 rounded focus:outline-[#505050]"
-            placeholder="city"
+            placeholder="Choose a city you&apos;d like to visit"
           />
           <div className="mt-4 text-right">
             <button className="w-1/3 bg-opacity-0 border-2 border-[#505050] rounded-md px-3 py-1 text-[#505050] font-bold hover:bg-[#505050] hover:text-yellow">
