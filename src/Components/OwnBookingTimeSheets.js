@@ -14,43 +14,39 @@ const OwnBookingTimeSheets = ({ selectedOwnFlat }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-    useEffect(() => {
-!verified && navigate(`${}`)
-    }, [ apiUrl]);
+  console.log(selectedOwnFlat);
+  useEffect(() => {
+    !verified && navigate(`/login`);
+    try {
+      axios
+        .get(`${apiUrl}/timesheets/flats/${selectedOwnFlat._id}`)
+        .then((res) => {
+          setOwnTimeSheets(res.data.timeSheet);
+          console.log(res.data.timeSheet);
+          setLoading(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(err);
+          console.log(err);
+          toast.error(
+            "Sorry, we couldn't get the timesheets you have requested"
+          );
+        });
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  }, [apiUrl, verified, selectedOwnFlat.id, navigate]);
 
-    if (loading) {
-      return <Loader />;
-    }
-    if (error) {
-      return <h3>Oh no, an error occured</h3>;
-    }
-  //   return (
-  //     <>
-  //       <div className="flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center items-start">
-  //         <div className="sticky w-1/3 rounded-lg p-5 my-5 shadow-lg bg-white">
-  //           <h3 className="font-heading text-2xl mb-5">{ownFlats.title}</h3>
-  //           {/* <FlatDetailCarousel /> */}
-  //           <div className="mt-5 w-5/6 h-60 mx-auto bg-lightgreen rounded-lg shadow-lg text-center">
-  //             <SingleFlatMap />
-  //           </div>
-  //           <div className="flex justify-between items-end mt-5">
-  //             <p className="ml-10">
-  //               {ownFlats.location.street} {ownFlats.location.housenumber} <br />
-  //               {ownFlats.location.postalcode} {ownFlats.location.city} <br />
-  //               {ownFlats.location.country}
-  //             </p>
-  //             {/* <Link
-  //               to={`/flats/${ownFlats.id}`}
-  //               className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
-  //             >
-  //               View this flat
-  //             </Link> */}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // };
+  if (loading) {
+    return <Loader />;
+  }
+  if (error) {
+    return <h3>Oh no, an error occured</h3>;
+  }
+
   return <p>Test</p>;
 };
 export default OwnBookingTimeSheets;
