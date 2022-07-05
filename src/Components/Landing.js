@@ -13,7 +13,7 @@ const Landing = () => {
       <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full h-full bg-no-repeat'>
         <div className="flex justify-between w-5/6 mx-auto mt-20 mb-20">
           <div>
-            <h1 className="font-script text-6xl -mt-10 mb-20">
+            <h1 className="font-script text-5xl mb-20">
               Make the WORLD become your home.
             </h1>
             <StartSwapping />
