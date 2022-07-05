@@ -112,8 +112,14 @@
 
 <br>
 
-<img src="https://i.ibb.co/fnt5dt8/Landingpage.jpg" alt="Landingpage top" title="Example picture" width="45%"/>
-<img src="https://i.ibb.co/9WYTq6b/Landingpage2.jpg" alt="Landingpage bottom" title="Example picture" width="45%" style="float: right;"/>
+<img src="https://i.ibb.co/fnt5dt8/Landingpage.jpg" alt="Landingpage top" title="Landingpage top" width="75%"/>
+
+<br>
+
+<img src="https://i.ibb.co/9WYTq6b/Landingpage2.jpg" alt="Landingpage bottom" title="Landingpage bottom" width="75%"/>
+
+<br>
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
 #
 <br>
@@ -122,8 +128,14 @@
 
 <br>
 
-<img src="https://i.ibb.co/PchvJ0R/Flats-List.jpg" alt="Homes overview" title="Example picture" width="45%"/>
-<img src="https://i.ibb.co/qk64k8f/Single-Flat.jpg" alt="Home details page" title="Example picture" width="45%" style="float: right;"/>
+<img src="https://i.ibb.co/PchvJ0R/Flats-List.jpg" alt="Homes overview" title="Homes overview" width="75%"/>
+
+<br>
+
+<img src="https://i.ibb.co/qk64k8f/Single-Flat.jpg" alt="Home details page" title="Home details page" width="75%"/>
+
+<br>
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
 #
 <br>
@@ -132,8 +144,11 @@
 
 <br>
 
-<img src="https://i.ibb.co/tpXQpcm/About1.jpg" alt="About" title="Example picture" width="45%"/>
-<img src="https://i.ibb.co/8K1Ck99/About2.jpg" alt="Contact" title="Example picture" width="45%" style="float: right;"/>
+<img src="https://i.ibb.co/tpXQpcm/About1.jpg" alt="About" title="About" width="75%"/>
+
+<br>
+
+<img src="https://i.ibb.co/8K1Ck99/About2.jpg" alt="Contact" title="Contact" width="75%"/>
 
 #
 
