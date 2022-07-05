@@ -7,11 +7,11 @@ const FlatDetailReviews = () => {
         <div className="flex justify-between mb-2">
           <h4 className="font-heading text-lg">Name Nachname</h4>
           <p className="text-yellow">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
           </p>
         </div>
         <p className="mr-20">
@@ -26,11 +26,11 @@ const FlatDetailReviews = () => {
         <div className="flex justify-between mb-2">
           <h4 className="font-heading text-lg">Name Nachname</h4>
           <p className="text-yellow">
-            <i class="fa fa-star text-[#d9d9d9]"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <i className="fa fa-star text-[#d9d9d9]"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
+            <i className="fa fa-star"></i>
           </p>
         </div>
         <p className="mr-20">

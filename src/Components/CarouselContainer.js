@@ -11,11 +11,11 @@ const CarouselContainer = () => {
           <div className="flex w-3/5 mx-auto justify-between">
             <h1 className="pb-10 font-heading text-3xl align">Matthias</h1>
             <p className="text-2xl text-yellow">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
             </p>
           </div>
           <p className="w-2/3 mx-auto pb-10">
@@ -43,11 +43,11 @@ const CarouselContainer = () => {
           <div className="flex w-3/5 mx-auto justify-between">
             <h1 className="pb-10 font-heading text-3xl align">Marcel</h1>
             <p className="text-2xl text-yellow">
-              <i class="fa fa-star text-[#d9d9d9]"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
+              <i className="fa fa-star text-[#d9d9d9]"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
             </p>
           </div>
           <p className="w-2/3 mx-auto pb-10">
@@ -76,11 +76,11 @@ const CarouselContainer = () => {
           <div className="flex w-3/5 mx-auto justify-between">
             <h1 className="pb-10 font-heading text-3xl align">Disko Denso</h1>
             <p className="text-2xl text-yellow">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
+              <i className="fa fa-star"></i>
             </p>
           </div>
           <p className="w-2/3 mx-auto pb-10">

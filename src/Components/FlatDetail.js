@@ -91,7 +91,25 @@ const FlatDetail = () => {
                                     <div>{flat.description}</div>
 
                                     <h3 className="font-heading text-2xl mt-10 mb-2">Location</h3>
-                                    {flat.location && flat.location.city}
+                                    <div className="flex gap-2">
+                                        <p>
+                                            {flat.location && flat.location.street}
+                                        </p>
+                                        <p>
+                                            {flat.location && flat.location.housenumber}
+                                        </p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <p>
+                                            {flat.location && flat.location.postalcode}
+                                        </p>
+                                        <p>
+                                            {flat.location && flat.location.city}
+                                        </p>
+                                    </div>
+                                    <p>
+                                        {flat.location && flat.location.country}
+                                    </p>
 
                                     <div>
                                         <h3 className="font-heading text-2xl mt-10 mb-2">
