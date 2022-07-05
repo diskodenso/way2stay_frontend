@@ -1,156 +1,117 @@
 import axios from "axios";
-import React, { useEffect, useNavigate, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, } from "react";
 import Loader from "./Loader";
-import { authContext } from "../Context/authContext";
 import { toast } from "react-toastify";
+import { format, parseISO } from "date-fns";
 
-const TimeSheet = () => {
-  const { timesheetId } = useParams();
-  const { flatId, verified } = useContext(authContext);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [flat, setFlat] = useState(null);
-  const navigate = useNavigate(authContext);
-  const [timesheet, setTimesheet] = useState(null);
-  const apiUrl = process.env.REACT_APP_API_URL;
-  const [flats, setFlats] = useState(null);
+const TimeSheet = ({ timeSheet, flat, isOwner }) => {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-  // if verified
-  // useEffect(() => {
-  //   !verified && navigate(`${apiUrl}/users/login`);
-  //   const getTimes = async () => {
-  //     if (verified && timesheetId) {
-  //       try {
-  //         await axios
-  //           .get(`${apiUrl}/timesheets/${timesheetId}`)
-  //           .then((res) => {
-  //             setTimesheet(res.data);
-  //             setLoading(false);
-  //           })
-  //           .catch((error) => {
-  //             setError(err);
-  //             setLoading(false);
-  //             console.log(err);
-  //           });
-  //         await axios
-  //           .get(`${apiUrl}/timesheets/flats/${flatId}`)
-  //           .then((flatsRes) => {
-  //             setFlats(flatsRes.data.flats);
-  //             setLoading(false);
-  //           })
-  //           .catch((error) => {
-  //             setError(error);
-  //             setLoading(false);
-  //             console.log(error);
-  //           });
-  //       } catch (error) {
-  //         setError(error);
-  //       }
-  //     } else {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   getTimes();
-  // }, [apiUrl, navigate, timesheetId, verified]);
+    // standard axios fetch of all timesheets
+    useEffect(() => {
+        setLoading(false)
+    }, [timeSheet]);
 
-  // standard axios fetch of all timesheets
-  useEffect(() => {
-    !verified && navigate(`${apiUrl}/users/login`);
-    axios
-      .get(`${apiUrl}/timesheets`)
-      .then((res) => {
-        setTimesheet(res.data.timesheet);
-        setLoading(false);
-        setError(null);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(err);
-        console.log(err);
-      });
-  }, [apiUrl, navigate, verified]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { start, end } = e.target;
-      if (!timesheetId && flatId) {
-        await axios
-          .post(`${apiUrl}/timesheets`, {
-            start: start.value,
-            end: end.value,
-          })
-          .then((res) => {
-            setTimesheet(res.data.timesheet);
-            setLoading(false);
-            toast.success("Buchungszeitraum wurde erfolgreich erstellt!");
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const { start, end, available } = e.target;
+            if (!timeSheet) {
+                await axios
+                    .post(`${apiUrl}/timesheets`, {
+                        flatId: flat._id,
+                        start: start.value,
+                        end: end.value,
+                        available: true
+                    })
+                    .then((res) => {
+                        toast.success("Verfügbarkeit wurde erfolgreich erstellt!");
+                    })
+                    .catch((err) => {
+                        setError(err);
+                        console.log(err);
+                        toast.error("Verfügbarkeit konnte nicht erfolgreich erstellt werden!");
+                    });
+            } else {
+                const updatedTimeSheet = {
+                    start: start.value,
+                    end: end.value,
+                    available: available.checked
+                };
+                await axios
+                    .put(`${apiUrl}/timesheets/${timeSheet._id}`, updatedTimeSheet)
+                    .then((res) => {
+                        toast.success("Buchungszeitraum wurde erfolgreich geändert!");
+                    })
+                    .catch((err) => {
+                        setError(err);
+                        console.log(err);
+                        toast.error("Buchungszeitraum konnte nicht erfolgreich geändert werden!");
+                    });
+            }
+        } catch (err) {
             console.log(err);
-            toast.error("Zeitraum nicht erfolgreich erstellt!");
-          });
-        const updatedTimeSheet = {
-          start: start.value,
-          end: end.value,
-        };
-        await axios
-          .put(`${apiUrl}/timesheets/${timesheetId}`, updatedTimeSheet)
-          .then((res) => {
-            setTimesheet(res.data.timesheet);
-            setLoading(false);
-            toast.success("Buchungszeitraum wurde erfolgreich geändert!");
-          })
-          .catch((err) => {
-            setLoading(false);
-            setError(err);
-            console.log(err);
-            toast.error("Buchungszeitraum wurde erfolgreich geändert!");
-          });
-      }
-    } catch (err) {
-      console.log(err);
-    }
+        }
+    };
 
-    if (loading) {
-      return <Loader />;
-    }
+    if (loading) { return <Loader />; }
 
-    if (error) {
-      return (
-        <h2 className="text-center my-10">Damn Daniel, an error occured!</h2>
-      );
-    }
+    if (error) { return (<h2 className="text-center my-10">Damn Daniel, an error occured!</h2>); }
+
     return (
-      <>
-        <div className="flex w-1/3 bg-white shadow-lg rounded-lg">
-          <form onSubmit={handleSubmit} className="my-5 items-stretch">
-            <div className="w-1/2 m-5">
-              <h3 className="pb-3 font-heading font-bold text-xl">Arrival</h3>
-              <input
-                name="start"
-                className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
-                type="date"
-                placeholder="YYYY/MM/DD"
-              />
+        <>
+            <div className="bg-white">
+                <form onSubmit={handleSubmit} className="flex my-5 justify-between items-center gap-3">
+                    <div className="w-1/2 m-5">
+                        <label htmlFor="start" className="pb-3 font-heading font-bold text-xl">Arrival</label>
+                        <input
+                            name="start"
+                            className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
+                            type="date"
+                            disabled={!isOwner}
+                            defaultValue={timeSheet && format(parseISO(timeSheet.start), 'yyyy-MM-dd')}
+                        />
+                    </div>
+                    <div className="w-1/2 m-5">
+                        <label htmlFor="end" className="pb-3 font-heading font-bold text-xl">Departure</label>
+                        <input
+                            name="end"
+                            type="date"
+                            className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
+                            disabled={!isOwner}
+                            defaultValue={timeSheet && format(parseISO(timeSheet.end), 'yyyy-MM-dd')}
+                        />
+                    </div>
+
+                    <div className="flex gap-2 justify-between">
+                        <input
+                            name="available"
+                            type={'checkbox'}
+                            disabled={!isOwner}
+                            defaultChecked={timeSheet && timeSheet.available}
+                        />
+                        <label
+                            htmlFor="available"
+                        >
+                            Verfügbar
+                        </label>
+
+                    </div>
+                    <div className="flex flex-col items-center justify-between" hidden={!isOwner}>
+                        <button
+                            name="submit"
+                            type="submit"
+                            className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'
+                        >
+                            {!timeSheet ? <i className="fas fa-plus"/> : <i className="fa fa-pen"/>}
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div className="w-1/2 m-5">
-              <h3 className="pb-3 font-heading font-bold text-xl">Departure</h3>
-              <input
-                name="end"
-                type="date"
-                className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
-                placeholder="YYYY/MM/DD"
-              />
-            </div>
-          </form>
-        </div>
-      </>
+        </>
     );
-  };
 };
 
 export default TimeSheet;

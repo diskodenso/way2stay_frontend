@@ -42,8 +42,10 @@ const ImageList = ({ flat }) => {
                 setLoading(false)
             });
     }
-
+    
+    if (error) { return <h2>Bugger, an error occured!</h2> };
     (loading && images !== []) && <Loader />
+
 
     return (
         <>

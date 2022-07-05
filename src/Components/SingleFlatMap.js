@@ -13,7 +13,7 @@ const SingleFlatMap = ({ flat }) => {
     const [isStandard, setIsStandard] = useState(true);
 
     useEffect(() => {
-        if (flat.location) {
+        if (flat && flat.location) {
             axios
                 .get(`${process.env.REACT_APP_GEOAPI}${flat.location.housenumber}%20${flat.location.street}%2C%20${flat.location.city}%20W1H%201LJ%2C%20${flat.location.country}&apiKey=${process.env.REACT_APP_GEOAPI_KEY}`)
                 .then(res => {
@@ -30,7 +30,7 @@ const SingleFlatMap = ({ flat }) => {
             setLoading(false);
         }
         // setLoading(false);
-    }, [flat.location]);
+    }, [flat]);
 
     // --- custom icon as marker --- //
     // const houseMarker = new Icon({

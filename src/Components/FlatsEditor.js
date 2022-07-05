@@ -6,6 +6,7 @@ import { authContext } from "../Context/authContext";
 import SingleFlatMap from '../Components/SingleFlatMap'
 import Loader from "./Loader";
 import ImageList from "./ImageList";
+import TimeSheetListContainer from "./TimeSheetListContainer";
 
 
 
@@ -34,16 +35,16 @@ const FlatsEditor = () => {
                     setError(err);
                     console.log(err);
                 })
-            axios
-                .get(`${apiUrl}/categories`)
-                .then(res => {
-                    setCategories(res.data.categories)
-                })
-                .catch(err => console.log(err))
 
         } else {
             setLoading(false);
         }
+        axios
+            .get(`${apiUrl}/categories`)
+            .then(res => {
+                setCategories(res.data.categories)
+            })
+            .catch(err => console.log(err))
 
     }, [apiUrl, flatId, navigate, verified])
 
@@ -52,14 +53,10 @@ const FlatsEditor = () => {
         e.preventDefault();
         const { title, description, street, housenumber, postalcode, city } = e.target;
 
-        let flatCategories = categories.filter(category => {
-            return (e.target[`${category._id}`].checked)
-        });
+        let flatCategories = categories.filter(category => { return (e.target[`${category._id}`].checked) });
 
-        (flatCategories) && (flatCategories = flatCategories.map(category => { return category._id })); 
+        (flatCategories) && (flatCategories = flatCategories.map(category => { return category._id }));
 
-        console.log(flatCategories);
-        
         if (!flatId) {
             axios
                 .post(`${apiUrl}/flats`, {
@@ -150,7 +147,7 @@ const FlatsEditor = () => {
                         <div className='flex justify-between items-center mt-8'>
                             <h2>Daten</h2>
                         </div>
-                        <form onSubmit={submitHandler} className='my-5 items-stretch'>
+                        <form onSubmit={submitHandler} className='my-5'>
                             <input
                                 name="title"
                                 type={'text'}
@@ -210,17 +207,15 @@ const FlatsEditor = () => {
                             <div className="flex gap-3">
                                 <div className="flex flex-col gap-2">
                                     <h3>Kategorien</h3>
-
                                     {
                                         categories && categories.map(category => {
-                                            console.log(category._id)
                                             return (
                                                 <div key={`cat_${category._id}`} className="flex gap-2">
                                                     <input
                                                         id={`cb_${category._id}`}
                                                         name={`${category._id}`}
                                                         type={'checkbox'}
-                                                        defaultChecked={flat.details.categories && (flat.details.categories.includes(category._id))}
+                                                        defaultChecked={(flat && flat.details.categories) && (flat.details.categories.includes(category._id))}
                                                     />
                                                     <label htmlFor={`${category._id}`} >{category.name}</label>
                                                 </div>
@@ -248,7 +243,8 @@ const FlatsEditor = () => {
                                 Speichern
                             </button>
                         </form>
-                        <form onSubmit={uploadPicture}>
+                        <hr />
+                        <form onSubmit={uploadPicture} className={'my-5'}>
                             <input
                                 name="files"
                                 type={'file'}
@@ -262,7 +258,16 @@ const FlatsEditor = () => {
                                 Upload
                             </button>
                         </form>
-                        <ImageList flat={flat} />
+                        {flat && <ImageList flat={flat} />}
+                        <div>
+                            <>
+                                {
+                                    (flat) && (
+                                        <TimeSheetListContainer flat={flat} />
+                                    )
+                                }
+                            </>
+                        </div>
                     </div>
                 </div>
             </>

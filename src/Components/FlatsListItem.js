@@ -8,7 +8,7 @@ import Loader from './Loader';
 
 export const FlatsListItem = ({ flat }) => {
     const { userId, user } = useContext(authContext);
-    const [users, setUsers] = useState(null);
+    // const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [favoriteList, setFavoriteList] = useState(null);
