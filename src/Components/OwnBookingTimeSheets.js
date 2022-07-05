@@ -6,7 +6,7 @@ import { authContext } from "../Context/authContext";
 import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";
 
-const OwnBookingTimeSheets = ({ selectedOwnFlat }) => {
+const OwnBookingTimeSheets = ({ flat }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [ownTimeSheets, setOwnTimeSheets] = useState(null);
   const { verified } = useContext(authContext);
