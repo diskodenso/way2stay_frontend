@@ -64,8 +64,7 @@ const TimeSheet = ({ timeSheet, flat, isOwner }) => {
         <>
             <div className="bg-white">
                 <form onSubmit={handleSubmit} className="flex my-5 justify-between items-center gap-3">
-                    <div className="w-1/2 m-5">
-                        <label htmlFor="start" className="pb-3 font-heading font-bold text-xl">Arrival</label>
+                    <div className="w-1/2">
                         <input
                             name="start"
                             className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
@@ -74,8 +73,7 @@ const TimeSheet = ({ timeSheet, flat, isOwner }) => {
                             defaultValue={timeSheet && format(parseISO(timeSheet.start), 'yyyy-MM-dd')}
                         />
                     </div>
-                    <div className="w-1/2 m-5">
-                        <label htmlFor="end" className="pb-3 font-heading font-bold text-xl">Departure</label>
+                    <div className="w-1/2">
                         <input
                             name="end"
                             type="date"
@@ -89,7 +87,7 @@ const TimeSheet = ({ timeSheet, flat, isOwner }) => {
                         <input
                             name="available"
                             type={'checkbox'}
-                            disabled={!isOwner}
+                            disabled={!isOwner }
                             defaultChecked={timeSheet && timeSheet.available}
                         />
                         <label
@@ -99,11 +97,12 @@ const TimeSheet = ({ timeSheet, flat, isOwner }) => {
                         </label>
 
                     </div>
-                    <div className="flex flex-col items-center justify-between" hidden={!isOwner}>
+                    <div className="flex flex-col items-center justify-between">
                         <button
                             name="submit"
                             type="submit"
                             className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'
+                            hidden={!isOwner}
                         >
                             {!timeSheet ? <i className="fas fa-plus"/> : <i className="fa fa-pen"/>}
                         </button>
