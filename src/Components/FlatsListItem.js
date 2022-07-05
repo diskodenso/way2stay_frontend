@@ -66,7 +66,7 @@ export const FlatsListItem = ({ flat }) => {
 
     const deleteHandler = (e) => {
         axios
-            .delete(`${apiUrl}/flats/delete/${flat._id}`)
+            .delete(`${apiUrl}/flats/${flat._id}`)
             .then(res => {
                 axios
                     .get(`${apiUrl}/users`)
