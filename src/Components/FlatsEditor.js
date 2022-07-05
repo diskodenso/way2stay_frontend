@@ -81,6 +81,7 @@ const FlatsEditor = () => {
         } else {
             axios
                 .put(`${apiUrl}/flats/${flatId}`, {
+                    userId: userId,
                     title: title.value,
                     description: description.value,
                     street: street.value,
@@ -100,9 +101,8 @@ const FlatsEditor = () => {
     };
 
     const uploadPicture = (e) => {
-        const formData = new FormData();
-
         e.preventDefault();
+        const formData = new FormData();
 
         formData.append('file', e.target.files.files[0])
         formData.append('upload_preset', 'way2stay')
