@@ -33,9 +33,7 @@
 
 ## Build Status
 
-| Netlify |
-| --- |
-| [![Build Status](https://ci.joomla.org/api/badges/joomla/joomla-cms/status.svg?branch=4.0-dev)](https://ci.joomla.org/joomla/joomla-cms) |
+[![Netlify Status](https://api.netlify.com/api/v1/badges/577789b0-985c-43ae-a4c1-810dea986112/deploy-status)](https://app.netlify.com/sites/way2stay/deploys)
 
 <p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
 
