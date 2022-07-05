@@ -18,12 +18,12 @@ const Landing = () => {
             </h1>
             <StartSwapping />
           </div>
-          <div>
+          <div className="flex flex-col items-end mr-10">
             <HowToUseContainer />
           </div>
         </div>
 
-        <div className="flex justify-end w-5/6 mx-auto py-20 gap-12">
+        <div className="flex justify-end w-5/6 mx-auto mt-28 pb-20 gap-12">
           <div className="w-1/2">
             <div className="w-3/4 h-3/4 mx-auto mb-20 overflow-hidden">
               <img
