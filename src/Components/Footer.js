@@ -80,19 +80,19 @@ const Footer = () => {
       <div className="mr-40">
         <div className="mb-5 font-heading text-xl">Follow us on:</div>
         <div className="text-2xl">
-          <a href="https://facebook.com/" target="_blank">
+          <a href="https://facebook.com/" target="_blank" rel="noreferrer">
             <i className="mr-2 text-blue hover:text-green fa fa-facebook"></i>
           </a>
-          <a href="https://twitter.com/" target="_blank">
+          <a href="https://twitter.com/" target="_blank" rel="noreferrer">
             <i className="mx-2 text-lightblue hover:text-green fa fa-twitter"></i>
           </a>
-          <a href="https://instagram.com/" target="_blank">
+          <a href="https://instagram.com/" target="_blank" rel="noreferrer">
             <i className="mx-2 text-red hover:text-green fa fa-instagram"></i>
           </a>
-          <a href="https://linkedin.com/" target="_blank">
+          <a href="https://linkedin.com/" target="_blank" rel="noreferrer">
             <i className="mx-2 text-blue hover:text-green fa fa-linkedin"></i>
           </a>
-          <a href="https://github.com/" target="_blank">
+          <a href="https://github.com/" target="_blank" rel="noreferrer">
             <i className="ml-2 text-[#505050] hover:text-green fa fa-github"></i>
           </a>
         </div>
