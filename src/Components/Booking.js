@@ -2,9 +2,10 @@ import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { authContext } from "../Context/authContext";
 import Loader from "./Loader";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import FlatDetailCarousel from "./FlatDetailCarousel.js";
+import ToTopButton from "./ToTopButton";
 
 // erstelle booking
 // verified - wenn verified checken ob flatID existiert und wenn ja dann booking

@@ -9,7 +9,7 @@ const FlatDetailCarousel = ({ images }) => {
             {
                 images !== [] ? images.map(image => {
                     return (
-                        <div className="w-5/6 mb-10 mx-auto overflow-hidden rounded-lg shadow-lg">
+                        <div key={image} className="w-5/6 mb-10 mx-auto overflow-hidden rounded-lg shadow-lg">
                             <CloudinaryShow publicId={image} />
                         </div>
                     )

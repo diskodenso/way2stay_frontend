@@ -6,7 +6,7 @@ import { authContext } from "../Context/authContext"
 import Loader from "./Loader";
 import TimeSheet from "./TimeSheet";
 
-const TimeSheetListContainer = ({ flat }) => {
+const TimeSheetListContainer = ({ flat, isView }) => {
     const { verified, userId } = useContext(authContext);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -35,7 +35,8 @@ const TimeSheetListContainer = ({ flat }) => {
             toast.error('Der Timesheet-Editor benötigt eine Wohnung!');
             setError({ message: 'Der Timesheet-Editor benötigt eine Wohnung!' });
         }
-    }, [apiUrl, flat, navigate, userId, verified])
+        isView && setIsOwner(false)
+    }, [apiUrl, flat, isView, navigate, userId, verified])
 
     if (error) { return <h2>Bugger, an error occured!</h2> };
     if (loading) { return (<Loader />) };
@@ -43,12 +44,19 @@ const TimeSheetListContainer = ({ flat }) => {
     if (flat) {
         return (
             <>
+                <div className="flex w-2/3 justify-between">
+                    <p className="pb-3 font-heading font-bold text-xl">Arrival</p>
+                    <p className="pb-3 font-heading font-bold text-xl">Departure</p>
+                    {isOwner && <p>Available</p>}
+                    {isOwner && <p></p>}
+                </div>
                 {
+
                     timeSheets.map(timeSheet => {
                         return <TimeSheet key={timeSheet._id} timeSheet={timeSheet} flat={flat} isOwner={isOwner} />
                     })
                 }
-                <TimeSheet timesheet={null} flat={flat} isOwner={isOwner} />
+                {isOwner && <TimeSheet timesheet={null} flat={flat} isOwner={isOwner} />}
             </>
         )
     }
