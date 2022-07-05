@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./FlatDetailMap.css";
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Context/authContext.js";
@@ -52,11 +53,11 @@ const FlatDetail = () => {
     );
   }
 
-  if (!loading && !error && flat) {
+  if (!loading && !error && flat && categories) {
     return (
       <>
         <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20 pb-20'>
-          <div className="w-2/3 border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white mx-auto">
+          <div className="w-2/3 rounded-lg p-5 shadow-lg bg-white mx-auto">
             <div className="flex justify-between mt-5 mb-10 ml-10 mr-5">
               <h2 className="font-script text-4xl">{flat.title}</h2>
               <Link
@@ -71,37 +72,35 @@ const FlatDetail = () => {
               <div className="w-1/2">
                 <FlatDetailCarousel />
                 <div className="ml-10 mt-10 mr-5">
-                  <h3 className="font-heading text-2xl mb-5">
+                  <h3 className="font-heading text-2xl mb-2">
                     About this home
                   </h3>
                   <div>{flat.description}</div>
-                  <div className="mt-10">
-                    {flat.location && flat.location.city}
-                  </div>
 
-                  {categories && (
-                    <div className="mt-10 flex flex-col gap-5">
-                      <div className="flex gap-1">
-                        {categories.map((category) => {
-                          <>
-                            {console.log(category.name)}
-                            <div key={`cb_${category._id}`}>
-                              <input
-                                type={"checkbox"}
-                                name={`cb_${category._id}`}
-                                checked={true}
-                                disabled
-                              />
-                              <label htmlFor={`cb_${category._id}`}>
-                                {category.name}
-                              </label>
-                            </div>
-                            ;
-                          </>;
-                        })}
-                      </div>
+                  <h3 className="font-heading text-2xl mt-10 mb-2">Location</h3>
+                  {flat.location && flat.location.city}
+
+                  <div>
+                    <h3 className="font-heading text-2xl mt-10 mb-2">
+                      Categories
+                    </h3>
+                    <div className="flex gap-5">
+                      {categories.map((category) => (
+                        <>
+                          <p>
+                            <input
+                              className="mr-2"
+                              type={"checkbox"}
+                              name={`cb_${category._id}`}
+                              checked={flat.details.categories && (flat.details.categories.includes(category._id))}
+                              disabled
+                            />
+                            {category.name}
+                          </p>
+                        </>
+                      ))}
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
 
@@ -109,44 +108,47 @@ const FlatDetail = () => {
                 <div className="rounded-lg shadow-lg overflow-hidden mr-5">
                   <SingleFlatMap flat={flat} />
                 </div>
+
                 <div className="border border-[#b3b3b3] rounded-lg shadow-lg h-36 mr-5 mt-10">
                   {/* <TimeSheet /> */}
                 </div>
               </div>
             </div>
 
-              <div className="ml-10 mt-20 mr-5">
-                <h3 className="font-heading text-2xl mb-5">Reviews</h3>
+            <div className="mt-10 ml-10 mr-5">
+              <h3 className="font-heading text-2xl mb-5">Reviews</h3>
 
-                <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
-                  <div className="flex justify-between mb-2">
-                    <h4 className="font-heading text-lg">Name Nachname</h4>
-                    <p className="text-yellow"># # # # #</p>
-                  </div>
-                  <p>
-                    You go to their place. They come to yours. Just find a home
-                    you&apos;d like to stay in, and see if the owner would like
-                    to stay in yours. Classic Swaps can happen at the same time
-                    or at different times.
-                  </p>
+              <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
+                <div className="flex justify-between mb-2">
+                  <h4 className="font-heading text-lg">Name Nachname</h4>
+                  <p className="text-yellow"># # # # #</p>
                 </div>
-
-                <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
-                  <div className="flex justify-between mb-2">
-                    <h4 className="font-heading text-lg">Name Nachname</h4>
-                    <p className="text-yellow"># # # # #</p>
-                  </div>
-                  <p>
-                    You go to their place. They come to yours. Just find a home
-                    you&apos;d like to stay in, and see if the owner would like
-                    to stay in yours. Classic Swaps can happen at the same time
-                    or at different times. You go to their place. They come to
-                    yours. Just find a home you&apos;d like to stay in, and see
-                    if the owner would like to stay in yours. Classic Swaps can
-                    happen at the same time or at different times.
-                  </p>
-                </div>
+                <p className="mr-20">
+                  You go to their place. They come to yours. Just find a home
+                  you&apos;d like to stay in, and see if the owner would like to
+                  stay in yours. Classic Swaps can happen at the same time or at
+                  different times.
+                </p>
+                <div className="flex justify-end">04.07.2022</div>
               </div>
+
+              <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
+                <div className="flex justify-between mb-2">
+                  <h4 className="font-heading text-lg">Name Nachname</h4>
+                  <p className="text-yellow"># # # # #</p>
+                </div>
+                <p className="mr-20">
+                  You go to their place. They come to yours. Just find a home
+                  you&apos;d like to stay in, and see if the owner would like to
+                  stay in yours. Classic Swaps can happen at the same time or at
+                  different times. You go to their place. They come to yours.
+                  Just find a home you&apos;d like to stay in, and see if the
+                  owner would like to stay in yours. Classic Swaps can happen at
+                  the same time or at different times.
+                </p>
+                <div className="flex justify-end">17.02.1687</div>
+              </div>
+            </div>
           </div>
         </div>
       </>
