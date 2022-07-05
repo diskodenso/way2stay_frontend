@@ -5,7 +5,7 @@
 # <div align="center">&mdash;&mdash;&mdash;&mdash;&mdash; way2stay Frontend &mdash;&mdash;&mdash;&mdash;&mdash;</div>
 
 #### <div align="center">[go to the backend &rarr;](https://github.com/diskodenso/way2stay_backend)</div>
-#### <div align="center">[go to the website &rarr;](https://www.google.com)</div>
+#### <div align="center">[go to the website &rarr;](https://way2stay.netlify.app/)</div>
 
 <p align="right">&darr; <a href="#end">go to the bottom</a> &darr;</p>
 
