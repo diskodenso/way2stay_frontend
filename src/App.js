@@ -39,8 +39,7 @@ const App = () => {
           <Route path="/how2use" element={<HowToUse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path='/bookings/:flatId' element={<Booking />} />
-
+          <Route path="/bookings/flats/:flatId" element={<Booking />} />
         </Routes>
       </main>
       <footer>

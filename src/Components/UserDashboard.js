@@ -10,7 +10,7 @@ const UserDashboard = () => {
     const navigate = useNavigate(authContext);
     const { userId, verified } = useContext(authContext);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const [flats, setFlats] = useState(null);
     const [user, setUser] = useState(null);
     const [favorites, setFavorites] = useState([]);
