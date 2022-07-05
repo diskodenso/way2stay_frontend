@@ -7,6 +7,7 @@ import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";
 import FlatDetailCarousel from "./FlatDetailCarousel.js";
 import TimeSheet from "./TimeSheet.js";
+import FlatDetailReviews from "./FlatDetailReviews";
 
 const FlatDetail = () => {
   const { flatId } = useParams();
@@ -92,7 +93,10 @@ const FlatDetail = () => {
                               className="mr-2"
                               type={"checkbox"}
                               name={`cb_${category._id}`}
-                              checked={flat.details.categories && (flat.details.categories.includes(category._id))}
+                              checked={
+                                flat.details.categories &&
+                                flat.details.categories.includes(category._id)
+                              }
                               disabled
                             />
                             {category.name}
@@ -117,37 +121,7 @@ const FlatDetail = () => {
 
             <div className="mt-10 ml-10 mr-5">
               <h3 className="font-heading text-2xl mb-5">Reviews</h3>
-
-              <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
-                <div className="flex justify-between mb-2">
-                  <h4 className="font-heading text-lg">Name Nachname</h4>
-                  <p className="text-yellow"># # # # #</p>
-                </div>
-                <p className="mr-20">
-                  You go to their place. They come to yours. Just find a home
-                  you&apos;d like to stay in, and see if the owner would like to
-                  stay in yours. Classic Swaps can happen at the same time or at
-                  different times.
-                </p>
-                <div className="flex justify-end">04.07.2022</div>
-              </div>
-
-              <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
-                <div className="flex justify-between mb-2">
-                  <h4 className="font-heading text-lg">Name Nachname</h4>
-                  <p className="text-yellow"># # # # #</p>
-                </div>
-                <p className="mr-20">
-                  You go to their place. They come to yours. Just find a home
-                  you&apos;d like to stay in, and see if the owner would like to
-                  stay in yours. Classic Swaps can happen at the same time or at
-                  different times. You go to their place. They come to yours.
-                  Just find a home you&apos;d like to stay in, and see if the
-                  owner would like to stay in yours. Classic Swaps can happen at
-                  the same time or at different times.
-                </p>
-                <div className="flex justify-end">17.02.1687</div>
-              </div>
+              <FlatDetailReviews />
             </div>
           </div>
         </div>
