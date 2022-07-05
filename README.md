@@ -15,7 +15,8 @@
     <li><a href="#build-status">Build Status</a></li>
     <li><a href="#what">What is way2stay?</a></li>
     <li><a href="#how">How do you use way2stay?</a></li>
-    <li><a href="#pictures">Pictures</a></li>
+    <li><a href="#sitemap">Sitemap</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#contributing">Contributing</a></li>
@@ -71,9 +72,39 @@
 ---
 <br>
 
-<div id="pictures"></div>
+<div href="#sitemap"></div>
 
-## Pictures (Wireframe for now)
+## Sitemap
+
+> #### Landingpage
+
+> - How to use
+
+> - Login / Sign Up
+>     - Profile
+>         - edit Profile
+> 
+>     - add Home
+>         - edit Home
+
+> - List
+>     - Item
+>         - book Home
+
+> - FAQ
+
+> - About / Contact
+
+<br>
+
+<p align="right">&uarr; <a href="#top">back to top</a> &uarr;</p>
+
+---
+<br>
+
+<div id="screenshots"></div>
+
+## Screenshots
 
 <br>
 
@@ -81,18 +112,28 @@
 
 <br>
 
-<img src="https://i.ibb.co/vYNdndJ/Wireframe.jpg" alt="Wireframe" title="Example picture" width="45%"/>
-<img src="https://i.ibb.co/QJXSmtD/Wireframe2.jpg" alt="Wireframe" title="Example picture" width="45%" style="float: right;"/>
+<img src="https://i.ibb.co/fnt5dt8/Landingpage.jpg" alt="Landingpage top" title="Example picture" width="45%"/>
+<img src="https://i.ibb.co/9WYTq6b/Landingpage2.jpg" alt="Landingpage bottom" title="Example picture" width="45%" style="float: right;"/>
 
 #
 <br>
 
-### About Page
+### Homes
 
 <br>
 
-<img src="https://i.ibb.co/fpV3d6X/Wireframe3.jpg" alt="Wireframe" title="Example picture" width="45%"/>
-<img src="https://i.ibb.co/0mS9RPy/Wireframe4.jpg" alt="Wireframe" title="Example picture" width="45%" style="float: right;"/>
+<img src="https://i.ibb.co/PchvJ0R/Flats-List.jpg" alt="Homes overview" title="Example picture" width="45%"/>
+<img src="https://i.ibb.co/qk64k8f/Single-Flat.jpg" alt="Home details page" title="Example picture" width="45%" style="float: right;"/>
+
+#
+<br>
+
+### About / Contact
+
+<br>
+
+<img src="https://i.ibb.co/tpXQpcm/About1.jpg" alt="About" title="Example picture" width="45%"/>
+<img src="https://i.ibb.co/8K1Ck99/About2.jpg" alt="Contact" title="Example picture" width="45%" style="float: right;"/>
 
 #
 

@@ -6,7 +6,13 @@ const FlatDetailReviews = () => {
       <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
         <div className="flex justify-between mb-2">
           <h4 className="font-heading text-lg">Name Nachname</h4>
-          <p className="text-yellow"># # # # #</p>
+          <p className="text-yellow">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </p>
         </div>
         <p className="mr-20">
           You go to their place. They come to yours. Just find a home you&apos;d
@@ -19,7 +25,13 @@ const FlatDetailReviews = () => {
       <div className="mb-5 p-5 rounded-lg shadow-lg border border-[#b3b3b3]">
         <div className="flex justify-between mb-2">
           <h4 className="font-heading text-lg">Name Nachname</h4>
-          <p className="text-yellow"># # # # #</p>
+          <p className="text-yellow">
+            <i class="fa fa-star text-[#d9d9d9]"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </p>
         </div>
         <p className="mr-20">
           You go to their place. They come to yours. Just find a home you&apos;d
