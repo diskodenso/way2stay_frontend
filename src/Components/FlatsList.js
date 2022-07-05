@@ -6,11 +6,14 @@ import { FlatsListItem } from "./FlatsListItem";
 import { authContext } from "../Context/authContext";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const FlatsList = () => {
     const { userId } = useContext(authContext);
     const [isOpen, setIsOpen] = useState(false);
     const [flats, setFlats] = useState(null);
+    const [filteredFlats, setFilteredFlats] = useState(null);
+    const [categories, setCategories] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [flatCount, setFlatCount] = useState(0);
@@ -21,7 +24,6 @@ const FlatsList = () => {
         axios
             .get(`${apiUrl}/flats`)
             .then((res) => {
-                setFlats(res.data.flats);
                 let tempFlats;
                 if (userId) {
                     tempFlats = res.data.flats.filter((flat) => {
@@ -32,17 +34,33 @@ const FlatsList = () => {
                 }
                 console.log(tempFlats);
                 tempFlats && setFlatCount(tempFlats.length);
+                tempFlats && setFilteredFlats(tempFlats);
+                setFlats(res.data.flats);
                 setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
                 setError(err);
                 setLoading(false);
+                toast.error('Could not get flats!')
             });
-        axios.get(`${apiUrl}/categories`);
+        axios
+            .get(`${apiUrl}/categories`)
+            .then(res => {
+                setCategories(res.data.categories);
+            })
+            .catch(err => toast('Categories could not be loaded!'));
     }, [apiUrl, userId]);
 
     const toggling = () => setIsOpen(!isOpen);
+
+    const filter = (e) => {
+        const { name } = e.target;
+        let tempFlats = flats.filter(flat => flat.details.categories && (flat.details.categories.includes(name)));
+        userId && (tempFlats = tempFlats.filter(flat => flat.userId !== userId));
+        setFilteredFlats(tempFlats);
+        setFlatCount(tempFlats.length);
+    };
 
     if (loading) {
         return <Loader />;
@@ -87,15 +105,13 @@ const FlatsList = () => {
                         {isOpen && (
                             <div className="bg-blue/60 absolute rounded ml-9 w-[14rem]">
                                 <ul>
-                                    <li className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white">
-                                        Bedrooms
-                                    </li>
-                                    <li className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white">
-                                        Bathrooms
-                                    </li>
-                                    <li className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white">
-                                        m&#178;
-                                    </li>
+                                    {categories && categories.map(cat => {
+                                        return (
+                                            <li key={cat._id} className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white">
+                                                <button name={cat._id} onClick={filter} >{cat.name}</button>
+                                            </li>
+                                        )
+                                    })};
                                 </ul>
                             </div>
                         )}
@@ -103,11 +119,13 @@ const FlatsList = () => {
                 </div>
                 <div className="flex flex-wrap gap-16 mt-10 w-5/6 justify-between">
                     {/* <FlatsListItem /> */}
-                    {flats &&
-                        flats.map((flat) => {
+                    {filteredFlats &&
+                        filteredFlats.map((flat) => {
+
                             return (
-                                userId !== flat.userId && (
+                                 (
                                     <FlatsListItem key={`flat_${flat._id}`} flat={flat} />
+                                    // <h3>Hallo</h3>
                                 )
                             );
                         })}

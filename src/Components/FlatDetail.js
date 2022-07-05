@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./FlatDetailMap.css";
 import { useState, useContext, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../Context/authContext.js";
 import SingleFlatMap from "./SingleFlatMap";
 import Loader from "./Loader";

@@ -61,6 +61,7 @@ const FlatsEditor = () => {
         if (!flatId) {
             axios
                 .post(`${apiUrl}/flats`, {
+                    userId: userId,
                     title: title.value,
                     description: description.value,
                     street: street.value,
@@ -71,6 +72,7 @@ const FlatsEditor = () => {
                 })
                 .then(res => {
                     toast.success('Die Wohnung wurde erfolgreich angelegt!');
+                    console.log(res.data);
                     navigate(`/flats/editor/${res.data.flat._id}`);
                 })
                 .catch(err => {
@@ -81,7 +83,6 @@ const FlatsEditor = () => {
         } else {
             axios
                 .put(`${apiUrl}/flats/${flatId}`, {
-                    userId: userId,
                     title: title.value,
                     description: description.value,
                     street: street.value,
