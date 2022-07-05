@@ -16,12 +16,17 @@ import OwnBookingTimeSheets from "./OwnBookingTimeSheets";
 const Booking = () => {
   const { flatId } = useParams();
   const [customerFlats, setFlatsCustomer] = useState(null);
-  const { user, verified } = useContext(authContext);
+  const [isOpen, setIsOpen] = useState(null);
+  const { userId, user, verified } = useContext(authContext);
+  const [ownFlats, setOwnFlats] = useState(null);
+  const [selectedOwnFlat, setSelectedOwnFlat] = useState(null);
+
   const apiUrl = process.env.REACT_APP_API_URL;
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(authContext);
   const [customerTimeSheets, setCustomerTimeSheets] = useState(null);
+
   useEffect(() => {
     !verified && navigate(`/login`);
     const customerBookingData = async () => {
@@ -55,6 +60,19 @@ const Booking = () => {
                 "Sorry, we couldn't get the timesheets you have requested"
               );
             });
+          await axios
+            .get(`${apiUrl}/flats/users/${userId}`)
+            .then((res) => {
+              setOwnFlats(res.data.flats);
+              console.log(res.data.flats);
+              setLoading(false);
+              setError(null);
+            })
+            .catch((err) => {
+              setLoading(false);
+              setError(err);
+              toast.error("Sorry, we couldn't find your flat");
+            });
         } catch (err) {
           setLoading(false);
           setError(err);
@@ -70,25 +88,16 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("damn");
-    // const { departure, arrival } = e.target;
+  };
 
-    // console.log(departure);
-    // await axios
-    //   .post(`${apiUrl}/bookings`, {
-    //     departure: departure.value,
-    //     arrival: arrival.value,
-    //   })
-    //   .then((res) => {
-    //     setLoading(false);
-    //     setBooking(res.data);
-    //     console.log(booking);
-    //     toast.success("Booking successfully requested");
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     setError(err);
-    //     toast.error("Oh no, something went wrong with the booking");
-    //   });
+  const toggling = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const select = (e) => {
+    const { name } = e.target;
+    setIsOpen(false);
+    setSelectedOwnFlat(name);
   };
 
   if (loading) {
@@ -114,7 +123,7 @@ const Booking = () => {
             </div>
             {/* <FlatDetailCarousel /> */}
             <div className="mt-5 w-5/6 h-60 mx-auto bg-lightgreen rounded-lg shadow-lg text-center">
-              <SingleFlatMap />
+              <SingleFlatMap flat={customerFlats} />
             </div>
             <p className="ml-10 mt-5">
               {customerFlats.location.street}{" "}
@@ -127,8 +136,59 @@ const Booking = () => {
           </div>
         </div>
 
-        <OwnBookingTimeSheets />
-        <form onSubmit={handleSubmit}>
+        <div className="sticky w-1/3 rounded-lg p-5 my-5 shadow-lg bg-white mx-auto">
+          <button onClick={toggling} className="mb-2">
+            <h2 className="flex gap-3 font-heading text-2xl w-[16rem] justify-between text-blue">
+              <i className="text-blue fa fa-filter"></i>
+              {selectedOwnFlat ? selectedOwnFlat.title : "sauce your flat"}
+              <i className="text-lg fa fa-caret-up"></i>
+            </h2>
+          </button>
+          {isOpen && (
+            <div className="bg-blue/60 absolute rounded ml-9 w-[14rem]">
+              <ul>
+                {ownFlats &&
+                  ownFlats.map((flat) => {
+                    return (
+                      <li
+                        key={flat._id}
+                        className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white"
+                      >
+                        <button name={flat._id} onClick={select}>
+                          {flat.title}
+                        </button>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
+          )}
+          <div className="flex justify-between mb-5">
+            <h3 className="font-heading text-2xl">{customerFlats.title}</h3>
+            <Link
+              to={`/flats/${flatId}`}
+              className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+            >
+              View this flat
+            </Link>
+          </div>
+          <div>
+            {/* <FlatDetailCarousel /> */}
+            <div className="mt-5 w-5/6 h-60 mx-auto bg-lightgreen rounded-lg shadow-lg text-center">
+              <SingleFlatMap flat={customerFlats} />
+            </div>
+            <p className="ml-10 mt-5">
+              {customerFlats.location.street}{" "}
+              {customerFlats.location.housenumber}
+              <br />
+              {customerFlats.location.postalcode} {customerFlats.location.city}
+              <br />
+              {customerFlats.country}
+            </p>
+          </div>
+          {selectedOwnFlat && <OwnBookingTimeSheets flat={selectedOwnFlat} />}
+        </div>
+        {/* <form onSubmit={handleSubmit}>
           <div className="flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center items-start">
             <div className="sticky w-1/3 rounded-lg p-5 my-5 shadow-lg bg-white">
               <div className="flex justify-between items-center gap-5 mb-5">
@@ -144,36 +204,9 @@ const Booking = () => {
                   Book now!
                 </button>
               </div>
-
-              {/* <div className="flex">
-                <div className="w-1/2 m-5">
-                  <h3 className="pb-3 font-heading text-xl">Arrival</h3>
-                  <input
-                    name="arrival"
-                    className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
-                    type="date"
-                    placeholder="YYYY-MM-DD"
-                    // defaultValue={
-                    //   booking && format(parseISO(booking.arrival), "yyyy-MM-dd")
-                    // }
-                  />
-                </div>
-                <div className="w-1/2 m-5">
-                  <h3 className="pb-3 font-heading text-xl">Departure</h3>
-                  <input
-                    name="departure"
-                    type="date"
-                    className="p-2 rounded border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
-                    placeholder="YYYY-MM-DD"
-                    // defaultValue={
-                    //   booking && format(parseISO(booking.arrival), "yyyy-MM-dd")
-                    // }
-                  />
-                </div>
-              </div> */}
             </div>
           </div>
-        </form>
+        </form> */}
       </div>
     </>
   );
