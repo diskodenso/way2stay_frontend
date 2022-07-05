@@ -138,7 +138,7 @@ const UserDashboard = () => {
                                 <p>{user.username}</p>
                             </div>
                             <div className="flex justify-between items-center mt-8">
-                                <h2>Persönliche Daten</h2>
+                                <h2>Personal information</h2>
                                 {/* <button name='edit' type='button' className='border-2 border-blue rounded-md px-3 py-1 text-blue font-bold hover:bg-blue hover:text-white'>Bearbeiten</button> */}
                             </div>
                             <form onSubmit={submitHandler} className="my-5 items-stretch">
@@ -146,7 +146,7 @@ const UserDashboard = () => {
                                     name="email"
                                     type={"email"}
                                     className="border-b-2 border-[#6b6b6b] w-full focus:outline-none my-5"
-                                    placeholder="E-Mail Adresse"
+                                    placeholder="E-Mail address"
                                     defaultValue={user.contact && user.contact.email}
                                     required
                                 />
@@ -154,13 +154,13 @@ const UserDashboard = () => {
                                     name="password"
                                     type={"password"}
                                     className="border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5"
-                                    placeholder="Passwort"
+                                    placeholder="Password"
                                 />
                                 <input
                                     name="password2"
                                     type={"password"}
                                     className="border-b-2 border-[#6b6b6b] focus:outline-none w-full"
-                                    placeholder="Passwort wiederholen"
+                                    placeholder="Repeat password"
                                 />
                                 <div
                                     name="namedetails"
@@ -170,14 +170,14 @@ const UserDashboard = () => {
                                         name="firstname"
                                         type={"text"}
                                         className="border-b-2 border-[#6b6b6b] w-1/2 focus:outline-none"
-                                        placeholder="Vorname"
+                                        placeholder="Name"
                                         defaultValue={user.firstname}
                                     />
                                     <input
                                         name="lastname"
                                         type={"text"}
                                         className="border-b-2 border-[#6b6b6b] w-1/2 focus:outline-none"
-                                        placeholder="Nachname"
+                                        placeholder="Last name"
                                         defaultValue={user.lastname}
                                     />
                                 </div>
@@ -189,7 +189,7 @@ const UserDashboard = () => {
                                         name="postalcode"
                                         type={"number"}
                                         className="border-b-2 border-[#6b6b6b] focus:outline-none w-[4em]"
-                                        placeholder="PLZ"
+                                        placeholder="ZIP"
                                         defaultValue={user.address && user.address.postalcode}
                                         required
                                     />
@@ -197,7 +197,7 @@ const UserDashboard = () => {
                                         name="city"
                                         type={"text"}
                                         className="border-b-2 border-[#6b6b6b] focus:outline-none w-full"
-                                        placeholder="Ort"
+                                        placeholder="City"
                                         defaultValue={user.address && user.address.city}
                                     />
                                 </div>
@@ -209,14 +209,14 @@ const UserDashboard = () => {
                                         name="street"
                                         type={"text"}
                                         className="border-b-2 border-[#6b6b6b] focus:outline-none w-5/6"
-                                        placeholder="Straße"
+                                        placeholder="Street"
                                         defaultValue={user.address && user.address.street}
                                     />
                                     <input
                                         name="housenumber"
                                         type={"text"}
                                         className="border-b-2 border-[#6b6b6b] focus:outline-none w-1/6"
-                                        placeholder="Nr."
+                                        placeholder="No."
                                         defaultValue={user.address && user.address.housenumber}
                                     />
                                 </div>
@@ -224,7 +224,7 @@ const UserDashboard = () => {
                                     name="phone"
                                     type={"tel"}
                                     className="border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-3"
-                                    placeholder="Mobil- / Telefonnummer"
+                                    placeholder="Phonenumber"
                                     defaultValue={user.contact && user.contact.phonenumber}
                                 />
                                 <div className="flex items-center">
@@ -234,7 +234,7 @@ const UserDashboard = () => {
                                         className="mr-2"
                                         defaultChecked={user.isActive}
                                     />
-                                    <label htmlFor="isActive">Profil aktiv</label>
+                                    <label htmlFor="isActive">Profile active</label>
                                 </div>
                                 <div className="flex justify-between my-5 gap-4">
                                     <button
@@ -242,14 +242,14 @@ const UserDashboard = () => {
                                         type="reset"
                                         className="border-2 border-red rounded-md px-3 py-1 text-red font-bold hover:bg-red hover:text-white"
                                     >
-                                        Zurücksetzen
+                                        Reset
                                     </button>
                                     <button
                                         name="submit"
                                         type="submit"
                                         className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
                                     >
-                                        Speichern
+                                        Save
                                     </button>
                                 </div>
                             </form>
@@ -258,14 +258,14 @@ const UserDashboard = () => {
                             <div className=" rounded-lg p-5 mb-5 shadow-lg bg-white">
                                 <div>
                                     <div className="flex justify-between">
-                                        <h2>Meine Wohnungen</h2>
+                                        <h2>My homes</h2>
                                         <Link
                                             to={"/flats/editor"}
                                             name="newFlat"
                                             newflat="true"
-                                            className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+                                            className="flex justify-center items-center border-2 border-green w-8 h-8 rounded-full px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
                                         >
-                                            neue Wohnung anlegen
+                                            <i className="fa fa-plus"></i>
                                         </Link>
                                     </div>
 
@@ -289,7 +289,7 @@ const UserDashboard = () => {
                             </div>
                             <div className=" rounded-lg p-5 my-5 shadow-lg bg-white">
                                 <div>
-                                    <h2>Meine Favoriten</h2>
+                                    <h2>My favourites</h2>
                                     <div className="flex gap-5 my-5">
                                         {favorites !== [] && favorites ? (
                                             <>
