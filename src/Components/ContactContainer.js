@@ -7,7 +7,7 @@ const ContactContainer = () => {
         <div className='flex justify-end w-5/6 mx-auto pt-20 pb-16 gap-12'>
             <div className='w-1/2'>
                 <div className='flex items-end overflow-hidden'>
-                    <img className='w-80 h-80 ml-auto mr-40' src="https://i.ibb.co/dMt5FdB/Contact-Container-Picture.png"></img>
+                    <img className='w-80 h-80 ml-auto mr-40' src="https://i.ibb.co/dMt5FdB/Contact-Container-Picture.png" alt=''></img>
                 </div>
             </div>
             <div className='w-1/2'>

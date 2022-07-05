@@ -77,7 +77,7 @@ const FlatDetail = () => {
                                 onClick={clickHandler}
                                 className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
                             >
-                                {(flat) && (flat.userId !== userId ? 'Book it' : <i className="fa fa-pen" />)}
+                                {(flat) && (flat.userId !== userId ? 'Book this home' : <i className="fa fa-pen" />)}
                             </button>
                         </div>
 
