@@ -266,13 +266,14 @@ const FlatsEditor = () => {
                             <button
                                 name='submit'
                                 type='submit'
-                                className='border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'
+                                className='w-1/6 mx-auto border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white'
                             >
                                 <i className="fa fa-save" />
                             </button>
                         </form>
                         <hr />
                         <form onSubmit={uploadPicture} className={'my-5'}>
+                            <div className="flex justify-between mb-10">
                             <input
                                 name="files"
                                 type={'file'}
@@ -285,9 +286,10 @@ const FlatsEditor = () => {
                             >
                                 <i className="fa fa-upload" />
                             </button>
+                            </div>
                         </form>
                         {flat && <ImageList flat={flat} />}
-                        <div>
+                        <div className="mb-10">
                             <>
                                 <h3 className="text-2xl font-heading">Time Slots</h3>
                                 {
