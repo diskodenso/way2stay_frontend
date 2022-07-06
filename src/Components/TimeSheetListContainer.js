@@ -27,12 +27,12 @@ const TimeSheetListContainer = ({ flat, isView }) => {
                 })
                 .catch(err => {
                     console.log(err);
-                    toast.error('Der Timesheet-Editor konnte nicht geladen werden!')
+                    toast.error('The timesheet editor could not load!')
                 });
             (userId === flat.userId) && setIsOwner(true);
         } else {
             setLoading(false);
-            toast.error('Der Timesheet-Editor benötigt eine Wohnung!');
+            toast.error('The imesheets need a flat!');
             setError({ message: 'Der Timesheet-Editor benötigt eine Wohnung!' });
         }
         isView && setIsOwner(false)
@@ -44,12 +44,6 @@ const TimeSheetListContainer = ({ flat, isView }) => {
     if (flat) {
         return (
             <>
-                <div className="flex w-2/3 justify-between">
-                    <p className="pb-3 font-heading font-bold text-xl">Arrival</p>
-                    <p className="pb-3 font-heading font-bold text-xl">Departure</p>
-                    {isOwner && <p>Available</p>}
-                    {isOwner && <p></p>}
-                </div>
                 {
 
                     timeSheets.map(timeSheet => {

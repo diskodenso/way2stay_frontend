@@ -28,11 +28,15 @@ const BookingsFlatList = ({ flat }) => {
 
     return (
         <>
-            {console.log(bookings)}
             <div className=" rounded-lg p-5 my-5">
                 <div>
                     {
                         bookings.flatOne && bookings.flatOne.map(booking => {
+                            return <BookingItem key={booking._id} booking={booking} />
+                        })
+                    }
+                    {
+                        bookings.flatTwo && bookings.flatTwo.map(booking => {
                             return <BookingItem key={booking._id} booking={booking} />
                         })
                     }
