@@ -133,15 +133,15 @@ const UserDashboard = () => {
                 <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
                     <div className="flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center items-start">
                         <div className="sticky w-1/3 rounded-lg p-5 mb-5 shadow-lg bg-white">
-                            <div className="items-center gap-5 mb-5">
-                                <picture className="rounded-full w-[50px] h-[50px] bg-green"></picture>
-                                <p>{user.username}</p>
+                            <div className="flex justify-center gap-3">
+                            <i className="text-xl text-white text-center bg-[#d9d9d9] rounded-full w-8 h-8 fa fa-user"></i>
+                                <p className="font-script text-2xl">{user.username}</p>
                             </div>
                             <div className="flex justify-between items-center mt-8">
-                                <h2>Personal information</h2>
+                                <h2 className="font-heading text-xl">Personal information</h2>
                                 {/* <button name='edit' type='button' className='border-2 border-blue rounded-md px-3 py-1 text-blue font-bold hover:bg-blue hover:text-white'>Bearbeiten</button> */}
                             </div>
-                            <form onSubmit={submitHandler} className="my-5 items-stretch">
+                            <form onSubmit={submitHandler} className="mt-5 items-stretch">
                                 <input
                                     name="email"
                                     type={"email"}
@@ -227,7 +227,7 @@ const UserDashboard = () => {
                                     placeholder="Phonenumber"
                                     defaultValue={user.contact && user.contact.phonenumber}
                                 />
-                                <div className="flex items-center">
+                                <div className="flex justify-center my-3">
                                     <input
                                         name="isActive"
                                         type={"checkbox"}
@@ -236,7 +236,7 @@ const UserDashboard = () => {
                                     />
                                     <label htmlFor="isActive">Profile active</label>
                                 </div>
-                                <div className="flex justify-between my-5 gap-4">
+                                <div className="flex justify-between mt-5 gap-4">
                                     <button
                                         name="reset"
                                         type="reset"
@@ -258,7 +258,7 @@ const UserDashboard = () => {
                             <div className=" rounded-lg p-5 mb-5 shadow-lg bg-white">
                                 <div>
                                     <div className="flex justify-between">
-                                        <h2>My homes</h2>
+                                        <h2 className="font-heading text-xl">My homes</h2>
                                         <Link
                                             to={"/flats/editor"}
                                             name="newFlat"
@@ -282,14 +282,14 @@ const UserDashboard = () => {
                                                 })}
                                             </>
                                         ) : (
-                                            <h2>Du hast noch keine Wohnung angelegt!</h2>
+                                            <h2>You didn&apos;t add a home yet!</h2>
                                         )}
                                     </div>
                                 </div>
                             </div>
                             <div className=" rounded-lg p-5 my-5 shadow-lg bg-white">
                                 <div>
-                                    <h2>My favourites</h2>
+                                    <h2 className="font-heading text-xl">My favourites</h2>
                                     <div className="flex gap-5 my-5">
                                         {favorites !== [] && favorites ? (
                                             <>
@@ -303,7 +303,7 @@ const UserDashboard = () => {
                                                 })}
                                             </>
                                         ) : (
-                                            <h2>Du hast noch keine Favoriten angelegt!</h2>
+                                            <h2>You didn&apos;t add any homes to your favourites!</h2>
                                         )}
                                     </div>
                                 </div>
