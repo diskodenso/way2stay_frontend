@@ -180,6 +180,7 @@ const Booking = () => {
                         <div>
                             {/* <FlatDetailCarousel /> */}
                             <div className="mt-5 mx-auto bg-lightgreen rounded-lg shadow-lg text-center overflow-hidden">
+                                {console.log(selectedOwnFlat)}
                                 {selectedOwnFlat && <SingleFlatMap flat={selectedOwnFlat} />}
                             </div>
                             {(selectedOwnFlat && selectedOwnFlat.location) && (
