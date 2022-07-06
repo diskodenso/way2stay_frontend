@@ -7,7 +7,7 @@ import Loader from "./Loader";
 import ToTopButton from "./ToTopButton";
 import { format, parseISO } from "date-fns";
 
-const BookingTS = ({ flat }) => {
+const OwnBookingTimeSheets = ({ flat }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const [timeSheets, setTimeSheets] = useState(null);
     const [selectedTimeSheet, setSelectedTimeSheet] = useState(null);
@@ -95,4 +95,4 @@ const BookingTS = ({ flat }) => {
     );
 };
 
-export default BookingTS;
+export default OwnBookingTimeSheets;
