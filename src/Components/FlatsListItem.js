@@ -21,7 +21,6 @@ export const FlatsListItem = ({ flat }) => {
     // #####################################################
     // TODO's
     // - Calculate and set ratings according the reviews
-    // - link a cover picture
     // #####################################################
 
     useEffect(() => {
@@ -46,9 +45,9 @@ export const FlatsListItem = ({ flat }) => {
         const favIndex = tempFav.findIndex(fav => (fav === flat._id));
         if (favIndex < 0) {
             tempFav.push(flat._id)
-            toast.success(`Die Wohnung ${flat.title} wurde erfolgreich zu deinen Favoriten hinzugefügt`)
+            toast.success(`The flat ${flat.title} was added to your favorite list`)
         } else {
-            toast.success(`Die Wohnung ${flat.title} wurde erfolgreich von deinen Favoriten entfernt`)
+            toast.success(`The flat ${flat.title} was removed from your favorite list`)
             setFavoriteList(favoriteList.splice(favIndex, 1))
         }
         axios
@@ -80,13 +79,13 @@ export const FlatsListItem = ({ flat }) => {
                             axios
                                 .put(`${apiUrl}/users/${user._id}`)
                                 .then(console.log(user))
-                                .catch(err => toast.error('Die Wohnung wurde nicht aus allen Favoritenlisten gelöscht!'));
+                                .catch(err => toast.error('The flat was not deleted from all favorite lists!'));
 
                         });
                     })
                 toast.success('Wohnung wurde erfolgreich gelöscht')
             })
-            .catch(err => { toast.error('Die Wohnung konnte nicht gelöscht werden!') });
+            .catch(err => { toast.error('The flat could not be deleted!') });
     }
 
     if (loading) { return <Loader />; }
@@ -97,55 +96,55 @@ export const FlatsListItem = ({ flat }) => {
 
     return (
         <>
-            <Link to={`/flats/${flat._id}`}>
-                <div className='overflow-hidden shadow-lg rounded-lg w-96 bg-white flex flex-col justify-between'>
-                    <div className='min-h-[27rem]'>
+            <div className='overflow-hidden shadow-lg rounded-lg w-96 bg-[#e8f3ea] flex flex-col justify-between'>
+                <div className='min-h-[27rem]'>
+                    <Link to={`/flats/${flat._id}`}>
                         <div>
                             <CloudinaryShow publicId={flat.images[0]} />
                         </div>
+                    </Link>
 
-                        <div className='px-5 py-2'>
-                            <div className='flex items-center justify-between text-xl font-bold'>
-                                <h3>{flat.title}</h3>
-                                {(owner && userId) && (
-                                    <div className='flex flex-end gap-4'>
-                                        <Link to={`/flats/editor/${flat._id}`}>
-                                            <i className='fa fa-pen text-green' />
-                                        </Link>
-                                        <button type='button' onClick={deleteHandler} >
-                                            <i className='fas fa-trash-alt text-red' />
-                                        </button>
-                                    </div>
-                                )}
-                                {(!owner && userId) && (
-                                    <button type='button' onClick={handleToggleFavorite} className='p-3 z-20'>
-                                        <i name={'favicon'} value={flat._id} className={`fa fa-heart ${(isFavorite) ? 'text-red' : 'text-lightblue'}`} />
+                    <div className='px-5 py-2'>
+                        <div className='flex items-center justify-between text-xl font-bold'>
+                            <h3>{flat.title}</h3>
+                            {(owner && userId) && (
+                                <div className='flex flex-end gap-4'>
+                                    <Link to={`/flats/editor/${flat._id}`}>
+                                        <i className='fa fa-pen text-green' />
+                                    </Link>
+                                    <button type='button' onClick={deleteHandler} >
+                                        <i className='fas fa-trash-alt text-red' />
                                     </button>
-                                )}
-                            </div>
-                            <div>
-                                {shortDescription}
-                            </div>
+                                </div>
+                            )}
+                            {(!owner && userId) && (
+                                <button type='button' onClick={handleToggleFavorite} className='p-3 z-20'>
+                                    <i name={'favicon'} value={flat._id} className={`fa fa-heart ${(isFavorite) ? 'text-red' : 'text-lightblue'}`} />
+                                </button>
+                            )}
                         </div>
-                    </div>
-                    <div className='flex justify-between items-center p-5'>
-                        <div className='flex items-center gap-2'>
-                            <i className='fa fa-map-marker-alt' />
-                            {(flat.location) ? flat.location.city : 'unknown, yet'}
-                        </div>
-                        <div className='flex gap-2 items-center'>
-                            <div className='flex items-center gap-1'>
-                                <i className={`fa fa-star ${(rating < 1) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
-                                <i className={`fa fa-star ${(rating < 1.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
-                                <i className={`fa fa-star ${(rating < 2.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
-                                <i className={`fa fa-star ${(rating < 3.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
-                                <i className={`fa fa-star ${(rating < 4.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
-                            </div>
-                            {rating}/5
+                        <div>
+                            {shortDescription}
                         </div>
                     </div>
                 </div>
-            </Link>
+                <div className='flex justify-between items-center p-5'>
+                    <div className='flex items-center gap-2'>
+                        <i className='fa fa-map-marker-alt' />
+                        {(flat.location) ? flat.location.city : 'unknown, yet'}
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        <div className='flex items-center gap-1'>
+                            <i className={`fa fa-star ${(rating < 1) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
+                            <i className={`fa fa-star ${(rating < 1.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
+                            <i className={`fa fa-star ${(rating < 2.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
+                            <i className={`fa fa-star ${(rating < 3.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
+                            <i className={`fa fa-star ${(rating < 4.5) ? 'text-[#e0e0e0]' : 'text-[#ffd700]'}`} />
+                        </div>
+                        {rating}/5
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

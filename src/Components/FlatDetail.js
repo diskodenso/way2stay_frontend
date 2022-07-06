@@ -50,7 +50,7 @@ const FlatDetail = () => {
         if (userId !== flat.userId) {
             navigate(`/bookings/flats/${flatId}`);
         } else {
-            navigate(`/flats/editor/${flat._id}`);
+            navigate(`/flats/editor/${flatId}`);
         }
 
     }
