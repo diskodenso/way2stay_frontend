@@ -79,7 +79,7 @@ export const Signup = () => {
         <>
             <div className=' bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[65.8vh] mt-20 flex items-center pb-40'>
             <div className='border rounded-lg p-5 my-5 shadow-lg border-[#b9b9b9] bg-white w-96 m-auto'>
-                <h2 className='text-center mb-5'>Sign Up</h2>
+                <h2 className='text-center font-heading text-2xl mb-5'>Sign Up</h2>
                 <form onSubmit={submitHandler}>
                     <input name='username' type={'text'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='Username' />
                     <input name='email' type={'email'} className='border-b-2 border-[#6b6b6b] focus:outline-none w-full mb-5' placeholder='E-Mail address' />

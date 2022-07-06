@@ -47,7 +47,7 @@ const Login = () => {
     <>
       <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full h-[65.8vh] mt-20 pb-40 bg-no-repeat flex items-center'>
         <div className="border rounded-lg p-5 shadow-lg border-[#b9b9b9] bg-white w-96 m-auto">
-          <h2 className="text-center mb-5">Log In</h2>
+          <h2 className="text-center font-heading text-2xl mb-5">Log In</h2>
           <form onSubmit={submitHandler}>
             <input
               name="email"
