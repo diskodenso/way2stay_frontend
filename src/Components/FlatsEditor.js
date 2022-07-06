@@ -178,7 +178,7 @@ const FlatsEditor = () => {
                                     name="city"
                                     type={"text"}
                                     className="border-b-2 border-[#6b6b6b] focus:outline-none w-full my-5"
-                                    placeholder="City, Country"
+                                    placeholder="City"
                                     defaultValue={flat && flat.location && flat.location.city}
                                     required
                                 />
