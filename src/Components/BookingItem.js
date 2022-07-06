@@ -1,8 +1,11 @@
+import { format, parseISO } from 'date-fns'
 import React from 'react'
 
-const BookingItem = () => {
+const BookingItem = ({booking}) => {
   return (
-    <div>BookingItem</div>
+    <p>
+      {format(parseISO(booking.arrival), 'yyyy-MM-dd')} - {format(parseISO(booking.departure), 'yyyy-MM-dd')}
+    </p>
   )
 }
 

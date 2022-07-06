@@ -4,10 +4,10 @@ import { authContext } from "../Context/authContext";
 import Loader from "./Loader";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import FlatDetailCarousel from "./FlatDetailCarousel.js";
 import ToTopButton from "./ToTopButton";
 import SingleFlatMap from "./SingleFlatMap";
-import OwnBookingTimeSheets from "./OwnBookingTimeSheets";
+import BookingTS from "./BookingTS";
+// import { format, parseISO } from "date-fns";
 // import { format, parseISO } from "date-fns";
 // import timesheet und zeitdaten rausholen
 // erstelle booking
@@ -15,17 +15,18 @@ import OwnBookingTimeSheets from "./OwnBookingTimeSheets";
 // create a booking - check ob flatId existiert
 const Booking = () => {
     const { flatId } = useParams();
-    const [customerFlats, setFlatsCustomer] = useState(null);
+    const { userId, verified } = useContext(authContext);
     const [isOpen, setIsOpen] = useState(null);
-    const { userId, user, verified } = useContext(authContext);
+    const [customerFlat, setCustomerFlat] = useState(null);
+    const [selectedCustomerTS, setSelectedCustomerTS] = useState(null);
     const [ownFlats, setOwnFlats] = useState(null);
     const [selectedOwnFlat, setSelectedOwnFlat] = useState(null);
+    const [selectedOwnTS, setSelectedOwnTS] = useState(null);
 
     const apiUrl = process.env.REACT_APP_API_URL;
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate(authContext);
-    const [customerTimeSheets, setCustomerTimeSheets] = useState(null);
 
     useEffect(() => {
         !verified && navigate(`/login`);
@@ -35,7 +36,7 @@ const Booking = () => {
                     await axios
                         .get(`${apiUrl}/flats/${flatId}`)
                         .then((res) => {
-                            setFlatsCustomer(res.data.flat);
+                            setCustomerFlat(res.data.flat);
                             setLoading(true);
                             setError(false);
                         })
@@ -43,22 +44,6 @@ const Booking = () => {
                             setLoading(false);
                             setError(err);
                             console.log(err);
-                        });
-                    await axios
-                        .get(`${apiUrl}/timesheets/flats/${flatId}`)
-                        .then((res) => {
-                            setCustomerTimeSheets(res.data.timeSheet);
-                            // console.log(res.data.timeSheet);
-                            setLoading(false);
-                            setError(null);
-                        })
-                        .catch((err) => {
-                            setLoading(false);
-                            setError(err);
-                            console.log(err);
-                            toast.error(
-                                "Sorry, we couldn't get the timesheets you have requested"
-                            );
                         });
                     await axios
                         .get(`${apiUrl}/flats/users/${userId}`)
@@ -85,21 +70,44 @@ const Booking = () => {
         customerBookingData();
     }, [apiUrl, navigate, verified, flatId, userId]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log("damn");
-    };
-
     const toggling = () => {
         setIsOpen(!isOpen);
     };
 
-    const select = (e) => {
+    const selectOwnFlat = (e) => {
         const { name } = e.target;
         console.log(e.target.name);
         setSelectedOwnFlat(ownFlats.find(flat => flat._id === name));
         setIsOpen(false);
     };
+
+    const bookingCheck = (e) => {
+        if (selectedOwnTS.start < selectedCustomerTS.start) {
+            toast.warning('Your starting date is before the desired flat starting date, please use a different one, or modify yours!')
+        }
+        if (selectedOwnTS.end > selectedCustomerTS.end) {
+            toast.warning('Your end date is after the desired flat end date, please use a different one, or modify yours!')
+        }
+
+        if (selectedOwnTS.start >= selectedCustomerTS.start && selectedOwnTS.end <= selectedCustomerTS.end) {
+            axios
+                .post(`${apiUrl}/bookings`, {
+                    flatOneId: customerFlat._id,
+                    flatTwoId: selectOwnFlat._id,
+                    arrival: selectedOwnTS.start,
+                    departure: selectedOwnTS.end
+                })
+                .then(res => {
+                    console.log(res.data);
+                    toast.success('Booking is done!')
+                })
+                .catch(err => {
+                    console.log(err);
+                    toast.error(`Could NOT create Booking!`)
+                }
+                );
+        }
+    }
 
     if (loading) {
         return <Loader />;
@@ -110,36 +118,31 @@ const Booking = () => {
     return (
         <>
             <ToTopButton />
-            <div className='bg-[url("https://i.ibb.co/qJFwrYN/Landingpage-BG1.png")] w-full bg-no-repeat min-h-[73vh] mt-20'>
-                <div className="w-2/3 gap-5 m-auto justify-center items-start">
-                    <div className="rounded-lg p-5 my-5 shadow-lg bg-white">
-                        <div className="flex justify-between mb-5">
-                            <h3 className="font-heading text-2xl">{customerFlats.title}</h3>
-                            <Link
-                                to={`/flats/${flatId}`}
-                                className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
-                            >
-                                View this flat
-                            </Link>
-                        </div>
-                        {/* <FlatDetailCarousel /> */}
-                        <div className="mt-5 mx-auto bg-lightgreen rounded-lg overflow-hidden shadow-lg text-center">
-                            <SingleFlatMap flat={customerFlats} />
-                        </div>
-                        <p className="ml-10 mt-5">
-                            {customerFlats.location.street}{" "}
-                            {customerFlats.location.housenumber}
-                            <br />
-                            {customerFlats.location.postalcode} {customerFlats.location.city}
-                            <br />
-                            {customerFlats.country}
-                        </p>
+            <div className="w-2/3 gap-5 m-auto justify-center items-start">
+                <div className="rounded-lg p-5 my-5 shadow-lg bg-white">
+                    <div className="flex justify-between mb-5">
+                        <h3 className="font-heading text-2xl">{customerFlat.title}</h3>
+                        <Link
+                            to={`/flats/${flatId}`}
+                            className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+                        >
+                            View this flat
+                        </Link>
                     </div>
+                    {/* <FlatDetailCarousel /> */}
+                    <div className="mt-5 mx-auto bg-lightgreen rounded-lg overflow-hidden shadow-lg text-center">
+                        <SingleFlatMap flat={customerFlat} />
+                    </div>
+                    <div className="mt-5">
+                        <p>{customerFlat.location.street} {customerFlat.location.housenumber}</p>
+                        <p>{customerFlat.location.postalcode} {customerFlat.location.city}</p>
+                        <br />
+                        {customerFlat.country}
+                    </div>
+                    <BookingTS flat={customerFlat} selectedTS={selectedCustomerTS} setSelectedTS={setSelectedCustomerTS} />
                 </div>
-
-                <div className="flex flex-col w-2/3 rounded-lg p-5 my-5 shadow-lg bg-white mx-auto">
+                <div className="rounded-lg p-5 my-5 shadow-lg bg-white">
                     <div className="flex justify-between items-center">
-
                         <button onClick={toggling} className="mb-2">
                             <h2 className="flex gap-3 font-heading text-2xl w-[16rem] justify-between text-blue">
                                 <i className="text-blue fa fa-filter"></i>
@@ -157,7 +160,7 @@ const Booking = () => {
                                                     key={flat._id}
                                                     className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white"
                                                 >
-                                                    <button name={flat._id} onClick={select}>
+                                                    <button name={flat._id} onClick={selectOwnFlat}>
                                                         {flat.title}
                                                     </button>
                                                 </li>
@@ -176,46 +179,33 @@ const Booking = () => {
                         </div>
                     </div>
                     <div>
-                        
-                        <div>
-                            {/* <FlatDetailCarousel /> */}
-                            <div className="mt-5 mx-auto bg-lightgreen rounded-lg shadow-lg text-center overflow-hidden">
-                                {console.log(selectedOwnFlat)}
-                                {selectedOwnFlat && <SingleFlatMap flat={selectedOwnFlat} />}
-                            </div>
-                            {(selectedOwnFlat && selectedOwnFlat.location) && (
-                                <p className="ml-10 mt-5">
-                                    {selectedOwnFlat.location.street}{" "}
-                                    {selectedOwnFlat.location.housenumber}
-                                    <br />
-                                    {selectedOwnFlat.location.postalcode} {selectedOwnFlat.location.city}
-                                    <br />
-                                    {selectedOwnFlat.country}
-                                </p>
-                            )}
+                        {/* <FlatDetailCarousel /> */}
+                        <div className="mt-5 mx-auto bg-lightgreen rounded-lg shadow-lg text-center overflow-hidden">
+                            {selectedOwnFlat && <SingleFlatMap flat={selectedOwnFlat} />}
                         </div>
+                        {(selectedOwnFlat && selectedOwnFlat.location) && (
+                            <p className="ml-10 mt-5">
+                                {selectedOwnFlat.location.street}{" "}
+                                {selectedOwnFlat.location.housenumber}
+                                <br />
+                                {selectedOwnFlat.location.postalcode} {selectedOwnFlat.location.city}
+                                <br />
+                                {selectedOwnFlat.country}
+                            </p>
+                        )}
                     </div>
-                    {selectedOwnFlat && <OwnBookingTimeSheets flat={selectedOwnFlat} />}
-                </div>
-                {/* <form onSubmit={handleSubmit}>
-          <div className="flex w-5/6 gap-5 m-auto md:flex-wrap lg:flex-nowrap justify-center items-start">
-          <div className="sticky w-1/3 rounded-lg p-5 my-5 shadow-lg bg-white">
-              <div className="flex justify-between items-center gap-5 mb-5">
-              <div className="flex gap-4">
-              <i className="text-xl text-white text-center bg-green rounded-full w-8 h-8 fa fa-user"></i>
-                  <h3 className="font-heading text-2xl">{user.username}</h3>
-                </div>
+                    <div className="flex gap-4">
+                        {selectedOwnFlat && <BookingTS flat={selectedOwnFlat} selectedTS={selectedOwnTS} setSelectedTS={setSelectedOwnTS} />}
+                        <button
+                            onClick={bookingCheck}
+                            className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+                        >
+                            Book
+                        </button>
 
-                <button
-                  type="submit"
-                  className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
-                >
-                  Book now!
-                </button>
-              </div>
-            </div>
-          </div>
-        </form> */}
+
+                    </div>
+                </div>
             </div>
         </>
     );

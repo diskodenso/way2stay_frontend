@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import { toast } from "react-toastify";
 import { format, parseISO } from "date-fns";
 
-const TimeSheet = ({ timeSheet, flat, isOwner }) => {
+const TimeSheet = ({ timeSheet, flat, isOwner, isBooking }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -89,9 +89,12 @@ const TimeSheet = ({ timeSheet, flat, isOwner }) => {
                             type={'checkbox'}
                             disabled={!isOwner }
                             defaultChecked={timeSheet && timeSheet.available}
+                            hidden={!isOwner}
+
                         />
                         <label
                             htmlFor="available"
+                            hidden={!isOwner}
                         >
                             Verfügbar
                         </label>
