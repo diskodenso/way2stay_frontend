@@ -7,10 +7,10 @@ import Loader from "./Loader";
 import ToTopButton from "./ToTopButton";
 import { format, parseISO } from "date-fns";
 
-const OwnBookingTimeSheets = ({ flat }) => {
+const OwnBookingTimeSheets = ({ flat, setSelectedTS, selectedTS }) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const [timeSheets, setTimeSheets] = useState(null);
-    const [selectedTimeSheet, setSelectedTimeSheet] = useState(null);
+    // const [selectedTimeSheet, setSelectedTimeSheet] = useState(null);
     const [isOpen, setIsOpen] = useState(null);
     const { verified } = useContext(authContext);
     const navigate = useNavigate(authContext);
@@ -18,13 +18,11 @@ const OwnBookingTimeSheets = ({ flat }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        !verified && navigate(`/login`);
         try {
             axios
                 .get(`${apiUrl}/timesheets/flats/${flat._id}`)
                 .then((res) => {
                     setTimeSheets(res.data.timeSheet);
-                    console.log(res.data.timeSheet);
                     setLoading(false);
                     setError(null);
                 })
@@ -48,8 +46,7 @@ const OwnBookingTimeSheets = ({ flat }) => {
 
     const select = (e) => {
         const { name } = e.target;
-        console.log(e.target.name);
-        setSelectedTimeSheet(timeSheets.find(timeSheet => timeSheet._id === name));
+        setSelectedTS(timeSheets.find(timeSheet => timeSheet._id === name));
         setIsOpen(false);
     };
 
@@ -67,7 +64,7 @@ const OwnBookingTimeSheets = ({ flat }) => {
                 <button onClick={toggling} className="mb-2 w-full">
                     <div className="flex gap-3 my-4 items-center">
                         <i className=" fa fa-calendar" />
-                        <p>{selectedTimeSheet ? `${format(parseISO(selectedTimeSheet.start), 'yyyy-MM-dd')} - ${format(parseISO(selectedTimeSheet.end), 'yyyy-MM-dd')}` : "choose your desired time range"}</p>
+                        <p>{selectedTS ? `${format(parseISO(selectedTS.start), 'yyyy-MM-dd')} - ${format(parseISO(selectedTS.end), 'yyyy-MM-dd')}` : "choose your desired time range"}</p>
                         <i className="text-lg fa fa-caret-up" />
                     </div>
                 </button>

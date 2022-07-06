@@ -8,6 +8,7 @@ import ToTopButton from "./ToTopButton";
 import SingleFlatMap from "./SingleFlatMap";
 import BookingTS from "./BookingTS";
 // import { format, parseISO } from "date-fns";
+// import { format, parseISO } from "date-fns";
 // import timesheet und zeitdaten rausholen
 // erstelle booking
 // verified - wenn verified checken ob flatID existiert und wenn ja dann booking
@@ -15,10 +16,12 @@ import BookingTS from "./BookingTS";
 const Booking = () => {
     const { flatId } = useParams();
     const { userId, verified } = useContext(authContext);
-    const [customerFlat, setCustomerFlat] = useState(null);
     const [isOpen, setIsOpen] = useState(null);
+    const [customerFlat, setCustomerFlat] = useState(null);
+    const [selectedCustomerTS, setSelectedCustomerTS] = useState(null);
     const [ownFlats, setOwnFlats] = useState(null);
     const [selectedOwnFlat, setSelectedOwnFlat] = useState(null);
+    const [selectedOwnTS, setSelectedOwnTS] = useState(null);
 
     const apiUrl = process.env.REACT_APP_API_URL;
     const [error, setError] = useState(false);
@@ -71,12 +74,40 @@ const Booking = () => {
         setIsOpen(!isOpen);
     };
 
-    const select = (e) => {
+    const selectOwnFlat = (e) => {
         const { name } = e.target;
         console.log(e.target.name);
         setSelectedOwnFlat(ownFlats.find(flat => flat._id === name));
         setIsOpen(false);
     };
+
+    const bookingCheck = (e) => {
+        if (selectedOwnTS.start < selectedCustomerTS.start) {
+            toast.warning('Your starting date is before the desired flat starting date, please use a different one, or modify yours!')
+        }
+        if (selectedOwnTS.end > selectedCustomerTS.end) {
+            toast.warning('Your end date is after the desired flat end date, please use a different one, or modify yours!')
+        }
+
+        if (selectedOwnTS.start >= selectedCustomerTS.start && selectedOwnTS.end <= selectedCustomerTS.end) {
+            axios
+                .post(`${apiUrl}/bookings`, {
+                    flatOneId: customerFlat._id,
+                    flatTwoId: selectOwnFlat._id,
+                    arrival: selectedOwnTS.start,
+                    departure: selectedOwnTS.end
+                })
+                .then(res => {
+                    console.log(res.data);
+                    toast.success('Booking is done!')
+                })
+                .catch(err => {
+                    console.log(err);
+                    toast.error(`Could NOT create Booking!`)
+                }
+                );
+        }
+    }
 
     if (loading) {
         return <Loader />;
@@ -102,15 +133,13 @@ const Booking = () => {
                     <div className="mt-5 mx-auto bg-lightgreen rounded-lg overflow-hidden shadow-lg text-center">
                         <SingleFlatMap flat={customerFlat} />
                     </div>
-                    <p className="ml-10 mt-5">
-                        {customerFlat.location.street}{" "}
-                        {customerFlat.location.housenumber}
-                        <br />
-                        {customerFlat.location.postalcode} {customerFlat.location.city}
+                    <div className="mt-5">
+                        <p>{customerFlat.location.street} {customerFlat.location.housenumber}</p>
+                        <p>{customerFlat.location.postalcode} {customerFlat.location.city}</p>
                         <br />
                         {customerFlat.country}
-                    </p>
-                    <BookingTS flat={customerFlat} />
+                    </div>
+                    <BookingTS flat={customerFlat} selectedTS={selectedCustomerTS} setSelectedTS={setSelectedCustomerTS} />
                 </div>
                 <div className="rounded-lg p-5 my-5 shadow-lg bg-white">
                     <div className="flex justify-between items-center">
@@ -131,7 +160,7 @@ const Booking = () => {
                                                     key={flat._id}
                                                     className="mr-2 pl-2 my-1 w-full rounded hover:bg-blue hover:text-white"
                                                 >
-                                                    <button name={flat._id} onClick={select}>
+                                                    <button name={flat._id} onClick={selectOwnFlat}>
                                                         {flat.title}
                                                     </button>
                                                 </li>
@@ -152,7 +181,6 @@ const Booking = () => {
                     <div>
                         {/* <FlatDetailCarousel /> */}
                         <div className="mt-5 mx-auto bg-lightgreen rounded-lg shadow-lg text-center overflow-hidden">
-                            {console.log(selectedOwnFlat)}
                             {selectedOwnFlat && <SingleFlatMap flat={selectedOwnFlat} />}
                         </div>
                         {(selectedOwnFlat && selectedOwnFlat.location) && (
@@ -166,7 +194,17 @@ const Booking = () => {
                             </p>
                         )}
                     </div>
-                    {selectedOwnFlat && <BookingTS flat={selectedOwnFlat} />}
+                    <div className="flex gap-4">
+                        {selectedOwnFlat && <BookingTS flat={selectedOwnFlat} selectedTS={selectedOwnTS} setSelectedTS={setSelectedOwnTS} />}
+                        <button
+                            onClick={bookingCheck}
+                            className="border-2 border-green rounded-md px-3 py-1 text-green font-bold hover:bg-green hover:text-white"
+                        >
+                            Book
+                        </button>
+
+
+                    </div>
                 </div>
             </div>
         </>
