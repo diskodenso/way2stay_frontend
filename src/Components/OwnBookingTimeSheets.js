@@ -14,12 +14,12 @@ const OwnBookingTimeSheets = ({ flat }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(selectedOwnFlat);
+  console.log(flat);
   useEffect(() => {
     !verified && navigate(`/login`);
     try {
       axios
-        .get(`${apiUrl}/timesheets/flats/${selectedOwnFlat._id}`)
+        .get(`${apiUrl}/timesheets/flats/${flat._id}`)
         .then((res) => {
           setOwnTimeSheets(res.data.timeSheet);
           console.log(res.data.timeSheet);
@@ -38,7 +38,7 @@ const OwnBookingTimeSheets = ({ flat }) => {
       setLoading(false);
       setError(error);
     }
-  }, [apiUrl, verified, selectedOwnFlat.id, navigate]);
+  }, [apiUrl, verified, navigate, flat._id]);
 
   if (loading) {
     return <Loader />;
