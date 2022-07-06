@@ -90,10 +90,11 @@ const Booking = () => {
         }
 
         if (selectedOwnTS.start >= selectedCustomerTS.start && selectedOwnTS.end <= selectedCustomerTS.end) {
+            console.log(selectedOwnFlat);
             axios
                 .post(`${apiUrl}/bookings`, {
                     flatOneId: customerFlat._id,
-                    flatTwoId: selectOwnFlat._id,
+                    flatTwoId: selectedOwnFlat._id,
                     arrival: selectedOwnTS.start,
                     departure: selectedOwnTS.end
                 })
