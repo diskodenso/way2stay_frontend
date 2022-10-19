@@ -258,6 +258,8 @@ npm start
 
 ## Collaborators
 
+- [Denis Olf](https://github.com/diskodenso)
+
 - [Matthias Wieser](https://github.com/AlpineWeezl)
 
 - [Marcel-BK](https://github.com/Marcel-BK)
